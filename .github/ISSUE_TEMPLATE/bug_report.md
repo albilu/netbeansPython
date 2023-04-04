@@ -28,7 +28,7 @@ If applicable, add screenshots to help explain your problem.
 - Netbeans Version: [e.g. 22]
 - Python Plugin Version: [e.g. 22]
 
-**Additional context**
+**Mandatory Logs**
 Add any other context about the problem here.
 [e.g. Netbeans stacktrace/logs: (View-> IDE Log)]
 [e.g. LSP Server logs ${netbeans_userdir}/.pythonlsp/lsp_log_file] 
