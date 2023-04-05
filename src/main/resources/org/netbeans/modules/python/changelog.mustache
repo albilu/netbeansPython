@@ -1,0 +1,23 @@
+# Changelog
+_Changelog of {{ownerName}} {{repoName}}._
+
+{{#tags}}
+## {{name}}
+{{#hasTagTime}}
+>_{{tagTime}}_
+{{/hasTagTime}}
+
+  {{#commits}}
+  {{^merge}}
+[{{hash}}](https://github.com/{{ownerName}}/{{repoName}}/commits/{{hash}}) {{authorName}} *{{commitTime}}*
+
+ * {{{messageTitle}}}
+{{#messageBodyItems}}
+ * {{.}}
+{{/messageBodyItems}}
+
+
+  {{/merge}}
+  {{/commits}}
+
+{{/tags}}

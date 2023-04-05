@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE codetemplates PUBLIC "-//NetBeans//DTD Editor Code Templates settings 1.0//EN" "http://www.netbeans.org/dtds/EditorCodeTemplates-1_0.dtd">
+<codetemplates>
+    <codetemplate abbreviation="repr" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __repr__(self) -> str:
+    return ${super().__repr__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="def" uuid="python-3" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def ${name}(${1 default="parameters"}):
+    """${Documentation}"""
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_def]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="getattribute" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __getattribute__(self, name: str) -> Any:
+    return ${super().__getattribute__(name)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="setattr" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __setattr__(self, name: str, value: Any) -> None:
+    ${super().__setattr__(name, value)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="init_subclass" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __init_subclass__(cls) -> None:
+    ${super().__init_subclass__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="dir" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __dir__(self) -> Iterable[str]:
+    return ${super().__dir__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="imp" uuid="python-9" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[import ${libraryName}
+${cursor}]]>
+        </code>
+        <description><![CDATA[ct_imp]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="wh" uuid="python-1" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[while ${EXP}:
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_wh]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="bre" uuid="python-5" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[break
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_bre]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="delattr" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __delattr__(self, name: str) -> None:
+    ${super().__delattr__(name)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="rai" uuid="python-13" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[raise ${Exception}
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_rai]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="cont" uuid="python-6" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[continue
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_cont]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="if" uuid="python-14" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[if ${condition}:
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_if]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="class" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[@property
+def __class__(self: _T) -> Type[_T]:
+    return ${super().__class__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="reduce" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __reduce__(self) -> str | Tuple[Any, ...]:
+    return ${super().__reduce__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="init" uuid="python-4" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __init__(self) -> None:
+    ${super().__init__()}]]>
+        </code>
+        <description><![CDATA[ct_init]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="new" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __new__(cls: Type[_T]) -> _T:
+    return ${super().__new__(cls)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="reduce_ex" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __reduce_ex__(self, protocol: SupportsIndex) -> str | Tuple[Any, ...]:
+    return ${super().__reduce_ex__(protocol)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="sizeof" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __sizeof__(self) -> int:
+    return ${super().__sizeof__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="format" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __format__(self, format_spec: str) -> str:
+    return ${super().__format__(format_spec)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="asse" uuid="python-7" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[assert ${condition}, "${assertmessage}"
+    ${cursor}]]></code><description><![CDATA[ct_asse]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="ife" uuid="python-12" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[if ${condition}:
+    ${statement}
+else:
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_ife]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="eq" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __eq__(self, o: object) -> bool:
+    return ${super().__eq__(o)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="str" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __str__(self) -> str:
+    return ${super().__str__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="ne" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __ne__(self, o: object) -> bool:
+    return ${super().__ne__(o)}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="try" uuid="python-16" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[try:
+    ${dangerousCode}
+except Exception as e:
+    print ("Exception: ", e)
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_try]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="trye" uuid="python-10" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[try:
+    ${dangerousCode}
+except Exception as e:
+    print ("${errorMessage}")
+else:
+    ${runBlockIfNoExceptionThrown}
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_trye]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="tryf" uuid="python-11" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[try:
+    ${dangerousCode}
+except Exception as e:
+    print ("Exception: ", e)
+finally:
+    ${codeWillRunRegardlessOfException}
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_tryf]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="hash" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[def __hash__(self) -> int:
+    return ${super().__hash__()}]]>
+        </code>
+    </codetemplate>
+    <codetemplate abbreviation="forin" uuid="python-8" xml:space="preserve" contexts="python-code">
+        <code><![CDATA[for ${i} in range(${10}):
+    print (${i})
+    ${cursor}]]>
+        </code>
+        <description><![CDATA[ct_forin]]></description>
+    </codetemplate>
+    <codetemplate abbreviation="cls" remove="true"/>
+    <codetemplate abbreviation="doc" xml:space="preserve" contexts="python-code">
+        <code><![CDATA["""
+${_summary_}
+
+:param ${type} ${param}: ${_param_description_}
+:raises ${AssertionError}: ${_raise_description_}
+:return ${_type_}: ${_return_description_}
+"""]]></code>
+    </codetemplate>
+</codetemplates>

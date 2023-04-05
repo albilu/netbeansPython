@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Install: org/netbeans/modules/python/Installer.class
+OpenIDE-Module-Layer: org/netbeans/modules/python/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/netbeans/modules/python/Bundle.properties
+OpenIDE-Module-Display-Category: Editor
+OpenIDE-Module-Requires: org.openide.windows.WindowManager

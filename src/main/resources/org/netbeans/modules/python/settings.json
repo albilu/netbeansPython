@@ -1,0 +1,145 @@
+{
+    "auto_pop_completion": false,
+    "configurationSources": [
+        "pycodestyle"
+    ],
+    "plugins": {
+        "autopep8": {
+            "enabled": false
+        },
+        "flake8": {
+            "config": "",
+            "enabled": false,
+            "exclude": [],
+            "executable": "flake8",
+            "filename": "",
+            "hangClosing": false,
+            "ignore": [],
+            "maxLineLength": "80",
+            "indentSize": 4,
+            "perFileIgnores": [],
+            "select": [
+                ""
+            ]
+        },
+        "jedi": {
+            "auto_import_modules": [
+                "numpy"
+            ],
+            "extra_paths": [],
+            "env_vars": {}
+        },
+        "jedi_completion": {
+            "enabled": true,
+            "include_params": true,
+            "include_class_objects": false,
+            "include_function_objects": false,
+            "fuzzy": false,
+            "eager": false,
+            "resolve_at_most": 25,
+            "cache_for": [
+                "pandas",
+                "numpy",
+                "tensorflow",
+                "matplotlib"
+            ]
+        },
+        "jedi_definition": {
+            "enabled": true,
+            "follow_imports": true,
+            "follow_builtin_imports": true,
+            "follow_builtin_definitions": true
+        },
+        "jedi_hover": {
+            "enabled": true
+        },
+        "jedi_references": {
+            "enabled": true
+        },
+        "jedi_signature_help": {
+            "enabled": true
+        },
+        "jedi_symbols": {
+            "enabled": true,
+            "all_scopes": true,
+            "include_import_symbols": true
+        },
+        "mccabe": {
+            "enabled": true,
+            "threshold": 15
+        },
+        "preload": {
+            "enabled": true,
+            "modules": []
+        },
+        "pycodestyle": {
+            "enabled": true,
+            "exclude": [],
+            "filename": [],
+            "select": [
+                ""
+            ],
+            "ignore": [],
+            "hangClosing": false,
+            "maxLineLength": "",
+            "indentSize": 4
+        },
+        "pydocstyle": {
+            "enabled": false,
+            "convention": "None",
+            "addIgnore": [],
+            "addSelect": [],
+            "ignore": [],
+            "select": [
+                ""
+            ],
+            "match": "(?!test_).*\\.py",
+            "matchDir": "[^\\.].*"
+        },
+        "pyflakes": {
+            "enabled": true
+        },
+        "pylint": {
+            "enabled": false,
+            "args": [],
+            "executable": ""
+        },
+        "rope_autoimport": {
+            "enabled": false,
+            "memory": false
+        },
+        "rope_completion": {
+            "enabled": false,
+            "eager": false
+        },
+        "yapf": {
+            "enabled": false
+        },
+        "rope": {
+            "extensionModules": "",
+            "ropeFolder": [
+                ""
+            ]
+        },
+        "pylsp_mypy": {
+            "enabled": false,
+            "live_mode": true,
+            "dmypy": false,
+            "strict": false
+        },
+        "black": {
+            "enabled": true,
+            "cache_config": false,
+            "line_length": 80,
+            "preview": false
+        },
+        "pyls-memestra": {
+            "enabled": true,
+            "recursive": false,
+            "decorator_module": "deprecated",
+            "decorator_function": "deprecated",
+            "reason_keyword": "reason",
+            "additional_search_paths": []
+        }
+    }
+}
