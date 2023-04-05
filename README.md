@@ -16,13 +16,13 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 This `plugin` enables [Python Programming Language](https://www.python.org/about/) support for [Apache Netbeans](https://netbeans.apache.org/).
 It leverage the `Spyder IDE` community supported [Language Server Protocol](https://github.com/python-lsp/python-lsp-server)
 
-This project is driven by the need to bring to Netbeans similar support for Python as what other main IDEs/Editors (namely [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/)/[Spyder IDE](https://www.spyder-ide.org/)/[VScode](https://code.visualstudio.com/)) offers.
+This project is driven by the need to bring to Netbeans similar support for Python as what other main IDEs/Editors (namely [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/)/[Spyder IDE](https://www.spyder-ide.org/)/[VScode]([https://code.visualstudio.com/](https://code.visualstudio.com/docs/languages/python))) offers.
 
 ## Main Features
 ### Project Management
 - Simple Python projects type creation (with `venv/virtualenv`)
 - Import projects from Sources
-- Simple [Poetry](https://python-poetry.org/) porjects creattion (common `poetry` commands supported)
+- Simple [Poetry](https://python-poetry.org/) porjects creation (common `poetry` commands supported)
 - Run/Build projects
     ![f9b73732e9534000af91eb4e9bf11208.png](_resources/f9b73732e9534000af91eb4e9bf11208.png)
 
@@ -54,7 +54,7 @@ This project is driven by the need to bring to Netbeans similar support for Pyth
     ![ebaed2b72b503dec7733d6698f3a0a72.png](_resources/ebaed2b72b503dec7733d6698f3a0a72.png)
 
 ## Next Features
-Here are list of features to come ordered by priority
+Here is list of features to come ordered by priority:
 - Debugger => TD: 30APR
 - Support Pytest framework
 - Profiler (inspire from the Spyder IDE one)
