@@ -24,7 +24,7 @@ This project is driven by the need to bring to Netbeans similar support for Pyth
 - Import projects from Sources
 - Simple `Poetry` porjects creattion (common poetry commands supported)
 - Run/Build projects
-    ![074f01928a19095324fb65db6d19b754.png](_resources/074f01928a19095324fb65db6d19b754.png)
+    ![f9b73732e9534000af91eb4e9bf11208.png](_resources/f9b73732e9534000af91eb4e9bf11208.png)
 
 ### LSP Server Features
 - [See list of features supported](https://github.com/python-lsp/python-lsp-server#lsp-server-features)
