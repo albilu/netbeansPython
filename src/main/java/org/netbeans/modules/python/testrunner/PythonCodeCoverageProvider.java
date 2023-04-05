@@ -13,11 +13,10 @@ import java.util.stream.Stream;
 import javax.swing.text.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.netbeans.api.editor.document.LineDocument;
 import org.netbeans.api.editor.document.LineDocumentUtils;
 import org.netbeans.api.extexecution.ExecutionDescriptor;
 import org.netbeans.api.extexecution.ExecutionService;
-import org.netbeans.editor.BaseDocument;
-import org.netbeans.modules.csl.spi.GsfUtilities;
 import org.netbeans.modules.gsf.codecoverage.api.CoverageManager;
 import org.netbeans.modules.gsf.codecoverage.api.CoverageProvider;
 import org.netbeans.modules.gsf.codecoverage.api.CoverageType;
@@ -135,7 +134,7 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
                 0,
                 0);
 
-        return new PythonFileCoverageDetails(fo, fileCoverageSummary, executedLines,
+        return new PythonFileCoverageDetails(fo, dcmnt, fileCoverageSummary, executedLines,
                 missingLines,
                 executedBranches,
                 missingBranches);
@@ -232,17 +231,20 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
     class PythonFileCoverageDetails implements FileCoverageDetails {
 
         FileObject fo;
+        Document doc;
         FileCoverageSummary summary;
         JSONArray executedLines;
         JSONArray missingLines;
         JSONArray executedBranches;
         JSONArray missingBranches;
 
-        public PythonFileCoverageDetails(FileObject fo, FileCoverageSummary summary, JSONArray executedLines,
+        public PythonFileCoverageDetails(FileObject fo, Document doc,
+                FileCoverageSummary summary, JSONArray executedLines,
                 JSONArray missingLines,
                 JSONArray executedBranches,
                 JSONArray missingBranches) {
             this.fo = fo;
+            this.doc = doc;
             this.summary = summary;
             this.executedLines = executedLines;
             this.missingLines = missingLines;
@@ -257,8 +259,7 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
 
         @Override
         public int getLineCount() {
-            BaseDocument document = GsfUtilities.getDocument(fo, false);
-            return LineDocumentUtils.getLineCount(document);
+            return LineDocumentUtils.getLineCount((LineDocument) doc);
         }
 
         @Override
