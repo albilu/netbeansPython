@@ -47,7 +47,7 @@ jobs:
 
     - name: Set Version
       run: |
-        echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+        echo "RELEASE_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=next.version -q -DforceStdout)" >> $GITHUB_ENV
 
     - name: Build with RELEASE150
       run: mvn -B package -Dnetbeans.release.version=RELEASE150 -Dproject.version=RELEASE150-${{ env.RELEASE_VERSION }} --file pom.xml
@@ -67,34 +67,38 @@ jobs:
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
         tag_name: ${{ github.ref }}
         body_path: CHANGELOG.md
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Attach RELEASE150 NBM
       uses: actions/upload-release-asset@v1
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Attach RELEASE160 NBM
       uses: actions/upload-release-asset@v1
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Attach RELEASE170 NBM
       uses: actions/upload-release-asset@v1
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     #- name: Publish to GitHub Packages Apache Maven
     #  run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
