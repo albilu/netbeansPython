@@ -63,7 +63,7 @@ jobs:
         draft: false
         prerelease: true
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
-        tag_name: ${{ github.ref }}
+        tag_name: ${{ env.RELEASE_VERSION }}
         body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -72,7 +72,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
+        asset_path: target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
@@ -82,7 +82,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
+        asset_path: target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
@@ -92,7 +92,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
+        asset_path: target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
