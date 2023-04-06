@@ -8,7 +8,7 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 
 ### Requirements
 - Python 3.7+
-- Netbeans 17
+- Netbeans 15+
 - JDK 11+
 
 ## Goal of netbeansPython?
