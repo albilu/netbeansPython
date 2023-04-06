@@ -52,7 +52,7 @@ public final class PythonPoetryRunScript extends AbstractAction {
             ExecutionService service = ExecutionService.newService(() -> pb.start(),
                     PythonUtility.getExecutorDescriptor(new PythonOutputLine(), () -> {
                     }, () -> {
-                    }, false),
+                    }, false, true),
                     String.format("Poetry %s (%s)", Bundle.CTL_PythonPoetryRunScript(),
                             script));
 

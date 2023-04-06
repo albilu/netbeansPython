@@ -133,7 +133,7 @@ public final class PythonCleanVEnvAction extends AbstractAction
                                                     Bundle.CTL_PythonCleanVEnvMessage(), virtualmanager));
                                     LifecycleManager.getDefault().saveAll();
                                 }, () -> {
-                                }, true),
+                                }, true, true),
                         String.format("%s %s (%s)", "Clean",
                                 virtualmanager, get.getProjectDirectory().getNameExt())
                 );

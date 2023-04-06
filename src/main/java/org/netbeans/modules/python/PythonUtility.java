@@ -462,10 +462,10 @@ public class PythonUtility {
     }
 
     public static ExecutionDescriptor getExecutorDescriptor(ExecutionDescriptor.LineConvertorFactory convertorFactory,
-            Runnable preExeRunnable, Runnable postRunnable, boolean controllable) {
+            Runnable preExeRunnable, Runnable postRunnable, boolean controllable, boolean select) {
         ExecutionDescriptor execDescriptor = new ExecutionDescriptor()
-                .frontWindow(true)
-                .frontWindowOnError(true)
+                .frontWindow(select)
+                .frontWindowOnError(select)
                 .controllable(controllable)
                 .showProgress(true)
                 .outConvertorFactory(convertorFactory)

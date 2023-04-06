@@ -75,7 +75,7 @@ public class PythonPoetryWizardIterator implements WizardDescriptor./*Progress*/
         ExecutionService service = ExecutionService.newService(() -> pb.start(),
                 PythonUtility.getExecutorDescriptor(new PythonOutputLine(), () -> {
                 }, () -> {
-                }, false), String.format("Poetry New Project (%s)", name));
+                }, false, true), String.format("Poetry New Project (%s)", name));
 
         try {
             Integer get = service.run().get();

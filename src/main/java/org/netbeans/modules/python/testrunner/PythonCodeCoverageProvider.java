@@ -180,7 +180,7 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
 
         ExecutionDescriptor executorDescriptor = PythonUtility
                 .getExecutorDescriptor(new PythonOutputLine(), null, () -> {
-                }, false);
+                }, false, false);
 
         ExecutionService service = ExecutionService
                 .newService(() -> pb.start(), executorDescriptor, message);

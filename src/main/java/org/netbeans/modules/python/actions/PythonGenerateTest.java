@@ -101,7 +101,7 @@ public class PythonGenerateTest {
 
                                     }
                                 },
-                                true
+                                true, true
                         ),
                         String.format("%s%s%s", "Generating (", generatedTestFile.toFile().getName(), ")"));
 

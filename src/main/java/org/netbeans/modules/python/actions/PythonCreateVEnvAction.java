@@ -136,7 +136,7 @@ public final class PythonCreateVEnvAction extends AbstractAction
                             if (ProjectProblems.isBroken(get)) {
                                 ProjectProblems.showAlert(get);
                             }
-                        }, true),
+                        }, true, true),
                 String.format("%s %s (%s)", Bundle.CTL_PythonCreateVEnvMessage(),
                         virtualmanager, get.getProjectDirectory().getNameExt()));
 

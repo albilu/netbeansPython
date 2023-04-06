@@ -73,7 +73,7 @@ public final class PythonDocGenerator implements ActionListener {
                             StatusDisplayer.getDefault().setStatusText(Bundle.CTL_PythonDocMessage());
                             LifecycleManager.getDefault().saveAll();
                         }, () -> {
-                        }, true), String.format("%s%s%s", "Pdoc (", context.getProjectDirectory().getName(), ")"));
+                        }, true, true), String.format("%s%s%s", "Pdoc (", context.getProjectDirectory().getName(), ")"));
 
         service.run();
     }

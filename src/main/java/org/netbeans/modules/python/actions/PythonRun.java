@@ -72,7 +72,7 @@ public class PythonRun {
                             StatusDisplayer.getDefault().setStatusText(Bundle.CTL_Run());
                             LifecycleManager.getDefault().saveAll();
                         }, () -> {
-                        }, true), String.format("%s%s%s", "Run (", context.getPrimaryFile().getNameExt(), ")"));
+                        }, true, true), String.format("%s%s%s", "Run (", context.getPrimaryFile().getNameExt(), ")"));
 
         service.run();
     }

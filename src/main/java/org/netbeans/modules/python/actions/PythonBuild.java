@@ -83,7 +83,7 @@ public class PythonBuild {
                             StatusDisplayer.getDefault().setStatusText(Bundle.CTL_BuildStatusMessage());
                             LifecycleManager.getDefault().saveAll();
                         }, () -> {
-                        }, true),
+                        }, true, true),
                         String.format("%s%s%s", Bundle.CTL_BuildMessage(), context.getName(), ")"));
 
         service.run();
