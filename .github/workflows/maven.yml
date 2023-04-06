@@ -50,13 +50,13 @@ jobs:
         echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
     - name: Build with RELEASE150
-      run: mvn -B package -Dnetbeans.release.version=RELEASE150 -Dversion=RELEASE150-${{ env.RELEASE_VERSION }} --file pom.xml
+      run: mvn -B package -Dnetbeans.release.version=RELEASE150 -Dproject.version=RELEASE150-${{ env.RELEASE_VERSION }} --file pom.xml
 
     - name: Build with RELEASE160
-      run: mvn -B package -Dnetbeans.release.version=RELEASE160 -Dversion=RELEASE160-${{ env.RELEASE_VERSION }} --file pom.xml
+      run: mvn -B package -Dnetbeans.release.version=RELEASE160 -Dproject.version=RELEASE160-${{ env.RELEASE_VERSION }} --file pom.xml
 
     - name: Build with RELEASE170
-      run: mvn -B package -Dnetbeans.release.version=RELEASE170 -Dversion=RELEASE170-${{ env.RELEASE_VERSION }} --file pom.xml
+      run: mvn -B package -Dnetbeans.release.version=RELEASE170 -Dproject.version=RELEASE170-${{ env.RELEASE_VERSION }} --file pom.xml
 
     - name: Create Release
       uses: actions/create-release@v1
@@ -66,15 +66,13 @@ jobs:
         prerelease: true
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
         tag_name: ${{ github.ref }}
-        #body_path: CHANGELOG.md
-      #env:
-      #  GITHUB_TOKEN: ${{ github.token }}
+        body_path: CHANGELOG.md
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Attach RELEASE150 NBM
       uses: actions/upload-release-asset@v1
-      #env:
-      #  GITHUB_TOKEN: ${{ github.token }}
       with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
@@ -82,9 +80,8 @@ jobs:
 
     - name: Attach RELEASE160 NBM
       uses: actions/upload-release-asset@v1
-      #env:
-      #  GITHUB_TOKEN: ${{ github.token }}
       with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
@@ -92,9 +89,8 @@ jobs:
 
     - name: Attach RELEASE170 NBM
       uses: actions/upload-release-asset@v1
-      #env:
-      #  GITHUB_TOKEN: ${{ github.token }}
       with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
