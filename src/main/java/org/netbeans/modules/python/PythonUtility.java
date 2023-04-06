@@ -264,8 +264,10 @@ public class PythonUtility {
     public static Properties getProperties(@NonNull Project project) throws IOException {
 
         Properties prop = new Properties();
-        File file = createProperties(project, false);
-        prop.load(new FileInputStream(file));
+        if (OpenProjects.getDefault().isProjectOpen(project)) {
+            File file = createProperties(project);
+            prop.load(new FileInputStream(file));
+        }
         return prop;
 
     }
@@ -526,10 +528,10 @@ public class PythonUtility {
         return defaultPython;
     }
 
-    public static File createProperties(Project project, boolean isOpening) {
+    public static File createProperties(Project project) {
         File toFile = Paths.get(project.getProjectDirectory().getPath())
                 .resolve("nbproject").resolve("project.properties").toFile();
-        if (!toFile.exists() && (isOpening || OpenProjects.getDefault().isProjectOpen(project))) {
+        if (!toFile.exists()) {
             try {
                 FileUtils.createParentDirectories(toFile);
                 toFile.createNewFile();

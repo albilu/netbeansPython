@@ -41,7 +41,7 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
 
     @Override
     protected void projectOpened() {
-        PythonUtility.createProperties(project, true);
+        PythonUtility.createProperties(project);
         IndexingManager.getDefault().refreshIndex(projectDir.toURL(), null, false, true);
         try {
             String pythonStdLibPath = PythonUtility.getPythonStdLibPath(PythonUtility
