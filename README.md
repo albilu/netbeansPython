@@ -1,6 +1,6 @@
 # netbeansPython
 
-[![Maven Build](https://github.com/albilu/netbeansPython/actions/workflows/maven-publish.yml/badge.svg?branch=master)](https://github.com/albilu/netbeansPython/actions/workflows/maven-publish.yml)
+[![Maven Build](https://github.com/albilu/netbeansPython/actions/workflows/maven-publish.yml/badge.svg?branch=master)](https://github.com/albilu/netbeansPython/actions/workflows/maven-publish.yml) [![Github All Releases](https://img.shields.io/github/downloads/albilu/netbeansPython/total.svg)]()
 
 ## User guide
 
