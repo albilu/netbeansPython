@@ -50,13 +50,13 @@ jobs:
         echo "RELEASE_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=next.version -q -DforceStdout)" >> $GITHUB_ENV
 
     - name: Build with RELEASE150
-      run: mvn -B package -Dnetbeans.release.version=RELEASE150 -Dproject.version=RELEASE150-${{ env.RELEASE_VERSION }} --file pom.xml
+      run: mvn -B package -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }} --file pom.xml
 
     - name: Build with RELEASE160
-      run: mvn -B package -Dnetbeans.release.version=RELEASE160 -Dproject.version=RELEASE160-${{ env.RELEASE_VERSION }} --file pom.xml
+      run: mvn -B package -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }} --file pom.xml
 
     - name: Build with RELEASE170
-      run: mvn -B package -Dnetbeans.release.version=RELEASE170 -Dproject.version=RELEASE170-${{ env.RELEASE_VERSION }} --file pom.xml
+      run: mvn -B package -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }} --file pom.xml
 
     - name: Create Release
       uses: actions/create-release@v1
