@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.netbeans.modules</groupId>
     <artifactId>python</artifactId>
-    <version>0.1</version>
+    <version>${next.version}</version>
     <packaging>nbm</packaging>
     <repositories>
         <repository>
@@ -669,6 +669,7 @@
     <properties>
         <dev.name>albilu</dev.name>
         <netbeans.release.version>RELEASE170</netbeans.release.version>
+        <next.version>0.1</next.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
