@@ -529,7 +529,7 @@ public class PythonUtility {
     public static File createProperties(Project project, boolean isOpening) {
         File toFile = Paths.get(project.getProjectDirectory().getPath())
                 .resolve("nbproject").resolve("project.properties").toFile();
-        if (toFile == null && (isOpening || OpenProjects.getDefault().isProjectOpen(project))) {
+        if (!toFile.exists() && (isOpening || OpenProjects.getDefault().isProjectOpen(project))) {
             try {
                 FileUtils.createParentDirectories(toFile);
                 toFile.createNewFile();
