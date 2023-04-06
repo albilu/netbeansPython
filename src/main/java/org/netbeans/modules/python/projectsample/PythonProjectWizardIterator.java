@@ -105,9 +105,9 @@ public class PythonProjectWizardIterator
         if (!venv.isEmpty()) {
             Project owner = FileOwnerQuery.getOwner(dir);
             PythonCreateVEnvAction.createEnv((PythonProject) owner, python, venv);
-            Properties conf = PythonUtility.getConf(owner);
-            conf.setProperty("nbproject.virtualmanager", venv);
-            conf.store(new FileWriter(FileUtil.toFile(owner.getProjectDirectory()
+            Properties prop = PythonUtility.getProperties(owner);
+            prop.setProperty("nbproject.virtualmanager", venv);
+            prop.store(new FileWriter(FileUtil.toFile(owner.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);
         }
 

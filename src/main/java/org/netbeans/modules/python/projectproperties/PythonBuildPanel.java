@@ -78,8 +78,8 @@ public class PythonBuildPanel extends javax.swing.JPanel implements DocumentList
 
     private void loadProperties() {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            buildParamsTextField.setText(conf.getProperty("nbproject.build.params", ""));
+            Properties prop = PythonUtility.getProperties(project);
+            buildParamsTextField.setText(prop.getProperty("nbproject.build.params", ""));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -87,9 +87,9 @@ public class PythonBuildPanel extends javax.swing.JPanel implements DocumentList
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            conf.setProperty("nbproject.build.params", buildParamsTextField.getText());
-            conf.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
+            Properties prop = PythonUtility.getProperties(project);
+            prop.setProperty("nbproject.build.params", buildParamsTextField.getText());
+            prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

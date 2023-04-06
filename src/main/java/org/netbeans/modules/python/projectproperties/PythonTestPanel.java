@@ -261,23 +261,23 @@ public class PythonTestPanel extends javax.swing.JPanel implements DocumentListe
 
     private void loadProperties() {
         try {
-            Properties conf = PythonUtility.getConf(project);
+            Properties prop = PythonUtility.getProperties(project);
             FileObject fileObject = project.getProjectDirectory()
                     .getFileObject("tests");
             FileObject fileObjectG = project.getProjectDirectory()
                     .getFileObject("tests/pynguin-tests");
-            testFrameworkComboBox.setSelectedItem(conf
+            testFrameworkComboBox.setSelectedItem(prop
                     .getProperty("nbproject.test.runner", "print"));
-            testFrameworkParamsTextField.setText(conf.
+            testFrameworkParamsTextField.setText(prop.
                     getProperty("nbproject.test.params", ""));
-            testFrameworkDirTextField.setText(conf
+            testFrameworkDirTextField.setText(prop
                     .getProperty("nbproject.test.dir", fileObject != null
                             ? Paths.get(fileObject.getPath()).toString() : ""));
-            testGeneratorDirTextField.setText(conf
+            testGeneratorDirTextField.setText(prop
                     .getProperty("nbproject.test.generator.dir", fileObjectG != null
                             ? Paths.get(fileObjectG.getPath()).toString() : ""));
             testGeneratorComboBox.setSelectedIndex(0);
-            testGeneratorParamsTextField.setText(conf
+            testGeneratorParamsTextField.setText(prop
                     .getProperty("nbproject.test.generator.params", ""));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
@@ -286,14 +286,14 @@ public class PythonTestPanel extends javax.swing.JPanel implements DocumentListe
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            conf.setProperty("nbproject.test.runner", testFrameworkComboBox.getSelectedItem().toString());
-            conf.setProperty("nbproject.test.params", testFrameworkParamsTextField.getText());
-            conf.setProperty("nbproject.test.dir", testFrameworkDirTextField.getText());
-            conf.setProperty("nbproject.test.generator.dir", testGeneratorDirTextField.getText());
-            conf.setProperty("nbproject.test.generator.runner", testGeneratorComboBox.getSelectedItem().toString());
-            conf.setProperty("nbproject.test.generator.params", testGeneratorParamsTextField.getText());
-            conf.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
+            Properties prop = PythonUtility.getProperties(project);
+            prop.setProperty("nbproject.test.runner", testFrameworkComboBox.getSelectedItem().toString());
+            prop.setProperty("nbproject.test.params", testFrameworkParamsTextField.getText());
+            prop.setProperty("nbproject.test.dir", testFrameworkDirTextField.getText());
+            prop.setProperty("nbproject.test.generator.dir", testGeneratorDirTextField.getText());
+            prop.setProperty("nbproject.test.generator.runner", testGeneratorComboBox.getSelectedItem().toString());
+            prop.setProperty("nbproject.test.generator.params", testGeneratorParamsTextField.getText());
+            prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

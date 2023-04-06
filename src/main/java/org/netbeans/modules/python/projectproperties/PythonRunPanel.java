@@ -124,13 +124,13 @@ public class PythonRunPanel extends javax.swing.JPanel implements DocumentListen
 
     private void loadProperties() {
         try {
-            Properties conf = PythonUtility.getConf(project);
+            Properties prop = PythonUtility.getProperties(project);
             FileObject fileObject = project.getProjectDirectory()
                     .getFileObject("main.py");
-            scriptTextField.setText(conf.getProperty("nbproject.run.script",
+            scriptTextField.setText(prop.getProperty("nbproject.run.script",
                     (fileObject != null
                             ? Paths.get(fileObject.getPath()).toString() : "")));
-            paramsTextField.setText(conf.getProperty("nbproject.run.params", ""));
+            paramsTextField.setText(prop.getProperty("nbproject.run.params", ""));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -138,10 +138,10 @@ public class PythonRunPanel extends javax.swing.JPanel implements DocumentListen
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            conf.setProperty("nbproject.run.script", scriptTextField.getText());
-            conf.setProperty("nbproject.run.params", paramsTextField.getText());
-            conf.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
+            Properties prop = PythonUtility.getProperties(project);
+            prop.setProperty("nbproject.run.script", scriptTextField.getText());
+            prop.setProperty("nbproject.run.params", paramsTextField.getText());
+            prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

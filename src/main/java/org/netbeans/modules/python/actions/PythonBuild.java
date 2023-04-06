@@ -43,9 +43,9 @@ public class PythonBuild {
             String[] params = {};
             List<String> argList = new ArrayList<>();
             if (owner != null) {
-                Properties conf = PythonUtility.getConf(owner);
-                if (!conf.getProperty("nbproject.build.params", "").isEmpty()) {
-                    params = conf.getProperty("nbproject.build.params", "")
+                Properties prop = PythonUtility.getProperties(owner);
+                if (!prop.getProperty("nbproject.build.params", "").isEmpty()) {
+                    params = prop.getProperty("nbproject.build.params", "")
                             .split(" ");
                 }
             }

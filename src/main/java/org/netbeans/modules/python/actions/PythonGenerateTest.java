@@ -48,10 +48,10 @@ public class PythonGenerateTest {
         try {
             Project owner = FileOwnerQuery.getOwner(primaryFile);
             if (owner != null) {
-                Properties conf = PythonUtility.getConf(owner);
-                if (!conf.getProperty("nbproject.test.generator.params", "")
+                Properties prop = PythonUtility.getProperties(owner);
+                if (!prop.getProperty("nbproject.test.generator.params", "")
                         .isEmpty()) {
-                    params = conf.getProperty("nbproject.test.generator.params", "")
+                    params = prop.getProperty("nbproject.test.generator.params", "")
                             .split(" ");
                 }
 
@@ -61,7 +61,7 @@ public class PythonGenerateTest {
                                 .getRelativePath(owner.getProjectDirectory(), primaryFile)) + "Test.py";
                 Path generatedTestFile = Paths.get(testSourceGroups[0].getRootFolder().getPath())
                         .resolve(testClassName);
-                String outputPath = conf.getProperty("nbproject.test.generator.dir", testSourceGroups.length > 0
+                String outputPath = prop.getProperty("nbproject.test.generator.dir", testSourceGroups.length > 0
                         ? generatedTestFile.getParent().toFile().toPath().toString()
                         : Paths.get(primaryFileParent.getPath()).toString());
 

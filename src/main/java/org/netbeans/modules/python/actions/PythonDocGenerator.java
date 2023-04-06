@@ -51,8 +51,8 @@ public final class PythonDocGenerator implements ActionListener {
         try {
             String[] params = {};
             List<String> argList = new ArrayList<>();
-            Properties conf = PythonUtility.getConf(context);
-            params = conf.getProperty("nbproject.pdoc.params", "-o docs")
+            Properties prop = PythonUtility.getProperties(context);
+            params = prop.getProperty("nbproject.pdoc.params", "-o docs")
                     .split(" ");
             List<String> asList1 = null;
 

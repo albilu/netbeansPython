@@ -7,10 +7,8 @@ import com.google.gson.ToNumberPolicy;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.netbeans.api.java.classpath.ClassPath;
 import org.netbeans.api.java.classpath.GlobalPathRegistry;
@@ -43,21 +41,7 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
 
     @Override
     protected void projectOpened() {
-        FileObject fileObject = projectDir.getFileObject("nbproject/project.properties");
-        if (fileObject == null) {
-
-            File file = /*new File(String.format("%s%s%s%s%s", projectDir.getPath(),
-                    File.separator, "nbproject",
-                    File.separator, "project.properties"))*/ Paths.get(projectDir.getPath())
-                            .resolve("nbproject").resolve("project.properties").toFile();
-            try {
-                FileUtils.createParentDirectories(file);
-                file.createNewFile();
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-            }
-
-        }
+        PythonUtility.createProperties(project, true);
         IndexingManager.getDefault().refreshIndex(projectDir.toURL(), null, false, true);
         try {
             String pythonStdLibPath = PythonUtility.getPythonStdLibPath(PythonUtility

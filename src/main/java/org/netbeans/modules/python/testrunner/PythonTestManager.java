@@ -29,9 +29,9 @@ public class PythonTestManager {
 
     public static Object[] getTestRunParams(PythonProject project) {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            return new Object[]{conf.getProperty("nbproject.test.runner", "unittest"),
-                conf.getProperty("nbproject.test.params", "*Test.py").split(" ")};
+            Properties prop = PythonUtility.getProperties(project);
+            return new Object[]{prop.getProperty("nbproject.test.runner", "unittest"),
+                prop.getProperty("nbproject.test.params", "*Test.py").split(" ")};
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }

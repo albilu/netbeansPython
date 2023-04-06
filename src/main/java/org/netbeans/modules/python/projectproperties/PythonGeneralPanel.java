@@ -179,7 +179,7 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
                     }
 
                 }
-                Properties prop = PythonUtility.getConf(project);
+                Properties prop = PythonUtility.getProperties(project);
                 Object python_path = prop.get("nbproject.python_path");
                 if (python_path != null && !python_path.toString().isEmpty()) {
 //                    pythonComboBox.addItem(Pair.of(PythonUtility
@@ -239,7 +239,7 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
 
             PythonUtility.processExecutor(cmd, "Update Properties");
 
-            Properties prop = PythonUtility.getConf(project);
+            Properties prop = PythonUtility.getProperties(project);
             prop.setProperty("nbproject.python_path", selectedItem != null
                     ? ((Pair) selectedItem).second().toString() : "");
             prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()

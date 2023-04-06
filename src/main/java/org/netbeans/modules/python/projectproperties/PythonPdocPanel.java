@@ -78,8 +78,8 @@ public class PythonPdocPanel extends javax.swing.JPanel implements DocumentListe
 
     private void loadProperties() {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            pdocParamsTextField.setText(conf.getProperty("nbproject.pdoc.params",
+            Properties prop = PythonUtility.getProperties(project);
+            pdocParamsTextField.setText(prop.getProperty("nbproject.pdoc.params",
                     "-o docs"));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
@@ -88,9 +88,9 @@ public class PythonPdocPanel extends javax.swing.JPanel implements DocumentListe
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties conf = PythonUtility.getConf(project);
-            conf.setProperty("nbproject.pdoc.params", pdocParamsTextField.getText());
-            conf.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
+            Properties prop = PythonUtility.getProperties(project);
+            prop.setProperty("nbproject.pdoc.params", pdocParamsTextField.getText());
+            prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

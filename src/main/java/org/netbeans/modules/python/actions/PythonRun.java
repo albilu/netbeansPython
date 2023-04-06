@@ -39,9 +39,9 @@ public class PythonRun {
         try {
             //Project owner = FileOwnerQuery.getOwner(context.getPrimaryFile());
             if (owner != null) {
-                Properties conf = PythonUtility.getConf(owner);
-                if (!conf.getProperty("nbproject.run.params", "").isEmpty()) {
-                    params = conf.getProperty("nbproject.run.params", "")
+                Properties prop = PythonUtility.getProperties(owner);
+                if (!prop.getProperty("nbproject.run.params", "").isEmpty()) {
+                    params = prop.getProperty("nbproject.run.params", "")
                             .split(" ");
                 }
             }

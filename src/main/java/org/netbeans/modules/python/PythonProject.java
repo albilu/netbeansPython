@@ -489,9 +489,9 @@ public class PythonProject implements Project {
                     break;
                 case ActionProvider.COMMAND_RUN:
                     try {
-                    Properties conf = PythonUtility.getConf(/*FileOwnerQuery
+                    Properties prop = PythonUtility.getProperties(/*FileOwnerQuery
                             .getOwner(projectDir)*/project);
-                    Object get = conf.getProperty("nbproject.run.script");
+                    Object get = prop.getProperty("nbproject.run.script");
                     PythonRun.runAction(project, get != null
                             ? DataObject.find(FileUtil.toFileObject(new File(get
                                     .toString())))
@@ -550,15 +550,15 @@ public class PythonProject implements Project {
                     FileObject fo = lookup.lookup(DataObject.class).getPrimaryFile();
                     return !fo.isFolder() && fo.getMIMEType().equals(PythonUtility.PYTHON_MIME_TYPE);
                 case ActionProvider.COMMAND_RUN:
-                    Properties conf = null;
+                    Properties prop = null;
                     try {
-                        conf = PythonUtility.getConf(/*FileOwnerQuery.getOwner(projectDir)*/project);
+                        prop = PythonUtility.getProperties(/*FileOwnerQuery.getOwner(projectDir)*/project);
                     } catch (IOException ex) {
                         Exceptions.printStackTrace(ex);
                     }
                     return projectDir.getFileObject("main.py") != null
-                            || (conf.getProperty("nbproject.run.script") != null
-                            && FileUtil.toFileObject(new File(conf
+                            || (prop.getProperty("nbproject.run.script") != null
+                            && FileUtil.toFileObject(new File(prop
                                     .getProperty("nbproject.run.script")
                                     .toString())) != null);
                 case ActionProvider.COMMAND_BUILD:

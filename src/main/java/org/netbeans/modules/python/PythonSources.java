@@ -45,8 +45,8 @@ public class PythonSources implements Sources {
                 return new SourceGroup[0];
             }
             try {
-                Properties conf = PythonUtility.getConf(project);
-                String tfo = conf.getProperty("nbproject.test.dir", "tests");
+                Properties prop = PythonUtility.getProperties(project);
+                String tfo = prop.getProperty("nbproject.test.dir", "tests");
                 ProjectInformation information = ProjectUtils.getInformation(project);
                 FileObject fo = StringUtils.equalsAny(tfo, "", "tests") ? project.getProjectDirectory()
                         .getFileObject("tests") : FileUtil.toFileObject(new File(tfo));

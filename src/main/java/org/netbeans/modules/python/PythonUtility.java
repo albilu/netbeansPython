@@ -32,6 +32,7 @@ import org.netbeans.api.extexecution.print.LineConvertor;
 import org.netbeans.api.extexecution.print.LineConvertors;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ui.OpenProjects;
 import org.netbeans.modules.python.options.PythonPlatformManager;
 import static org.netbeans.modules.python.options.PythonPlatformManager.getPathFile;
 import org.openide.awt.NotificationDisplayer;
@@ -260,26 +261,12 @@ public class PythonUtility {
 
     }
 
-    public static Properties getConf(@NonNull Project project) throws IOException {
+    public static Properties getProperties(@NonNull Project project) throws IOException {
 
-        Properties conf = new Properties();
-        FileObject fileObject = project.getProjectDirectory()
-                .getFileObject("nbproject/project.properties");
-        File file
-                = /*new File(project.getProjectDirectory().getPath()
-                + File.separator + "nbproject" + File.separator + "project.properties");*/ Paths.get(project.getProjectDirectory().getPath())
-                        .resolve("nbproject").resolve("project.properties").toFile();
-        if (fileObject == null) {
-            try {
-                FileUtils.createParentDirectories(file);
-                file.createNewFile();
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-            }
-
-        }
-        conf.load(new FileInputStream(file));
-        return conf;
+        Properties prop = new Properties();
+        File file = createProperties(project, false);
+        prop.load(new FileInputStream(file));
+        return prop;
 
     }
 
@@ -496,7 +483,7 @@ public class PythonUtility {
 
     public static String getVenv(PythonProject get) {
         try {
-            return getConf(get).getProperty("nbproject.virtualmanager", "venv");
+            return getProperties(get).getProperty("nbproject.virtualmanager", "venv");
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -537,6 +524,22 @@ public class PythonUtility {
             Exceptions.printStackTrace(ex);
         }
         return defaultPython;
+    }
+
+    public static File createProperties(Project project, boolean isOpening) {
+        File toFile = Paths.get(project.getProjectDirectory().getPath())
+                .resolve("nbproject").resolve("project.properties").toFile();
+        if (toFile == null && (isOpening || OpenProjects.getDefault().isProjectOpen(project))) {
+            try {
+                FileUtils.createParentDirectories(toFile);
+                toFile.createNewFile();
+                return toFile;
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+
+        }
+        return toFile;
     }
 
 }
