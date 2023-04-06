@@ -68,7 +68,7 @@ jobs:
         tag_name: ${{ github.ref }}
         body_path: CHANGELOG.md
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE150 NBM
       uses: actions/upload-release-asset@v1
@@ -78,7 +78,7 @@ jobs:
         asset_name: python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE160 NBM
       uses: actions/upload-release-asset@v1
@@ -88,7 +88,7 @@ jobs:
         asset_name: python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE170 NBM
       uses: actions/upload-release-asset@v1
@@ -98,7 +98,7 @@ jobs:
         asset_name: python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     #- name: Publish to GitHub Packages Apache Maven
     #  run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
