@@ -11,12 +11,12 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 - Netbeans 15+
 - JDK 11+
 
-## Goal of netbeansPython?
+## Goal of netbeansPython
 
 This `plugin` enables [Python Programming Language](https://www.python.org/about/) support for [Apache Netbeans](https://netbeans.apache.org/).
 It leverage the `Spyder IDE` community supported [Language Server Protocol](https://github.com/python-lsp/python-lsp-server)
 
-This project is driven by the need to bring to Netbeans similar support for Python as what other main IDEs/Editors (namely [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/)/[Spyder IDE](https://www.spyder-ide.org/)/[VScode]([https://code.visualstudio.com/](https://code.visualstudio.com/docs/languages/python))) offers.
+This project is driven by the need to bring to Netbeans similar support for Python as what other main IDEs/Editors (namely [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/)/[Spyder IDE](https://www.spyder-ide.org/)/[VScode](https://code.visualstudio.com/docs/languages/python)) offers.
 
 ## Main Features
 ### Project Management
