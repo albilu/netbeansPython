@@ -63,13 +63,15 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
                             PythonUtility.SETTINGS.toPath()),
                             new TypeToken<HashMap<String, Object>>() {
                             }.getType());
-            Map<String, Object> paramsObject = new HashMap<>();
-            settings.remove("auto_pop_completion");
-            paramsObject.put("pylsp", settings);
-            DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
-            LSPBindings.getBindingsImpl(project, projectDir,
-                    PythonUtility.PYTHON_MIME_TYPE).getWorkspaceService()
-                    .didChangeConfiguration(params);
+            if (settings != null) {
+                Map<String, Object> paramsObject = new HashMap<>();
+                settings.remove("auto_pop_completion");
+                paramsObject.put("pylsp", settings);
+                DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
+                LSPBindings.getBindingsImpl(project, projectDir,
+                        PythonUtility.PYTHON_MIME_TYPE).getWorkspaceService()
+                        .didChangeConfiguration(params);
+            }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }

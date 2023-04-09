@@ -220,15 +220,17 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
                         .fromJson(jsonSettings,
                                 new TypeToken<HashMap<String, Object>>() {
                                 }.getType());
-                Map<String, Object> paramsObject = new HashMap<>();
-                NbPreferences.root().putBoolean("auto_pop_completion",
-                        (boolean) settings.getOrDefault("auto_pop_completion", true));
-                settings.remove("auto_pop_completion");
-                paramsObject.put("pylsp", settings);
-                DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
-                LSPBindings.getAllBindings().forEach(server -> {
-                    server.getWorkspaceService().didChangeConfiguration(params);
-                });
+                if (settings != null) {
+                    Map<String, Object> paramsObject = new HashMap<>();
+                    NbPreferences.root().putBoolean("auto_pop_completion",
+                            (boolean) settings.getOrDefault("auto_pop_completion", true));
+                    settings.remove("auto_pop_completion");
+                    paramsObject.put("pylsp", settings);
+                    DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
+                    LSPBindings.getAllBindings().forEach(server -> {
+                        server.getWorkspaceService().didChangeConfiguration(params);
+                    });
+                }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
             }
