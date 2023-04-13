@@ -1,5 +1,6 @@
 package org.netbeans.modules.python.testrunner;
 
+import org.netbeans.modules.python.coverage.PythonCodeCoverageProvider;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;

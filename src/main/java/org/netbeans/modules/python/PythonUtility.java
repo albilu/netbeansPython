@@ -97,7 +97,7 @@ public class PythonUtility {
         ".ropeproject",
         "__pycache__",
         "poetry.lock",
-        "coverage.json"
+        ".coverage.json"
     };
 
     public static String[] VENV_DEPS = new String[]{

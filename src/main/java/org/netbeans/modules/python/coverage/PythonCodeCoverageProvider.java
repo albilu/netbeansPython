@@ -1,4 +1,4 @@
-package org.netbeans.modules.python.testrunner;
+package org.netbeans.modules.python.coverage;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -92,7 +92,7 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
                 "erase"
             };
             coverageExecutor(cmd, "Clear Coverage Results");
-            FileObject fileObject = projectDir.getFileObject("coverage.json");
+            FileObject fileObject = projectDir.getFileObject(".coverage.json");
             if (fileObject != null) {
                 fileObject.delete();
             }
@@ -117,14 +117,14 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
             return null;
         }
 
-        JSONObject jsonObject2 = report.getJSONObject(orElse);
-        int lineCount = jsonObject2.getJSONObject("summary").getInt("num_statements");//num_statements
-        int executedLineCount = jsonObject2.getJSONObject("summary").getInt("covered_lines");//covered_lines
+        JSONObject jsonObject = report.getJSONObject(orElse);
+        int lineCount = jsonObject.getJSONObject("summary").getInt("num_statements");//num_statements
+        int executedLineCount = jsonObject.getJSONObject("summary").getInt("covered_lines");//covered_lines
 
-        JSONArray executedLines = jsonObject2.getJSONArray("executed_lines");//covered_lines
-        JSONArray missingLines = jsonObject2.getJSONArray("missing_lines");//covered_lines
-        JSONArray executedBranches = jsonObject2.getJSONArray("executed_branches");//covered_lines
-        JSONArray missingBranches = jsonObject2.getJSONArray("missing_branches");//covered_lines
+        JSONArray executedLines = jsonObject.getJSONArray("executed_lines");//executed_lines
+        JSONArray missingLines = jsonObject.getJSONArray("missing_lines");//missing_lines
+        JSONArray executedBranches = jsonObject.getJSONArray("executed_branches");//executed_branches
+        JSONArray missingBranches = jsonObject.getJSONArray("missing_branches");//missing_branches
 
         FileCoverageSummary fileCoverageSummary = new FileCoverageSummary(
                 projectDir.getFileObject(orElse),
@@ -132,12 +132,14 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
                 lineCount,
                 executedLineCount,
                 0,
-                0);
+                0
+        );
 
         return new PythonFileCoverageDetails(fo, dcmnt, fileCoverageSummary, executedLines,
                 missingLines,
                 executedBranches,
-                missingBranches);
+                missingBranches
+        );
     }
 
     @Override
@@ -148,17 +150,17 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
             return null;
         }
         report.keySet().stream().forEach((t) -> {
-            JSONObject jsonObject2 = report.getJSONObject(t);
-            int lineCount = jsonObject2.getJSONObject("summary").getInt("num_statements");//num_statements
-            int executedLineCount = jsonObject2.getJSONObject("summary").getInt("covered_lines");//covered_lines
+            JSONObject jsonObject = report.getJSONObject(t);
+            int lineCount = jsonObject.getJSONObject("summary").getInt("num_statements");//num_statements
+            int executedLineCount = jsonObject.getJSONObject("summary").getInt("covered_lines");//covered_lines
             coverageList.add(new FileCoverageSummary(
                     projectDir.getFileObject(t),
                     t,
                     lineCount,
                     executedLineCount,
                     0,
-                    0)
-            );
+                    0
+            ));
 
         });
 
@@ -216,7 +218,7 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
 
     private JSONObject getReport() {
         collectReport();
-        FileObject fileObject = projectDir.getFileObject("coverage.json");
+        FileObject fileObject = projectDir.getFileObject(".coverage.json");
         if (fileObject != null) {
             try {
                 JSONObject jsonObject = new JSONObject(fileObject.asText());
@@ -269,7 +271,7 @@ public class PythonCodeCoverageProvider implements CoverageProvider {
 
         @Override
         public long lastUpdated() {
-            return projectDir.getFileObject("coverage.json").lastModified().getTime();
+            return projectDir.getFileObject(".coverage.json").lastModified().getTime();
         }
 
         @Override

@@ -1,4 +1,4 @@
-package org.netbeans.modules.python.testrunner;
+package org.netbeans.modules.python.coverage;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -14,7 +14,7 @@ import org.openide.util.Lookup;
 
 //Copy from org/netbeans/modules/gradle/java/coverage/CoveragePopup.java
 @ActionID(category = "Project", id = "org.netbeans.modules.python.testrunner.PythonCoverageMenuAction")
-@ActionRegistration(displayName = "Test Coverage", lazy = false) // NOI18N
+@ActionRegistration(displayName = "Test Coverage", lazy = false)
 @ActionReference(path = "Projects/org-netbeans-modules-python/Actions", position = 1205)
 public class PythonCoverageMenuAction extends AbstractAction implements ContextAwareAction {
 
