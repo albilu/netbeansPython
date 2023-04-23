@@ -274,7 +274,12 @@ public class PythonUtility {
     }
 
     public static String getVersion(String projectPythonExe) throws IOException {
-        return getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
+        String commandOutput = getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
+        //Python 2.7 print CLI output to stderr instead of stdout causing the version to not be retrieved
+        if (commandOutput.isEmpty() && projectPythonExe.contains("2.7")) {
+            commandOutput = "Python 2.7";
+        }
+        return commandOutput;
     }
 
     public static ImageIcon getErrorIcon() {
