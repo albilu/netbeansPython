@@ -12,7 +12,7 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 - JDK 11+
 
 ### Installation
-- Download the latest release and install in Netbeans: \
+- Download the latest [release](https://github.com/albilu/netbeansPython/releases) and install in Netbeans: \
     `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
 - Or install from Netbeans (WIP) \
     `Tools -> Plugins -> Available Plugins -> Install`
