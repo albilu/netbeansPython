@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
+    <folder name="Actions">
+        <folder name="Debug">
+            <file name="org-netbeans-modules-python-debugger-RestartAction.instance">
+                <attr name="instanceClass" stringvalue="org.netbeans.modules.debugger.ui.actions.DebuggerAction"/>
+                <attr name="instanceOf" stringvalue="javax.swing.Action"/>
+                <attr name="instanceCreate" methodvalue="org.netbeans.modules.debugger.ui.actions.DebuggerAction.createAction"/>
+                <attr name="action" stringvalue="restart"/>
+                <attr name="name" stringvalue="Restart"/>
+                <attr name="iconBase" stringvalue="org/netbeans/modules/python/debugger/restart24.png"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Toolbars">
+        <folder name="Debug">
+            <file name="org-netbeans-modules-python-debugger-RestartAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Debug/org-netbeans-modules-python-debugger-RestartAction.instance"/>
+                <attr name="position" intvalue="105"/>
+            </file>
+        </folder>
+    </folder>
     <folder name="Projects">
         <folder name="org-netbeans-modules-python">
             <folder name="Actions">
@@ -145,9 +165,30 @@
     <folder name="Editors">
         <folder name="AnnotationTypes">
             <file name="runnable-test-annotation.xml" url="runnable-test-annotation.xml"/>
+            <file name="CurrentPCLinePart.xml" url="/org/netbeans/modules/python/debugger/CurrentPCLinePart.xml">
+                <attr name="weight" intvalue="100"/>
+            </file>
+            <file name="CurrentPC2.xml" url="/org/netbeans/modules/python/debugger/CurrentPC2.xml">
+                <attr name="weight" intvalue="100"/>
+            </file>
+            <file name="CurrentPC2LinePart.xml" url="/org/netbeans/modules/python/debugger/CurrentPC2LinePart.xml">
+                <attr name="weight" intvalue="100"/>
+            </file>
+            <file name="CurrentPC2_BP.xml" url="/org/netbeans/modules/python/debugger/CurrentPC2_BP.xml">
+                <attr name="weight" intvalue="100"/>
+            </file>
+            <file name="CurrentPC2_DBP.xml" url="/org/netbeans/modules/python/debugger/CurrentPC2_DBP.xml">
+                <attr name="weight" intvalue="100"/>
+            </file>
         </folder>
         <folder name="text">
             <folder name="x-python">
+                <folder name="GlyphGutterActions">
+                    <file name="org-netbeans-modules-debugger-ui-actions-ToggleBreakpointAction.shadow">
+                        <attr name="originalFile" stringvalue="Actions/Debug/org-netbeans-modules-debugger-ui-actions-ToggleBreakpointAction.instance"/>
+                        <attr name="position" intvalue="500"/>
+                    </file>
+                </folder>
                 <file name="org-netbeans-modules-gsf-codecoverage-CoverageHighlightsLayerFactory.instance">
                     <attr name="instanceOf" stringvalue="org.netbeans.spi.editor.highlighting.HighlightsLayerFactory"/>
                     <attr name="instanceCreate" newvalue="org.netbeans.modules.gsf.codecoverage.CoverageHighlightsLayerFactory"/>
@@ -179,6 +220,9 @@
                             </file>
                         </folder>
                     </folder>
+                </folder>
+                <folder name="ToolTips">
+                    <file name="org-netbeans-modules-python-debugger-PythonDebuggerToolTip.instance"/>
                 </folder>
                 <folder name="Popup">
                     <file name="RunFile.shadow">
@@ -230,6 +274,20 @@
                         <attr name="originalFile" stringvalue="org.netbeans.modules.editor.NbCodeFoldingAction"/>
                         <attr name="position" intvalue="1500"/>
                     </file>-->
+                    <file name="AfterToolsSeparator.instance"><attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>    <attr name="position" intvalue="3333"/>
+                    </file>
+                    <file name="org-netbeans-modules-debugger-ui-actions-AddWatchAction.shadow">
+                        <attr name="originalFile" stringvalue="Actions/Debug/org-netbeans-modules-debugger-ui-actions-AddWatchAction.instance"/>
+                        <attr name="position" intvalue="3666"/>
+                    </file>
+                    <file name="org-netbeans-modules-debugger-ui-actions-ToggleBreakpointAction.shadow">
+                        <attr name="originalFile" stringvalue="Actions/Debug/org-netbeans-modules-debugger-ui-actions-ToggleBreakpointAction.instance"/>
+                        <attr name="position" intvalue="3800"/>
+                    </file>
+                    <file name="org-netbeans-modules-debugger-ui-actions-DebugFileAction.shadow">
+                        <attr name="originalFile" stringvalue="Actions/Debug/org-netbeans-modules-debugger-ui-actions-DebugFileAction.instance"/>
+                        <attr name="position" intvalue="3805"/>
+                    </file>	
                 </folder>
                 <folder name="Toolbars">
                     <folder name="Default">
