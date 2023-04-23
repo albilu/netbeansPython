@@ -63,7 +63,7 @@ public class PythonDebuggerCallStack implements DebuggingView.DVFrame {
 
     public Line location() {
         try {
-            LineCookie lc = DataObject.find(FileUtil.toFileObject(Paths.get(getSourceURI())))
+            LineCookie lc = DataObject.find(FileUtil.toFileObject(Paths.get(getSourceURI()).toFile()))
                     .getLookup().lookup(LineCookie.class);
             if (lc == null) {
                 return null;

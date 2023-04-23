@@ -192,7 +192,7 @@ public class PdbClient {
     }
 
     private Annotatable getLine(String filePath, int lineNumber) {
-        FileObject fobj = FileUtil.toFileObject(Paths.get(filePath));
+        FileObject fobj = FileUtil.toFileObject(Paths.get(filePath).toFile());
         DataObject dobj = null;
         try {
             dobj = DataObject.find(fobj);
