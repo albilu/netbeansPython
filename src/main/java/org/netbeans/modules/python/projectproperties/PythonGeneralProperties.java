@@ -5,7 +5,7 @@ package org.netbeans.modules.python.projectproperties;
  * @author albilu
  */
 import javax.swing.JComponent;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.spi.project.ui.support.ProjectCustomizer;
 import org.netbeans.spi.project.ui.support.ProjectCustomizer.Category;
 import org.openide.util.Lookup;

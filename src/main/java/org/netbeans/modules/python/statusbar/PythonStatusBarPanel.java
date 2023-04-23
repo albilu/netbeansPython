@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import org.netbeans.api.options.OptionsDisplayer;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.packagemanager.PythonPackagesModel;
 import org.openide.loaders.DataObject;

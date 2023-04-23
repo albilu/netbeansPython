@@ -3,7 +3,7 @@ package org.netbeans.modules.python.poetry;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.repl.PythonVEnvConsoleActionTopComponent;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionRegistration;
