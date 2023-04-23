@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import org.netbeans.api.extexecution.ExecutionService;
 import org.netbeans.api.project.Project;
 import org.netbeans.modules.python.PythonOutputLine;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.LifecycleManager;
 import org.openide.awt.StatusDisplayer;
@@ -28,12 +28,28 @@ public class PythonRun {
     public static final Logger LOG = Logger.getLogger(PythonRun.class.getName());
 
     @NbBundle.Messages("CTL_Run=Running Python")
-    static public void runAction(Project owner, DataObject context) {
+    static public void runAction(Project owner, DataObject context, boolean isDebug) {
 
         ProcessBuilder pb = new ProcessBuilder();
-        pb.directory(FileUtil.toFile(context.getPrimaryFile().getParent()));
+        pb.directory(owner != null ? FileUtil.toFile(owner.getProjectDirectory())
+                : FileUtil.toFile(context.getPrimaryFile().getParent()));
         PythonUtility.manageRunEnvs(pb);
 
+        List<String> argList = getRunArgs(owner, context, isDebug);
+        pb.command(argList);
+
+        ExecutionService service = ExecutionService.newService(() -> pb.start(),
+                PythonUtility.getExecutorDescriptor(
+                        new PythonOutputLine(), () -> {
+                            StatusDisplayer.getDefault().setStatusText(Bundle.CTL_Run());
+                            LifecycleManager.getDefault().saveAll();
+                        }, () -> {
+                        }, true, true), String.format("%s%s%s", "Run (", context.getPrimaryFile().getNameExt(), ")"));
+
+        service.run();
+    }
+
+    public static List<String> getRunArgs(Project owner, DataObject context, boolean isDebug) {
         String[] params = {};
         List<String> argList = new ArrayList<>();
         try {
@@ -45,7 +61,7 @@ public class PythonRun {
                             .split(" ");
                 }
             }
-            if (owner != null && PythonUtility.isPoetry((PythonProject) owner)) {
+            if (owner != null && PythonUtility.isPoetry((PythonProject) owner) && !isDebug) {
                 argList.addAll(Arrays.asList(PythonUtility
                         .getProjectPythonExe(context
                                 .getPrimaryFile()), "-m", "poetry", "run", "python",
@@ -58,22 +74,13 @@ public class PythonRun {
             }
 
             argList.addAll(Arrays.asList(params));
-            pb.command(argList);
 
             LOG.info(() -> Arrays.toString(argList.toArray()));
+            return argList;
 
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
-
-        ExecutionService service = ExecutionService.newService(() -> pb.start(),
-                PythonUtility.getExecutorDescriptor(
-                        new PythonOutputLine(), () -> {
-                            StatusDisplayer.getDefault().setStatusText(Bundle.CTL_Run());
-                            LifecycleManager.getDefault().saveAll();
-                        }, () -> {
-                        }, true, true), String.format("%s%s%s", "Run (", context.getPrimaryFile().getNameExt(), ")"));
-
-        service.run();
+        return null;
     }
 }
