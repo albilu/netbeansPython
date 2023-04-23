@@ -2,7 +2,7 @@ package org.netbeans.modules.python.testrunner;
 
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.modules.gsf.testrunner.api.TestCreatorProvider;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.filesystems.FileObject;
 import org.openide.util.RequestProcessor;
 

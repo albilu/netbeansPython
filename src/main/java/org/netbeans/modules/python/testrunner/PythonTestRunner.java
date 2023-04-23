@@ -4,7 +4,7 @@ import java.io.File;
 import org.netbeans.modules.gsf.testrunner.api.TestSession;
 import org.netbeans.modules.gsf.testrunner.ui.api.Manager;
 import org.netbeans.modules.gsf.testrunner.ui.api.TestMethodController;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.loaders.DataObject;
 
 /**

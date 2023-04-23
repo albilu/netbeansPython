@@ -23,7 +23,7 @@ import org.netbeans.modules.gsf.codecoverage.api.CoverageType;
 import org.netbeans.modules.gsf.codecoverage.api.FileCoverageDetails;
 import org.netbeans.modules.gsf.codecoverage.api.FileCoverageSummary;
 import org.netbeans.modules.python.PythonOutputLine;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;

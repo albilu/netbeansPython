@@ -6,7 +6,7 @@ import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ProjectUtils;
 import org.netbeans.modules.gsf.testrunner.api.TestSession;
 import org.netbeans.modules.gsf.testrunner.ui.api.Manager;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.util.Exceptions;
 

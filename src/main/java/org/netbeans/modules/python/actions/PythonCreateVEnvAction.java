@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 import org.netbeans.api.extexecution.ExecutionService;
 import org.netbeans.api.project.ui.ProjectProblems;
 import org.netbeans.modules.python.PythonOutputLine;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.LifecycleManager;
 import org.openide.awt.ActionID;

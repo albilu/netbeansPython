@@ -22,7 +22,7 @@ import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ProjectManager;
 import org.netbeans.api.templates.TemplateRegistration;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.actions.PythonCreateVEnvAction;
 import org.netbeans.spi.project.ui.support.ProjectChooser;

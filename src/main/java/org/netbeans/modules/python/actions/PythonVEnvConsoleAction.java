@@ -9,7 +9,7 @@ import java.util.Collection;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.repl.PythonVEnvConsoleActionTopComponent;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionRegistration;

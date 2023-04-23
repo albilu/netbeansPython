@@ -7,7 +7,7 @@ import javax.swing.Action;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
@@ -93,6 +93,6 @@ public final class PythonRunAction extends AbstractAction implements LookupListe
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        PythonRun.runAction(null, lkpInfo.allInstances().stream().findFirst().get());
+        PythonRun.runAction(null, lkpInfo.allInstances().stream().findFirst().get(), false);
     }
 }

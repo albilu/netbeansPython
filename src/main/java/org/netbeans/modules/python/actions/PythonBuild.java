@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.netbeans.api.extexecution.ExecutionService;
 import org.netbeans.api.project.Project;
 import org.netbeans.modules.python.PythonOutputLine;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.LifecycleManager;
 import org.openide.awt.StatusDisplayer;
