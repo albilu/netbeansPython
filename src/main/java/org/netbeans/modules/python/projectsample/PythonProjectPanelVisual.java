@@ -15,6 +15,7 @@ import org.openide.WizardDescriptor;
 import org.openide.WizardValidationException;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
+import org.openide.util.RequestProcessor;
 
 public class PythonProjectPanelVisual extends JPanel implements DocumentListener {
 
@@ -22,6 +23,7 @@ public class PythonProjectPanelVisual extends JPanel implements DocumentListener
     private static final long serialVersionUID = 1L;
 
     private final PythonProjectWizardPanel panel;
+    RequestProcessor RP = new RequestProcessor(this.getClass().getName(), 1);
 
     public PythonProjectPanelVisual(PythonProjectWizardPanel panel) {
         initComponents();
@@ -336,11 +338,13 @@ public class PythonProjectPanelVisual extends JPanel implements DocumentListener
             createdFolderTextField.setText(projectFolder
                     + File.separatorChar + projectName);
             //}
-            try {
-                pythonTextField.setText(PythonUtility.getPlatformPythonExe());
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-            }
+            RP.post(() -> {
+                try {
+                    pythonTextField.setText(PythonUtility.getPlatformPythonExe());
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
+            });
         }
         panel.fireChangeEvent(); // Notify that the panel changed
     }
