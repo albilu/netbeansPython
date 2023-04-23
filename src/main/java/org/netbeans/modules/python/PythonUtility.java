@@ -35,6 +35,7 @@ import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.OpenProjects;
 import org.netbeans.modules.python.options.PythonPlatformManager;
 import static org.netbeans.modules.python.options.PythonPlatformManager.getPathFile;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.awt.NotificationDisplayer;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
@@ -293,7 +294,7 @@ public class PythonUtility {
             "pip",
             "install"
         };
-        return processExecutor(ArrayUtils.addAll(cmd, VENV_DEPS), "Install packages");
+        return processExecutor(ArrayUtils.addAll(cmd, VENV_DEPS), "Installing packages");
     }
 
     public static String normalizeVenvPath(Path base) {
@@ -343,7 +344,7 @@ public class PythonUtility {
     }
 
     @NbBundle.Messages({
-        "CTL_CreatePylsp=Create pylsp environment",
+        "CTL_CreatePylsp=Creating pylsp environment",
         "CTL_PylspInstallIssue=Issue when creating Pylsp environment.",
         "CTL_PylspRetry=Retry"
     })
@@ -411,7 +412,7 @@ public class PythonUtility {
     }
 
     @NbBundle.Messages({
-        "CTL_InstallDeps=Install pylsp dependencies",
+        "CTL_InstallDeps=Installing pylsp dependencies",
         "CTL_MissingDeps=Missing dependency:"
     })
     public static int finish() {

@@ -1,6 +1,5 @@
 package org.netbeans.modules.python.testrunner;
 
-import org.netbeans.modules.python.coverage.PythonCodeCoverageProvider;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -34,9 +33,12 @@ import org.netbeans.modules.gsf.testrunner.api.Testcase;
 import org.netbeans.modules.gsf.testrunner.ui.api.Manager;
 import org.netbeans.modules.gsf.testrunner.ui.api.TestMethodController;
 import org.netbeans.modules.python.PythonOutputLine;
-import org.netbeans.modules.python.PythonProject;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
+import org.netbeans.modules.python.coverage.PythonCodeCoverageProvider;
 import org.netbeans.spi.project.SingleMethod;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
@@ -60,6 +62,11 @@ public class PythonUnitTestRunner implements PythonTestRunner {
 
         Object[] runParams = PythonTestManager.getTestRunParams(project);
         String runner = runParams[0].toString();
+
+        if (runner.equals("pytest")) {
+            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("PyTest not supported at the moment", NotifyDescriptor.INFORMATION_MESSAGE));
+            return;
+        }
 
         ProcessBuilder pb = new ProcessBuilder();
         pb.directory(FileUtil.toFile(pfo));
@@ -117,6 +124,12 @@ public class PythonUnitTestRunner implements PythonTestRunner {
 
         Object[] runParams = PythonTestManager.getTestRunParams(project);
         String runner = runParams[0].toString();
+
+        if (runner.equals("pytest")) {
+            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("PyTest not supported at the moment", NotifyDescriptor.INFORMATION_MESSAGE));
+            return;
+        }
+
         String[] params = (String[]) runParams[1];
 
         ProcessBuilder pb = new ProcessBuilder();
@@ -255,6 +268,11 @@ public class PythonUnitTestRunner implements PythonTestRunner {
 
             Object[] runParams = PythonTestManager.getTestRunParams(project);
             String runner = runParams[0].toString();
+
+            if (runner.equals("pytest")) {
+                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("PyTest not supported at the moment", NotifyDescriptor.INFORMATION_MESSAGE));
+                return;
+            }
 
             ProcessBuilder pb = new ProcessBuilder();
             pb.directory(FileUtil.toFile(project.getProjectDirectory())/*.getParentFile()*/);
