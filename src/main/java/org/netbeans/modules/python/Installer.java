@@ -18,13 +18,9 @@ public class Installer extends ModuleInstall {
     );
 
 ////TODO
-//1. Debugger
-//https://dzone.com/articles/how-reuse-netbeans-debugger
-////LATER
-//1. support pytest
-//2. profiler(inspire from spyder) (check for libraries)
-//3. support django and flask https://code.visualstudio.com/docs/python/tutorial-django
-//4. Jupyter Notebook/Data science support/conda
+    //clean testrunner
+    //clean ressources
+    //clean projectproperties
     @Override
     public void restored() {
         Unirest.config().cacheResponses(true);

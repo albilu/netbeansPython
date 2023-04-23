@@ -11,6 +11,10 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 - Netbeans 15+
 - JDK 11+
 
+### Installation
+- Download the latest release and install in Netbeans: `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
+- Or install from Netbeans (WIP) `Tools -> Plugins -> Available Plugins -> Install`
+
 ## Goal of netbeansPython
 
 This `plugin` enables [Python Programming Language](https://www.python.org/about/) support for [Apache Netbeans](https://netbeans.apache.org/).
@@ -20,9 +24,9 @@ This project is driven by the need to bring to Netbeans similar support for Pyth
 
 ## Main Features
 ### Project Management
-- Simple Python projects type creation (with `venv/virtualenv`)
+- Simple Python project type creation (with `venv/virtualenv`)
 - Import projects from Sources
-- Simple [Poetry](https://python-poetry.org/) porjects creation (common `poetry` commands supported)
+- Simple [Poetry](https://python-poetry.org/) project creation (common `poetry` commands supported)
 - Run/Build projects
     ![f9b73732e9534000af91eb4e9bf11208.png](_resources/f9b73732e9534000af91eb4e9bf11208.png)
 
@@ -53,13 +57,6 @@ This project is driven by the need to bring to Netbeans similar support for Pyth
 - Go to test/tested class
     ![ebaed2b72b503dec7733d6698f3a0a72.png](_resources/ebaed2b72b503dec7733d6698f3a0a72.png)
 
-## Next Features
-Here is list of features to come ordered by priority:
-- Debugger => TD: 30APR
-- Support Pytest framework
-- Profiler (inspire from the Spyder IDE one)
-- Support Web development frameworks (Django/Flask)
-- Jupyter Notebook/Data Science/Conda support (premisces with IPython integrated already)
-
-## Contributing
-(WIP)
+### Debugging
+- Lite Python Debugger relying on the Python internal debugger `PDB` (breakpoints/callstack variable inspection) supported
+	![74a5dd8877b9608931b49604ab59555d.png](_resources/74a5dd8877b9608931b49604ab59555d.png)

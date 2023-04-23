@@ -4,3 +4,6 @@ OpenIDE-Module-Layer: org/netbeans/modules/python/layer.xml
 OpenIDE-Module-Localizing-Bundle: org/netbeans/modules/python/Bundle.properties
 OpenIDE-Module-Display-Category: Editor
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
+OpenIDE-Module-Long-Description: <html>This plugin enables Python Programming Language support for Apache Netbeans.
+     It leverage the Spyder IDE community supported Language Server Protocol. See more details at the
+    <b><a href="https://github.com/albilu/netbeansPython">Full User Guide</a><b></html>

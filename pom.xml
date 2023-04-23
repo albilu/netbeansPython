@@ -112,7 +112,7 @@
                     <verifyRuntime>warn</verifyRuntime>
                     <requiresRestart>true</requiresRestart>
                     <author>${dev.name}</author>
-                    <!--<homePageUrl>${confluence.url}</homePageUrl>-->
+                    <homePageUrl>https://github.com/albilu/netbeansPython</homePageUrl>
                     <moduleDependencies>
                         <dependency>
                             <id>org.netbeans.api:org-netbeans-modules-lsp-client</id>
@@ -725,11 +725,31 @@
             <version>${netbeans.release.version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-api-debugger</artifactId>
+            <version>${netbeans.release.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-spi-debugger-ui</artifactId>
+            <version>${netbeans.release.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-spi-viewmodel</artifactId>
+            <version>${netbeans.release.version}</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.eclipse.lsp4j</groupId>
+            <artifactId>org.eclipse.lsp4j.debug</artifactId>
+            <version>0.13.0</version>
+        </dependency>-->
     </dependencies>
     <properties>
         <dev.name>albilu</dev.name>
         <netbeans.release.version>RELEASE170</netbeans.release.version>
-        <next.version>0.2</next.version>
+        <next.version>0.3</next.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
