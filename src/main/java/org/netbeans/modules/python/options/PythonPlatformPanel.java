@@ -15,12 +15,15 @@ import org.netbeans.modules.python.projectsample.PythonPoetryPanelVisual;
 import org.netbeans.modules.python.projectsample.PythonProjectPanelVisual;
 import org.openide.util.Exceptions;
 import org.openide.util.NbPreferences;
+import org.openide.util.RequestProcessor;
 
 final class PythonPlatformPanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
     private final PythonPlatformOptionsPanelController controller;
+
+    RequestProcessor RP = new RequestProcessor(this.getClass().getName(), 1);
 
     PythonPlatformPanel(PythonPlatformOptionsPanelController controller) {
         this.controller = controller;
@@ -431,34 +434,36 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sysCheckBoxActionPerformed
 
     void load() {
-        PythonPlatformManager.refresh();
-        reloadDetection();
+        RP.post(() -> {
+            PythonPlatformManager.refresh();
+            reloadDetection();
 
-        DefaultTableModel model1 = (DefaultTableModel) sysEnvsTable.getModel();
-        model1.setRowCount(0);
-        DefaultTableModel model2 = (DefaultTableModel) userEnvsTable.getModel();
-        model2.setRowCount(0);
+            DefaultTableModel model1 = (DefaultTableModel) sysEnvsTable.getModel();
+            model1.setRowCount(0);
+            DefaultTableModel model2 = (DefaultTableModel) userEnvsTable.getModel();
+            model2.setRowCount(0);
 
-        Map<String, String> envs = PythonUtility.getEnvs();
-        envs.forEach((key, value) -> {
-            ((DefaultTableModel) sysEnvsTable.getModel()).addRow(new Object[]{key, value});
-        });
-
-        try {
-            PythonUtility.getUserEnvs().forEach((key, value) -> {
-                ((DefaultTableModel) userEnvsTable.getModel()).addRow(new Object[]{key, value});
+            Map<String, String> envs = PythonUtility.getEnvs();
+            envs.forEach((key, value) -> {
+                ((DefaultTableModel) sysEnvsTable.getModel()).addRow(new Object[]{key, value});
             });
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
 
-        try {
-            if (!PythonPlatformManager.getDefault().isEmpty()) {
-                platformList.setSelectedIndex(defaultIndex);
+            try {
+                PythonUtility.getUserEnvs().forEach((key, value) -> {
+                    ((DefaultTableModel) userEnvsTable.getModel()).addRow(new Object[]{key, value});
+                });
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+
+            try {
+                if (!PythonPlatformManager.getDefault().isEmpty()) {
+                    platformList.setSelectedIndex(defaultIndex);
+                }
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        });
     }
 
     void store() {
