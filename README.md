@@ -12,8 +12,10 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 - JDK 11+
 
 ### Installation
-- Download the latest release and install in Netbeans: `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
-- Or install from Netbeans (WIP) `Tools -> Plugins -> Available Plugins -> Install`
+- Download the latest release and install in Netbeans: \
+    `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
+- Or install from Netbeans (WIP) \
+    `Tools -> Plugins -> Available Plugins -> Install`
 
 ## Goal of netbeansPython
 
@@ -57,6 +59,6 @@ This project is driven by the need to bring to Netbeans similar support for Pyth
 - Go to test/tested class
     ![ebaed2b72b503dec7733d6698f3a0a72.png](_resources/ebaed2b72b503dec7733d6698f3a0a72.png)
 
-### Debugging
+### Debugger
 - Lite Python Debugger relying on the Python internal debugger `PDB` (breakpoints/callstack variable inspection) supported
 	![74a5dd8877b9608931b49604ab59555d.png](_resources/74a5dd8877b9608931b49604ab59555d.png)
