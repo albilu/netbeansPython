@@ -156,7 +156,8 @@ public class PythonUtility {
         if (projectDir != null) {
             p.directory(FileUtil.toFile(projectDir));
         }
-        return IOUtils.toString(p.start().getInputStream(), StandardCharsets.UTF_8).strip();
+        return IOUtils.toString(p.redirectErrorStream(true).start().getInputStream(),
+                StandardCharsets.UTF_8).strip();
     }
 
     public static String getPythonStdLibPath(String path) throws IOException {
@@ -262,10 +263,10 @@ public class PythonUtility {
 
     }
 
-    public static Properties getProperties(@NonNull Project project) throws IOException {
+    public static Properties getProperties(@NonNull Project project, boolean isCreating) throws IOException {
 
         Properties prop = new Properties();
-        if (OpenProjects.getDefault().isProjectOpen(project)) {
+        if (OpenProjects.getDefault().isProjectOpen(project) || isCreating) {
             File file = createProperties(project);
             prop.load(new FileInputStream(file));
         }
@@ -274,12 +275,7 @@ public class PythonUtility {
     }
 
     public static String getVersion(String projectPythonExe) throws IOException {
-        String commandOutput = getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
-        //Python 2 print CLI output to stderr instead of stdout causing the version to not be retrieved
-        if (commandOutput.isEmpty() && projectPythonExe.contains("python2")) {
-            commandOutput = "Python 2";
-        }
-        return commandOutput;
+        return getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
     }
 
     public static ImageIcon getErrorIcon() {
@@ -491,7 +487,7 @@ public class PythonUtility {
 
     public static String getVenv(PythonProject get) {
         try {
-            return getProperties(get).getProperty("nbproject.virtualmanager", "venv");
+            return getProperties(get, false).getProperty("nbproject.virtualmanager", "venv");
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }

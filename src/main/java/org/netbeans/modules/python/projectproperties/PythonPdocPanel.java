@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.Properties;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.project.PythonProjectStateHandler;
-import org.netbeans.modules.python.PythonUtility;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
 
@@ -78,7 +78,7 @@ public class PythonPdocPanel extends javax.swing.JPanel implements DocumentListe
 
     private void loadProperties() {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             pdocParamsTextField.setText(prop.getProperty("nbproject.pdoc.params",
                     "-o docs"));
         } catch (IOException ex) {
@@ -88,7 +88,7 @@ public class PythonPdocPanel extends javax.swing.JPanel implements DocumentListe
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             prop.setProperty("nbproject.pdoc.params", pdocParamsTextField.getText());
             prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);

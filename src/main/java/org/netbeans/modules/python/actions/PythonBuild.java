@@ -11,8 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.netbeans.api.extexecution.ExecutionService;
 import org.netbeans.api.project.Project;
 import org.netbeans.modules.python.PythonOutputLine;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.LifecycleManager;
 import org.openide.awt.StatusDisplayer;
 import org.openide.filesystems.FileObject;
@@ -43,7 +43,7 @@ public class PythonBuild {
             String[] params = {};
             List<String> argList = new ArrayList<>();
             if (owner != null) {
-                Properties prop = PythonUtility.getProperties(owner);
+                Properties prop = PythonUtility.getProperties(owner, false);
                 if (!prop.getProperty("nbproject.build.params", "").isEmpty()) {
                     params = prop.getProperty("nbproject.build.params", "")
                             .split(" ");

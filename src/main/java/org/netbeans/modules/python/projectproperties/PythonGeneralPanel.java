@@ -11,10 +11,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.apache.commons.lang3.StringUtils;
 import org.javatuples.Triplet;
-import org.netbeans.modules.python.project.PythonProject;
-import org.netbeans.modules.python.project.PythonProjectStateHandler;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.options.PythonPlatformManager;
+import org.netbeans.modules.python.project.PythonProject;
+import org.netbeans.modules.python.project.PythonProjectStateHandler;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
@@ -179,7 +179,7 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
                     }
 
                 }
-                Properties prop = PythonUtility.getProperties(project);
+                Properties prop = PythonUtility.getProperties(project, false);
                 Object python_path = prop.get("nbproject.python_path");
                 if (python_path != null && !python_path.toString().isEmpty()) {
 //                    pythonComboBox.addItem(Pair.of(PythonUtility
@@ -239,7 +239,7 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
 
             PythonUtility.processExecutor(cmd, "Update Properties");
 
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             prop.setProperty("nbproject.python_path", selectedItem != null
                     ? ((Pair) selectedItem).second().toString() : "");
             prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()

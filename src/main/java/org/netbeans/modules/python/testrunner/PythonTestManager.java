@@ -6,8 +6,8 @@ import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ProjectUtils;
 import org.netbeans.modules.gsf.testrunner.api.TestSession;
 import org.netbeans.modules.gsf.testrunner.ui.api.Manager;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.util.Exceptions;
 
 /**
@@ -29,7 +29,7 @@ public class PythonTestManager {
 
     public static Object[] getTestRunParams(PythonProject project) {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             return new Object[]{prop.getProperty("nbproject.test.runner", "unittest"),
                 prop.getProperty("nbproject.test.params", "*Test.py").split(" ")};
         } catch (IOException ex) {

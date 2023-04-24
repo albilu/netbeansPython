@@ -498,7 +498,7 @@ public class PythonProject implements Project {
                 case ActionProvider.COMMAND_RUN:
                     try {
                     Properties prop = PythonUtility.getProperties(/*FileOwnerQuery
-                            .getOwner(projectDir)*/project);
+                            .getOwner(projectDir)*/project, false);
                     Object get = prop.getProperty("nbproject.run.script");
                     PythonRun.runAction(project, get != null
                             ? DataObject.find(FileUtil.toFileObject(new File(get
@@ -540,7 +540,7 @@ public class PythonProject implements Project {
                 case ActionProvider.COMMAND_DEBUG:
                     try {
                     Properties prop = PythonUtility.getProperties(/*FileOwnerQuery
-                            .getOwner(projectDir)*/project);
+                            .getOwner(projectDir)*/project, false);
                     Object get = prop.getProperty("nbproject.run.script");
                     PythonDebugger.startDebugger(project, get != null
                             ? DataObject.find(FileUtil.toFileObject(new File(get
@@ -579,7 +579,7 @@ public class PythonProject implements Project {
                 case ActionProvider.COMMAND_RUN:
                     Properties prop = null;
                     try {
-                        prop = PythonUtility.getProperties(/*FileOwnerQuery.getOwner(projectDir)*/project);
+                        prop = PythonUtility.getProperties(/*FileOwnerQuery.getOwner(projectDir)*/project, false);
                     } catch (IOException ex) {
                         Exceptions.printStackTrace(ex);
                     }

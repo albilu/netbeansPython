@@ -119,6 +119,8 @@ public class PdbClient {
     }
 
     public String getStreamResponse(boolean first) throws IOException {
+        //FIXME Something wrong with Python 2.7 reader.
+        //Not supporting for now
         StringBuilder content = new StringBuilder();
         int value = reader.read();
         while (value != -1) {

@@ -105,7 +105,7 @@ public class PythonPoetryWizardIterator implements WizardDescriptor./*Progress*/
         }
 
         Project owner = FileOwnerQuery.getOwner(dir);
-        Properties prop = PythonUtility.getProperties(owner);
+        Properties prop = PythonUtility.getProperties(owner, true);
 
         prop.setProperty("nbproject.python_path",
                 PythonUtility.getPoetryPythonPath(python, owner.getProjectDirectory()) /*python*/);

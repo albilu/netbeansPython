@@ -22,9 +22,9 @@ import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ProjectManager;
 import org.netbeans.api.templates.TemplateRegistration;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.actions.PythonCreateVEnvAction;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.spi.project.ui.support.ProjectChooser;
 import org.netbeans.spi.project.ui.templates.support.Templates;
 import org.openide.WizardDescriptor;
@@ -105,7 +105,7 @@ public class PythonProjectWizardIterator
         if (!venv.isEmpty()) {
             Project owner = FileOwnerQuery.getOwner(dir);
             PythonCreateVEnvAction.createEnv((PythonProject) owner, python, venv);
-            Properties prop = PythonUtility.getProperties(owner);
+            Properties prop = PythonUtility.getProperties(owner, false);
             prop.setProperty("nbproject.virtualmanager", venv);
             prop.store(new FileWriter(FileUtil.toFile(owner.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);

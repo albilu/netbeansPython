@@ -64,6 +64,13 @@ public class PythonDebugger {
         try {
             List<String> runArgs = PythonRun.getRunArgs(owner, dob, true);
 
+            if (runArgs.isEmpty() || runArgs.get(0).contains("Python 2")) {
+                DialogDisplayer.getDefault().notify(
+                        new NotifyDescriptor.Message("Python 2 Debugging not supported at the moment",
+                                NotifyDescriptor.INFORMATION_MESSAGE));
+                return;
+            }
+
             String sessionName = owner != null && !singleFile ? ProjectUtils
                     .getInformation(owner).getDisplayName()
                     : dob.getPrimaryFile().getNameExt();
@@ -100,7 +107,7 @@ public class PythonDebugger {
                             : FileUtil.toFile(dob.getPrimaryFile().getParent()));
             PythonUtility.manageRunEnvs(pb);
 
-            Process process = pb.start();
+            Process process = pb.redirectErrorStream(true).start();
             createHandle = ProgressHandle.createHandle(String.format("%s (%s)",
                     Bundle.CTL_SessionName(), sessionName));
             createHandle.start();

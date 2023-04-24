@@ -48,7 +48,7 @@ public class PythonGenerateTest {
         try {
             Project owner = FileOwnerQuery.getOwner(primaryFile);
             if (owner != null) {
-                Properties prop = PythonUtility.getProperties(owner);
+                Properties prop = PythonUtility.getProperties(owner, false);
                 if (!prop.getProperty("nbproject.test.generator.params", "")
                         .isEmpty()) {
                     params = prop.getProperty("nbproject.test.generator.params", "")

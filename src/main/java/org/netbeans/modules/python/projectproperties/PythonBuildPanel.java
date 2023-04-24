@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.Properties;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.project.PythonProjectStateHandler;
-import org.netbeans.modules.python.PythonUtility;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
 
@@ -78,7 +78,7 @@ public class PythonBuildPanel extends javax.swing.JPanel implements DocumentList
 
     private void loadProperties() {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             buildParamsTextField.setText(prop.getProperty("nbproject.build.params", ""));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
@@ -87,7 +87,7 @@ public class PythonBuildPanel extends javax.swing.JPanel implements DocumentList
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             prop.setProperty("nbproject.build.params", buildParamsTextField.getText());
             prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);

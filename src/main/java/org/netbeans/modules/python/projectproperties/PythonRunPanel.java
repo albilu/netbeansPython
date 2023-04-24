@@ -7,9 +7,9 @@ import java.util.Properties;
 import javax.swing.JFileChooser;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.project.PythonProjectStateHandler;
-import org.netbeans.modules.python.PythonUtility;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
@@ -124,7 +124,7 @@ public class PythonRunPanel extends javax.swing.JPanel implements DocumentListen
 
     private void loadProperties() {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             FileObject fileObject = project.getProjectDirectory()
                     .getFileObject("main.py");
             scriptTextField.setText(prop.getProperty("nbproject.run.script",
@@ -138,7 +138,7 @@ public class PythonRunPanel extends javax.swing.JPanel implements DocumentListen
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             prop.setProperty("nbproject.run.script", scriptTextField.getText());
             prop.setProperty("nbproject.run.params", paramsTextField.getText());
             prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()

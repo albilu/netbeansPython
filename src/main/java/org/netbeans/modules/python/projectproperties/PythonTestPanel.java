@@ -7,9 +7,9 @@ import java.util.Properties;
 import javax.swing.JFileChooser;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.project.PythonProjectStateHandler;
-import org.netbeans.modules.python.PythonUtility;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
@@ -261,7 +261,7 @@ public class PythonTestPanel extends javax.swing.JPanel implements DocumentListe
 
     private void loadProperties() {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             FileObject fileObject = project.getProjectDirectory()
                     .getFileObject("tests");
             FileObject fileObjectG = project.getProjectDirectory()
@@ -286,7 +286,7 @@ public class PythonTestPanel extends javax.swing.JPanel implements DocumentListe
 
     public static void setProperties(PythonProject project) {
         try {
-            Properties prop = PythonUtility.getProperties(project);
+            Properties prop = PythonUtility.getProperties(project, false);
             prop.setProperty("nbproject.test.runner", testFrameworkComboBox.getSelectedItem().toString());
             prop.setProperty("nbproject.test.params", testFrameworkParamsTextField.getText());
             prop.setProperty("nbproject.test.dir", testFrameworkDirTextField.getText());
