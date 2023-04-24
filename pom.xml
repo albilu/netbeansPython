@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>se.bjurr.gitchangelog</groupId>
                 <artifactId>git-changelog-maven-plugin</artifactId>
-                <version>1.96.1</version>
+                <version>1.97.0</version>
                 <executions>
                     <execution>
                         <phase>prepare-package</phase>
