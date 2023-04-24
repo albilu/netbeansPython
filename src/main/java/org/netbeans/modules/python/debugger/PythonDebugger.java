@@ -153,12 +153,12 @@ public class PythonDebugger {
             pdbClient.getProcess().destroyForcibly();
             pdbClient.getReader().close();
             pdbClient.getWriter().close();
-            engineProvider.getDestructor().killEngine();
-            io.closeInputOutput();
-            createHandle.finish();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
+        engineProvider.getDestructor().killEngine();
+        io.closeInputOutput();
+        createHandle.finish();
     }
 
     public PdbClient getPdbClient() {

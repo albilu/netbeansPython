@@ -67,6 +67,10 @@ public class PdbClient {
 
     public void sendCommand(String cmd) throws IOException {
         isStopped = false;
+        writeToStream(cmd);
+    }
+
+    private void writeToStream(String cmd) throws IOException {
         writer.write(cmd);
         writer.newLine();
         writer.flush();
@@ -74,9 +78,7 @@ public class PdbClient {
 
     public boolean sendCommandAndProcessResponse(String cmd) throws IOException {
         isStopped = false;
-        writer.write(cmd);
-        writer.newLine();
-        writer.flush();
+        writeToStream(cmd);
         try {
             return processResponse(getStreamResponse(false));
         } catch (IOException ex) {
@@ -88,9 +90,7 @@ public class PdbClient {
 
     public Object[] sendBreakpointsCommand(String cmd) throws IOException {
         isStopped = false;
-        writer.write(cmd);
-        writer.newLine();
-        writer.flush();
+        writeToStream(cmd);
         try {
             return breakPointCommandResponse(getStreamResponse(false));
         } catch (IOException ex) {
@@ -103,18 +103,14 @@ public class PdbClient {
 
     public List<PythonDebuggerCallStack> sendWhere(String cmd) throws IOException {
         isStopped = false;
-        writer.write(cmd);
-        writer.newLine();
-        writer.flush();
+        writeToStream(cmd);
         return whereResponse(getStreamResponse(false));
 
     }
 
     public String sendCommandAndGetResponse(String cmd) throws IOException {
         isStopped = false;
-        writer.write(cmd);
-        writer.newLine();
-        writer.flush();
+        writeToStream(cmd);
         return StringUtils.removeEnd(getStreamResponse(false), "(Pdb)").trim();
     }
 

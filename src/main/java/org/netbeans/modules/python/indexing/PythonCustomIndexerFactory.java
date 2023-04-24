@@ -38,7 +38,7 @@ public class PythonCustomIndexerFactory extends CustomIndexerFactory {
         FileObject fo = context.getRoot();
         Project owner = fo != null ? FileOwnerQuery.getOwner(fo) : null;
         if (owner != null && owner.getClass()
-                .getName().equals("org.netbeans.modules.python.PythonProject")) {
+                .getName().equals("org.netbeans.modules.python.project.PythonProject")) {
             try {
                 IndexingSupport is = IndexingSupport.getInstance(context);
                 for (Indexable indexable : deleted) {
@@ -58,7 +58,7 @@ public class PythonCustomIndexerFactory extends CustomIndexerFactory {
         FileObject fo = context.getRoot();
         Project owner = fo != null ? FileOwnerQuery.getOwner(fo) : null;
         if (owner != null && owner.getClass()
-                .getName().equals("org.netbeans.modules.python.PythonProject")) {
+                .getName().equals("org.netbeans.modules.python.project.PythonProject")) {
             try {
                 IndexingSupport is = IndexingSupport.getInstance(context);
                 for (Indexable indexable : dirty) {

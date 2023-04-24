@@ -57,7 +57,7 @@ public class PythonErrorAnnotator extends AnnotationProvider {
         Project owner = FileOwnerQuery.getOwner(fo);
 
         if (!Utilities.isBadgesEnabled() || owner == null || !owner.getClass().getName()
-                .equals("org.netbeans.modules.python.PythonProject")) {
+                .equals("org.netbeans.modules.python.project.PythonProject")) {
             return null;
         }
         boolean inError = false;
@@ -97,7 +97,7 @@ public class PythonErrorAnnotator extends AnnotationProvider {
         }
 
         if (owner.getClass().getName()
-                .equals("org.netbeans.modules.python.PythonProject")
+                .equals("org.netbeans.modules.python.project.PythonProject")
                 && files.size() == 1 && fo.isFolder() && fo.getFileObject("__init__.py") != null) {
             icon = ImageUtilities.mergeImages(icon, ImageUtilities
                     .addToolTipToImage(ImageUtilities.loadImage(IMAGE), "<img src='"

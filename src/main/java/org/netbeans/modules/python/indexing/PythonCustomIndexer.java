@@ -52,7 +52,7 @@ public class PythonCustomIndexer extends CustomIndexer {
         FileObject root = context.getRoot();
         Project owner = root != null ? FileOwnerQuery.getOwner(root) : null;
         boolean pyProject = owner != null && owner.getClass()
-                .getName().equals("org.netbeans.modules.python.PythonProject");
+                .getName().equals("org.netbeans.modules.python.project.PythonProject");
         boolean pyLibPath = root != null && root.getParent() != null
                 && root.getParent().getName().equals("lib");
         if (pyProject || pyLibPath) {
