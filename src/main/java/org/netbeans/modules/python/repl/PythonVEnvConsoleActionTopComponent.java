@@ -2,14 +2,16 @@ package org.netbeans.modules.python.repl;
 
 import com.jediterm.terminal.TtyConnector;
 import com.jediterm.terminal.ui.JediTermWidget;
+import com.jediterm.terminal.ui.TerminalWidget;
 import com.jediterm.terminal.ui.settings.DefaultSettingsProvider;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.SwingUtilities;
 import org.netbeans.api.progress.ProgressHandle;
 import org.netbeans.api.settings.ConvertAsProperties;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.NbBundle.Messages;
@@ -109,6 +111,11 @@ public final class PythonVEnvConsoleActionTopComponent extends TopComponent {
 
                 }
 
+            });
+            jediTermWidget.addListener((TerminalWidget tw) -> {
+                EventQueue.invokeLater(() -> {
+                    close();
+                });
             });
 
             ttyConnector = PythonTerminalConnector.createTtyConnector(type,
