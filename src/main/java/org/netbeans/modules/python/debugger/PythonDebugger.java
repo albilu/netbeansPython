@@ -64,7 +64,10 @@ public class PythonDebugger {
         try {
             List<String> runArgs = PythonRun.getRunArgs(owner, dob, true);
 
-            if (runArgs.isEmpty() || runArgs.get(0).contains("Python 2")) {
+            if (runArgs.isEmpty()) {
+                return;
+            }
+            if (PythonUtility.getVersion(runArgs.get(0)).contains("Python 2")) {
                 DialogDisplayer.getDefault().notify(
                         new NotifyDescriptor.Message("Python 2 Debugging not supported at the moment",
                                 NotifyDescriptor.INFORMATION_MESSAGE));

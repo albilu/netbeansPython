@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.netbeans.modules</groupId>
+    <groupId>io.github.albilu</groupId>
     <artifactId>python</artifactId>
     <version>${next.version}</version>
     <packaging>nbm</packaging>
@@ -11,6 +11,34 @@
             <url>https://packages.jetbrains.team/maven/p/ij/intellij-dependencies</url>
         </repository>
     </repositories>
+    <name>netbeansPython</name>
+    <description>Netbeans Support for Python</description>
+    <url>${git.url}</url>
+    <developers>
+        <developer>
+            <name>albilu</name>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:${git.link}</connection>
+        <developerConnection>scm:git:${git.link}</developerConnection>
+        <url>${git.url}</url>
+        <tag>master</tag>
+    </scm>
+    <licenses>
+        <license>
+            <name>GNU General Public License v3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <name>Central Repository OSSRH</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <build>
         <plugins>
             <plugin>
@@ -113,6 +141,8 @@
                     <requiresRestart>true</requiresRestart>
                     <author>${dev.name}</author>
                     <homePageUrl>https://github.com/albilu/netbeansPython</homePageUrl>
+                    <licenseFile>LICENCE</licenseFile>
+                    <licenseName>GNU General Public License v3.0</licenseName>
                     <moduleDependencies>
                         <dependency>
                             <id>org.netbeans.api:org-netbeans-modules-lsp-client</id>
@@ -740,7 +770,7 @@
             <artifactId>org-netbeans-spi-viewmodel</artifactId>
             <version>${netbeans.release.version}</version>
         </dependency>
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.eclipse.lsp4j</groupId>
             <artifactId>org.eclipse.lsp4j.debug</artifactId>
             <version>0.13.0</version>
@@ -749,7 +779,9 @@
     <properties>
         <dev.name>albilu</dev.name>
         <netbeans.release.version>RELEASE170</netbeans.release.version>
-        <next.version>0.7</next.version>
+        <next.version>0.8</next.version>
+        <git.url>https://github.com/albilu/netbeansPython</git.url>
+        <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

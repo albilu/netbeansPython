@@ -90,7 +90,8 @@ public class PythonDiagCollector {
                     "pyflakes",
                     Paths.get(fo.getPath()).toString()
             );
-            return !IOUtils.toString(p.start().getErrorStream(), StandardCharsets.UTF_8)
+            return !IOUtils.toString(p.redirectErrorStream(true).start()
+                    .getInputStream(), StandardCharsets.UTF_8)
                     .strip().isEmpty();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

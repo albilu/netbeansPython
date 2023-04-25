@@ -39,9 +39,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-        #Maven Publish
+        #Maven Publish to Github
         #server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         #settings-path: ${{ github.workspace }} # location for the settings.xml file
+        #Maven Publish to Central
+        server-id: ossrh
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
 
     - name: Set Version
       run: |
@@ -102,6 +106,23 @@ jobs:
     #  run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
     #  env:
     #    GITHUB_TOKEN: ${{ github.token }}
+    - name: Publish package RELEASE150
+      run: mvn --batch-mode deploy-file -Durl=file://target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE150-${{ env.RELEASE_VERSION }}
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+
+    - name: Publish package RELEASE160
+      run: mvn --batch-mode deploy-file -Durl=file://target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE160-${{ env.RELEASE_VERSION }}
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+
+    - name: Publish package RELEASE170
+      run: mvn --batch-mode deploy-file -Durl=file://target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE170-${{ env.RELEASE_VERSION }}
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
