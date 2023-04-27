@@ -107,19 +107,19 @@ jobs:
     #  env:
     #    GITHUB_TOKEN: ${{ github.token }}
     - name: Publish package RELEASE150
-      run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }} -Durl=file://${{ env.GITHUB_WORKSPACE }}/target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -DrepositoryId=ossrh -Dfile=python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE150-${{ env.RELEASE_VERSION }}
+      run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }} -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE150-${{ env.RELEASE_VERSION }}
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
 
     - name: Publish package RELEASE160
-      run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }} -Durl=file://${{ env.GITHUB_WORKSPACE }}/target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -DrepositoryId=ossrh -Dfile=python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE160-${{ env.RELEASE_VERSION }}
+      run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }} -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE160-${{ env.RELEASE_VERSION }}
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
 
     - name: Publish package RELEASE170
-      run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }} -Durl=file://${{ env.GITHUB_WORKSPACE }}/target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -DrepositoryId=ossrh -Dfile=python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE170-${{ env.RELEASE_VERSION }}
+      run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }} -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE170-${{ env.RELEASE_VERSION }}
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
