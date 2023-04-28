@@ -55,6 +55,10 @@ jobs:
 
     - name: Build with RELEASE150
       run: mvn -B clean install deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Create Release
       uses: actions/create-release@v1
@@ -80,6 +84,10 @@ jobs:
 
     - name: Build with RELEASE160
       run: mvn -B clean install deploy -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }}
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Attach RELEASE160 NBM
       uses: actions/upload-release-asset@v1
@@ -93,6 +101,10 @@ jobs:
 
     - name: Build with RELEASE170
       run: mvn -B clean install deploy -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }}
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Attach RELEASE170 NBM
       uses: actions/upload-release-asset@v1
