@@ -175,7 +175,7 @@
                     <requiresRestart>true</requiresRestart>
                     <author>${dev.name}</author>
                     <homePageUrl>https://github.com/albilu/netbeansPython</homePageUrl>
-                    <licenseFile>LICENCE</licenseFile>
+                    <licenseFile>LICENSE</licenseFile>
                     <licenseName>GNU General Public License v3.0</licenseName>
                     <moduleDependencies>
                         <dependency>
