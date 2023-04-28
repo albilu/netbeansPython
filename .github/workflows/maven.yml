@@ -46,6 +46,8 @@ jobs:
         server-id: ossrh
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
+        gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
     - name: Set Version
       run: |
@@ -111,18 +113,21 @@ jobs:
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Publish package RELEASE160
       run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Publish package RELEASE170
       run: mvn --batch-mode deploy:deploy-file -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
