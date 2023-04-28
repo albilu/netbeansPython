@@ -53,6 +53,9 @@ jobs:
       run: |
         echo "RELEASE_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=next.version -q -DforceStdout)" >> $GITHUB_ENV
 
+    - name: Build with RELEASE150
+      run: mvn -B clean install deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
+
     - name: Create Release
       uses: actions/create-release@v1
       id: create_release
@@ -64,9 +67,6 @@ jobs:
         body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE150
-      run: mvn -B clean install deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
 
     - name: Attach RELEASE150 NBM
       uses: actions/upload-release-asset@v1
