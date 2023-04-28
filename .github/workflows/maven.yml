@@ -109,21 +109,21 @@ jobs:
     #  env:
     #    GITHUB_TOKEN: ${{ github.token }}
     - name: Publish package RELEASE150
-      run: mvn --batch-mode deploy:deploy-file -Dgpg.passphrase="${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}" -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE150-${{ env.RELEASE_VERSION }}
+      run: mvn --batch-mode gpg:sign-and-deploy-file -Dpackaging=nbm -DgpgArguments="--no-tty --pinentry-mode loopback" -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE150-${{ env.RELEASE_VERSION }}
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Publish package RELEASE160
-      run: mvn --batch-mode deploy:deploy-file -Dgpg.passphrase="${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}" -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE160-${{ env.RELEASE_VERSION }}
+      run: mvn --batch-mode gpg:sign-and-deploy-file -Dpackaging=nbm -DgpgArguments="--no-tty --pinentry-mode loopback" -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE160-${{ env.RELEASE_VERSION }}
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
     - name: Publish package RELEASE170
-      run: mvn --batch-mode deploy:deploy-file -Dgpg.passphrase="${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}" -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE170-${{ env.RELEASE_VERSION }}
+      run: mvn --batch-mode gpg:sign-and-deploy-file -Dpackaging=nbm -DgpgArguments="--no-tty --pinentry-mode loopback" -DpomFile=pom.xml -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }} -Durl=https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -Dfile=target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm -Dversion=python-RELEASE170-${{ env.RELEASE_VERSION }}
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
