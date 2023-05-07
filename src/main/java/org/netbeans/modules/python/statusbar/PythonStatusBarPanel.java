@@ -7,9 +7,9 @@ import javax.swing.JLabel;
 import org.netbeans.api.options.OptionsDisplayer;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.packagemanager.PythonPackagesModel;
+import org.netbeans.modules.python.project.PythonProject;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
@@ -101,6 +101,13 @@ public final class PythonStatusBarPanel extends javax.swing.JPanel {
                     try {
                         DataObject dataO = (DataObject) c.iterator().next();
                         Project owner = FileOwnerQuery.getOwner(dataO.getPrimaryFile());
+                        if ((!dataO.getPrimaryFile().isFolder() && !dataO.getPrimaryFile().getMIMEType()
+                                .equals(PythonUtility.PYTHON_MIME_TYPE))
+                                || owner == null || !(owner instanceof PythonProject)) {
+                            setVisible(false);
+                            return;
+                        }
+                        setVisible(true);
                         if (owner != null && owner instanceof PythonProject) {
                             String projectPythonExe = PythonUtility.getProjectPythonExe(owner
                                     .getProjectDirectory());

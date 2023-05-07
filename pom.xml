@@ -174,7 +174,7 @@
                     <verifyIntegrity>true</verifyIntegrity>
                     <verifyRuntime>warn</verifyRuntime>
                     <requiresRestart>true</requiresRestart>
-                    <author>${dev.name}</author>
+                    <author>albilu</author>
                     <homePageUrl>https://github.com/albilu/netbeansPython</homePageUrl>
                     <licenseFile>LICENSE</licenseFile>
                     <licenseName>GNU General Public License v3.0</licenseName>
@@ -812,9 +812,8 @@
         </dependency>-->
     </dependencies>
     <properties>
-        <dev.name>albilu</dev.name>
         <netbeans.release.version>RELEASE170</netbeans.release.version>
-        <next.version>1.0</next.version>
+        <next.version>1.1</next.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
         <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
