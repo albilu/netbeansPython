@@ -10,6 +10,7 @@ import org.netbeans.api.project.Project;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.packagemanager.PythonPackagesModel;
 import org.netbeans.modules.python.project.PythonProject;
+import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
@@ -100,12 +101,16 @@ public final class PythonStatusBarPanel extends javax.swing.JPanel {
                 if (!c.isEmpty() && c.size() == 1/*to control multi project selection*/) {
                     try {
                         DataObject dataO = (DataObject) c.iterator().next();
-                        Project owner = FileOwnerQuery.getOwner(dataO.getPrimaryFile());
-                        if ((!dataO.getPrimaryFile().isFolder() && !dataO.getPrimaryFile().getMIMEType()
-                                .equals(PythonUtility.PYTHON_MIME_TYPE))
+                        FileObject primaryFile = dataO.getPrimaryFile();
+                        boolean isPythonFile = !primaryFile.getMIMEType()
+                                .equals(PythonUtility.PYTHON_MIME_TYPE);
+                        Project owner = FileOwnerQuery.getOwner(primaryFile);
+                        if ((!primaryFile.isFolder() && isPythonFile)
                                 || owner == null || !(owner instanceof PythonProject)) {
-                            setVisible(false);
-                            return;
+                            if (isPythonFile) {
+                                setVisible(false);
+                                return;
+                            }
                         }
                         setVisible(true);
                         if (owner != null && owner instanceof PythonProject) {
