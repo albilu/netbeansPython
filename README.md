@@ -14,7 +14,7 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 ### Installation
 - Download the latest [release](https://github.com/albilu/netbeansPython/releases) and install in Netbeans: \
     `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
-- Or install from Netbeans (WIP) \
+- Or install from Netbeans \
     `Tools -> Plugins -> Available Plugins -> Install`
 
 ## Goal of netbeansPython
