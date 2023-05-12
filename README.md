@@ -12,10 +12,10 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 - JDK 11+
 
 ### Installation
-- Download the latest [release](https://github.com/albilu/netbeansPython/releases) and install in Netbeans: \
-    `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
-- Or install from Netbeans \
+- Install from Netbeans \
     `Tools -> Plugins -> Available Plugins -> Install`
+- Or Download the latest [release](https://github.com/albilu/netbeansPython/releases) and install in Netbeans: \
+    `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
 
 ## Goal of netbeansPython
 
@@ -60,5 +60,5 @@ The project is driven by the need to bring to Netbeans similar support for Pytho
     ![ebaed2b72b503dec7733d6698f3a0a72.png](_resources/ebaed2b72b503dec7733d6698f3a0a72.png)
 
 ### Debugger
-- Lite Python Debugger relying on the Python internal debugger `PDB` (breakpoints/callstack variable inspection) supported
+- Lite Python Debugger relying on the Python internal debugger [PDB](https://docs.python.org/3/library/pdb.html) (breakpoints/callstack variable inspection) supported
 	![74a5dd8877b9608931b49604ab59555d.png](_resources/74a5dd8877b9608931b49604ab59555d.png)

@@ -33,7 +33,7 @@ import org.openide.util.NbBundle.Messages;
 @TemplateRegistration(folder = "Project/Python",
         displayName = "#PythonPoetry_displayName",
         description = "PythonPoetryDescription.html",
-        iconBase = "org/netbeans/modules/python/python-2.png"
+        iconBase = "org/netbeans/modules/python/poetry.png"
 )
 @Messages("PythonPoetry_displayName=Poetry Project")
 public class PythonPoetryWizardIterator implements WizardDescriptor./*Progress*/InstantiatingIterator {
