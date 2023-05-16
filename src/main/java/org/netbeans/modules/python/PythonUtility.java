@@ -201,9 +201,12 @@ public class PythonUtility {
             getCommandOutput(new String[]{Utilities.isWindows()
                 ? "where" : "which", python}, null).lines().forEach(exe -> {
                 try {
-                    String vers = getVersion(exe.strip());
-                    if (!vers.isEmpty()) {
-                        versions.add(Pair.of(vers, exe.strip()));
+                    String striped = exe.strip();
+                    if (Files.isExecutable(Paths.get(striped))) {
+                        String vers = getVersion(striped);
+                        if (!vers.isEmpty()) {
+                            versions.add(Pair.of(vers, striped));
+                        }
                     }
                 } catch (IOException ex) {
                     Exceptions.printStackTrace(ex);
