@@ -4,9 +4,191 @@ OpenIDE-Module-Layer: org/netbeans/modules/python/layer.xml
 OpenIDE-Module-Localizing-Bundle: org/netbeans/modules/python/Bundle.properties
 OpenIDE-Module-Display-Category: Editing
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
-OpenIDE-Module-Long-Description: <html>This plugin enables Python Programming Language support for Apache Netbeans.
-     It leverage the Spyder IDE community supported Language Server Protocol. See more details at the
-    <a href="https://github.com/albilu/netbeansPython">Full User Guide</a>
-    <br><br>Please Report any bugs at <a href="https://github.com/albilu/netbeansPython/issues">Issues</a>
+OpenIDE-Module-Long-Description: <html><h1 id="netbeanspython">netbeansPython</h1>
+    <p>
+      Homepage: <a href="https://github.com/albilu/netbeansPython">https://github.com/albilu/netbeansPython</a><br>
+      Report any issue at
+      <a href="https://github.com/albilu/netbeansPython/issues">Issues</a>.
+    </p>
+    <h2 id="goal-of-netbeanspython">Goal of netbeansPython</h2>
+    <p>
+      This <code>plugin</code> enables
+      <a href="https://www.python.org/about/">Python Programming Language</a>
+      support for <a href="https://netbeans.apache.org/">Apache Netbeans</a>. It
+      leverage the <code>Spyder IDE</code> community supported
+      <a href="https://github.com/python-lsp/python-lsp-server"
+        >Language Server Protocol</a
+      >
+    </p>
+    <p>
+      The project is driven by the need to bring to Netbeans similar support for
+      Python as what other main IDEs/Editors (namely
+      <a href="https://www.jetbrains.com/fr-fr/pycharm/">Pycharm</a>/<a
+        href="https://www.spyder-ide.org/"
+        >Spyder IDE</a
+      >/<a href="https://code.visualstudio.com/docs/languages/python">VScode</a>)
+      offers.
+    </p>
+    <h3 id="support-contribute-sponsor">Support/Contribute/Sponsor</h3>
+    <p>Support this project growth and maintenance by:</p>
+    <ul>
+      <li>
+        Submiting
+        <a href="https://github.com/albilu/netbeansPython/pulls">PR</a> for issues
+        in the backlog
+      </li>
+      <li><a href="https://github.com/sponsors/albilu">Sponsoring it</a></li>
+    </ul>
+    <h3 id="related-projects">Related Projects</h3>
+    <p>
+      This is a non exhaustive list of some outstanding projects this module rely
+      on:
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/python-lsp/python-lsp-server"
+          >python-lsp-server</a
+        >: Python Language Server <em>by Spyder IDE Community</em>
+      </li>
+      <li>
+        <a href="https://github.com/JetBrains/pty4j">pty4j</a>: Java implementation
+        of PTY <em>by JetBrains</em>
+      </li>
+      <li>
+        <a href="https://github.com/se2p/pynguin">pynguin</a>: Python Unit Test
+        Generator
+      </li>
+    </ul>
+    <h2 id="main-features">Main Features</h2>
+    <h3 id="project-management">Project Management</h3>
+    <ul>
+      <li>
+        Simple Python project type creation (with <code>venv/virtualenv</code>)
+      </li>
+      <li>Import projects from Sources</li>
+      <li>
+        Simple <a href="https://python-poetry.org/">Poetry</a> project creation
+        (common <code>poetry</code> commands supported)
+      </li>
+      <li>
+        Run/Build projects
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources/f9b73732e9534000af91eb4e9bf11208.png"
+          alt="f9b73732e9534000af91eb4e9bf11208.png"
+          width="800"
+          height="469"
+        />
+      </li>
+    </ul>
+    <h3 id="lsp-server-features">LSP Server Features</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/python-lsp/python-lsp-server#lsp-server-features"
+          >See list of features supported</a
+        >
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources//d242d82a04c729be7c6e6b0b84759c2f.png"
+          alt="d242d82a04c729be7c6e6b0b84759c2f.png"
+          width="800"
+          height="450"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/python-lsp/python-lsp-server#configuration"
+          >LSP Configurations</a
+        >
+        available in Netbeans via: <br />
+        <code>Tools -&gt; Python Platforms -&gt; Lsp Server</code>
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources//f4ecdf1c9e7648113e8dd265b277366a.png"
+          alt="f4ecdf1c9e7648113e8dd265b277366a.png"
+          width="800"
+          height="582"
+        />
+      </li>
+    </ul>
+    <h3 id="python-interpreters-management">Python Interpreters Management</h3>
+    <ul>
+      <li>
+        Multiple Python Interpreters Management including
+        <a href="https://docs.python.org/3/library/venv.html#venv-def">venv</a> and
+        <code>virtualenv</code>
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources/cad96c97900764698d62caf7d6bf49b4.png"
+          alt="cad96c97900764698d62caf7d6bf49b4.png"
+          width="800"
+          height="573"
+        />
+      </li>
+    </ul>
+    <h3 id="packages-management">Packages Management</h3>
+    <ul>
+      <li>
+        Manage Python Packages (Install/Delete) via
+        <a href="https://pypi.org/">Pypi</a> or personal Repositories <br />
+        <code>Windows -&gt; Python Package Manager</code>
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources/74a5dd8877b9608931b49604ab59440d.png"
+          alt="74a5dd8877b9608931b49604ab59440d.png"
+          width="800"
+          height="200"
+        />
+      </li>
+    </ul>
+    <h3 id="python-repl">Python REPL</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ipython/ipython">IPython</a> and
+        <a href="https://github.com/prompt-toolkit/ptpython">PTPython</a> integrated
+        as Interactive Shells (with autocompletion) <br />
+        <code>Windows -&gt; Interactive Python Interpreters -&gt; IPython</code>
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources/b18df5a8d44631819affe75ecd6fab61.png"
+          alt="b18df5a8d44631819affe75ecd6fab61.png"
+          width="800"
+          height="350"
+        />
+      </li>
+    </ul>
+    <h3 id="unittest-test-coverage">Unittest/Test Coverage</h3>
+    <ul>
+      <li>
+        <a href="https://docs.python.org/3/library/unittest.html">Unittest</a>/code
+        <a href="https://coverage.readthedocs.io/en/7.2.2/#">coverage</a> suportted
+      </li>
+      <li>Create/Generate unit tests</li>
+      <li>
+        Go to test/tested class
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources/ebaed2b72b503dec7733d6698f3a0a72.png"
+          alt="ebaed2b72b503dec7733d6698f3a0a72.png"
+          width="800"
+          height="450"
+        />
+      </li>
+    </ul>
+    <h3 id="debugger">Debugger</h3>
+    <ul>
+      <li>
+        Lite Python Debugger relying on the Python internal debugger
+        <a href="https://docs.python.org/3/library/pdb.html">PDB</a>
+        (breakpoints/callstack/variable inspection) supported
+        <br />
+        <img
+          src="https://raw.githubusercontent.com/albilu/netbeansPython/master/_resources//74a5dd8877b9608931b49604ab59555d.png"
+          alt="74a5dd8877b9608931b49604ab59555d.png"
+          width="800"
+          height="450"
+        />
+      </li>
+    </ul>
     </html>
 OpenIDE-Module-Specification-Version: 1.0
