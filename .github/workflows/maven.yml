@@ -49,16 +49,30 @@ jobs:
         gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-    - name: Set Version
+    - name: Get Next Version
       run: |
         echo "RELEASE_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=next.version -q -DforceStdout)" >> $GITHUB_ENV
+        echo "RELEASE_DAY=$(date +%d)" >> $GITHUB_ENV
+        echo "RELEASE_MONTH=$(date +%m)" >> $GITHUB_ENV
+        echo "RELEASE_YEAR=$(date +%y)" >> $GITHUB_ENV
 
-    - name: Build with RELEASE150
-      run: mvn -B clean deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
+    - name: Get Previous Version
+      run: |
+        echo "PREVIOUS_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=previous.version -q -DforceStdout)" >> $GITHUB_ENV
+
+    - name: Set Spec Version
+      run: |
+        sed -i "s/OpenIDE-Module-Specification-Version:.*/OpenIDE-Module-Specification-Version: ${{ env.RELEASE_VERSION }}/" src/main/nbm/manifest.mf
+
+    - name: Build with RELEASE130
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130-${{ env.RELEASE_VERSION }} -DuntaggedName=${{ env.RELEASE_VERSION }} -DfromRef=${{ env.PREVIOUS_VERSION }} -DgitHubToken=${{ env.GITHUB_TOKEN }}
+        echo "SIZE_13=$(wc -c target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Create Release
       uses: actions/create-release@v1
@@ -72,6 +86,44 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
+    - name: Attach RELEASE130 NBM
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm
+        asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE140
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE140 -Dnext.version=RELEASE140-${{ env.RELEASE_VERSION }}
+        echo "SIZE_14=$(wc -c target/nbm/python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
+    - name: Attach RELEASE140 NBM
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/nbm/python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm
+        asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE150
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
+        echo "SIZE_15=$(wc -c target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
     - name: Attach RELEASE150 NBM
       uses: actions/upload-release-asset@v1
       with:
@@ -83,7 +135,9 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with RELEASE160
-      run: mvn -B clean deploy -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }}
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }}
+        echo "SIZE_16=$(wc -c target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -100,7 +154,9 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with RELEASE170
-      run: mvn -B clean deploy -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }}
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }}
+        echo "SIZE_17=$(wc -c target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -115,6 +171,94 @@ jobs:
         asset_content_type: application/gzip
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE180
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE180 -Dnext.version=RELEASE180-${{ env.RELEASE_VERSION }}
+        echo "SIZE_18=$(wc -c target/nbm/python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
+    - name: Attach RELEASE180 NBM
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/nbm/python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm
+        asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Update PPUCs
+      id: my_string
+      run: |
+        STRING_13=$(cat << 'EOF'
+          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE130-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_13}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE130-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+              </module>
+          </module_updates>
+        EOF
+        )
+        STRING_14=$(cat << 'EOF'
+          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE140-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_14}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE140-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+              </module>
+          </module_updates>
+        EOF
+        )
+        STRING_15=$(cat << 'EOF'
+          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE150-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_15}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE150-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+              </module>
+          </module_updates>
+        EOF
+        )
+        STRING_16=$(cat << 'EOF'
+          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE160-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_16}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE160-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+              </module>
+          </module_updates>
+        EOF
+        )
+        STRING_17=$(cat << 'EOF'
+          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE170-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_17}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE170-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+              </module>
+          </module_updates>
+        EOF
+        )
+        STRING_18=$(cat << 'EOF'
+          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE180-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_18}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE180-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+              </module>
+          </module_updates>
+        EOF
+        )
+        echo "$STRING_13" > ppuc/13/updates.xml
+        echo "$STRING_14" > ppuc/14/updates.xml
+        echo "$STRING_15" > ppuc/15/updates.xml
+        echo "$STRING_16" > ppuc/16/updates.xml
+        echo "$STRING_17" > ppuc/17/updates.xml
+        echo "$STRING_18" > ppuc/18/updates.xml
+        git config --global user.name "albilu"
+        git config --global user.email "35330562+albilu@users.noreply.github.com"
+        git add ppuc/\*.*
+        git commit -m "Update PPUCs"
+        git push origin master
 
     #- name: Publish to GitHub Packages Apache Maven
     #  run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml

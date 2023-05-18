@@ -3,8 +3,10 @@ package org.netbeans.modules.python;
 import java.io.IOException;
 import java.nio.file.Files;
 import kong.unirest.Unirest;
+import org.openide.awt.CheckForUpdatesProvider;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.Exceptions;
+import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 import org.openide.util.RequestProcessor;
@@ -31,6 +33,9 @@ public class Installer extends ModuleInstall {
                 }
             });
         }
+        UpdateHandler.addUC();
+        CheckForUpdatesProvider checkForUpdatesProvider = Lookup.getDefault().lookup(CheckForUpdatesProvider.class);
+        checkForUpdatesProvider.notifyAvailableUpdates(true);
     }
 
     @Override

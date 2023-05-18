@@ -140,7 +140,6 @@
                         </goals>
                         <configuration>
                             <templateFile>src/main/resources/org/netbeans/modules/python/changelog.mustache</templateFile>
-                            <untaggedName>${project.version}</untaggedName>
                         </configuration>
                     </execution>
                 </executions>
@@ -271,18 +270,6 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>2.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
             <version>3.6.1</version>
@@ -298,12 +285,6 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.15.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.4</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -332,22 +313,6 @@
             <artifactId>javatuples</artifactId>
             <version>1.2</version>
             <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.41.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.swinglabs.swingx</groupId>
-            <artifactId>swingx-core</artifactId>
-            <version>1.6.5-1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.swinglabs.swingx</groupId>
-            <artifactId>swingx-beaninfo</artifactId>
-            <version>1.6.5-1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -810,10 +775,16 @@
             <artifactId>org.eclipse.lsp4j.debug</artifactId>
             <version>0.13.0</version>
         </dependency>-->
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-autoupdate-services</artifactId>
+            <version>${netbeans.release.version}</version>
+        </dependency>
     </dependencies>
     <properties>
         <netbeans.release.version>RELEASE170</netbeans.release.version>
-        <next.version>1.1</next.version>
+        <next.version>1.2</next.version>
+        <previous.version>1.1</previous.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
         <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

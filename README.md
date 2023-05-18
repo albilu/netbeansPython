@@ -7,9 +7,9 @@
 Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) for the full `user guide`
 
 ### Requirements
-- Python 3.7+
-- Netbeans 15+
-- JDK 11+
+- [![](https://img.shields.io/badge/Python-3.7+-green)]()
+- [![](https://img.shields.io/badge/Netbeans-13+-green)]()
+- [![](https://img.shields.io/badge/JDK-11+-green)]()
 
 ### Installation
 - Install from Netbeans \
@@ -17,12 +17,30 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 - Or Download the latest [release](https://github.com/albilu/netbeansPython/releases) and install in Netbeans: \
     `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`
 
+### Bugs
+
+Please Report any issue at [Issues](https://github.com/albilu/netbeansPython/issues).
+
 ## Goal of netbeansPython
 
 This `plugin` enables [Python Programming Language](https://www.python.org/about/) support for [Apache Netbeans](https://netbeans.apache.org/).
 It leverage the `Spyder IDE` community supported [Language Server Protocol](https://github.com/python-lsp/python-lsp-server)
 
 The project is driven by the need to bring to Netbeans similar support for Python as what other main IDEs/Editors (namely [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/)/[Spyder IDE](https://www.spyder-ide.org/)/[VScode](https://code.visualstudio.com/docs/languages/python)) offers.
+
+### Support/Contribute/Sponsor
+
+Support this project growth and maintenance by:
+- Starring it [![](https://img.shields.io/github/stars/albilu/netbeansPython)]()
+- Submiting [PR](https://github.com/albilu/netbeansPython/pulls) for issues in the backlog
+- [Sponsoring](https://github.com/sponsors/albilu)
+
+### Related Projects
+
+This is a non exhaustive list of some outstanding projects this module rely on:
+- [python-lsp-server](https://github.com/python-lsp/python-lsp-server): Python Language Server *by Spyder IDE Community*
+- [pty4j](https://github.com/JetBrains/pty4j): Java implementation of PTY *by JetBrains*
+- [pynguin](https://github.com/se2p/pynguin): Python Unit Test Generator
 
 ## Main Features
 ### Project Management
@@ -60,5 +78,5 @@ The project is driven by the need to bring to Netbeans similar support for Pytho
     ![ebaed2b72b503dec7733d6698f3a0a72.png](_resources/ebaed2b72b503dec7733d6698f3a0a72.png)
 
 ### Debugger
-- Lite Python Debugger relying on the Python internal debugger [PDB](https://docs.python.org/3/library/pdb.html) (breakpoints/callstack variable inspection) supported
+- Lite Python Debugger relying on the Python internal debugger [PDB](https://docs.python.org/3/library/pdb.html) (breakpoints/callstack/variable inspection) supported
 	![74a5dd8877b9608931b49604ab59555d.png](_resources/74a5dd8877b9608931b49604ab59555d.png)
