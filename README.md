@@ -7,7 +7,7 @@
 Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) for the full `user guide`
 
 ### Requirements
-- [![](https://img.shields.io/badge/Python-3.7+-green)]() [![](https://img.shields.io/badge/Netbeans-13+-green)]() [![](https://img.shields.io/badge/JDK-11+-green)]()
+[![](https://img.shields.io/badge/Python-3.7+-green)]() [![](https://img.shields.io/badge/Netbeans-13+-green)]() [![](https://img.shields.io/badge/JDK-11+-green)]()
 
 ### Installation
 - Install from Netbeans \
