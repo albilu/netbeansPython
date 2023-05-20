@@ -3,6 +3,33 @@ _Changelog of albilu netbeansPython._
 
 ## Unreleased
 
+[7a02ece2266bea4](https://github.com/albilu/netbeansPython/commits/7a02ece2266bea4) albilu *2023-05-20 09:09:47*
+
+ * Adding self signing even if irrelevant and insecure as much as Unsigned
+ * Specification version already fixed in 26e7831fb954a707262e965cc8fd60637e05602a
+ * Task #40 - Why is this plugin unsigned?
+
+
+[5a36eddc9e7c8b1](https://github.com/albilu/netbeansPython/commits/5a36eddc9e7c8b1) albilu *2023-05-20 03:08:52*
+
+ * Update README
+
+
+[14875d621b700fc](https://github.com/albilu/netbeansPython/commits/14875d621b700fc) albilu *2023-05-18 19:03:19*
+
+ * Update Plugin description
+
+
+[a865305e99de227](https://github.com/albilu/netbeansPython/commits/a865305e99de227) albilu *2023-05-18 18:46:13*
+
+ * Update Plugin description
+
+
+[e1788c4a9d490e9](https://github.com/albilu/netbeansPython/commits/e1788c4a9d490e9) albilu *2023-05-18 14:20:26*
+
+ * Update Plugin description
+
+
 [38aab9442f0e05d](https://github.com/albilu/netbeansPython/commits/38aab9442f0e05d) albilu *2023-05-18 13:43:32*
 
  * Update Readme
