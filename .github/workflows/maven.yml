@@ -68,6 +68,7 @@ jobs:
       run: |
         mvn -B clean deploy -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130-${{ env.RELEASE_VERSION }} -DuntaggedName=${{ env.RELEASE_VERSION }} -DfromRef=${{ env.PREVIOUS_VERSION }} -DgitHubToken=${{ env.GITHUB_TOKEN }}
         echo "SIZE_13=$(wc -c target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+        echo "CHANGELOG=$(cat CHANGELOG.md)" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -82,7 +83,7 @@ jobs:
         prerelease: false
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
         tag_name: ${{ env.RELEASE_VERSION }}
-        body_path: CHANGELOG.md
+        body: ${{env.CHANGELOG}}
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
