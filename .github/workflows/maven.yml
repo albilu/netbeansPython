@@ -49,6 +49,7 @@ jobs:
         gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+    #TODO
     - name: Get Next Version
       run: |
         echo "RELEASE_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=next.version -q -DforceStdout)" >> $GITHUB_ENV
@@ -82,6 +83,7 @@ jobs:
         prerelease: false
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
         tag_name: ${{ env.RELEASE_VERSION }}
+        #TODO
         #body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -191,74 +193,75 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Update PPUCs
-      id: my_string
-      run: |
-        STRING_13=$(cat << 'EOF'
-          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
-          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
-              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE130-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_13}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
-                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE130-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
-              </module>
-          </module_updates>
-        EOF
-        )
-        STRING_14=$(cat << 'EOF'
-          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
-          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
-              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE140-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_14}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
-                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE140-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
-              </module>
-          </module_updates>
-        EOF
-        )
-        STRING_15=$(cat << 'EOF'
-          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
-          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
-              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE150-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_15}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
-                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE150-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
-              </module>
-          </module_updates>
-        EOF
-        )
-        STRING_16=$(cat << 'EOF'
-          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
-          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
-              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE160-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_16}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
-                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE160-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
-              </module>
-          </module_updates>
-        EOF
-        )
-        STRING_17=$(cat << 'EOF'
-          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
-          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
-              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE170-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_17}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
-                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE170-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
-              </module>
-          </module_updates>
-        EOF
-        )
-        STRING_18=$(cat << 'EOF'
-          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
-          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
-              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE180-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_18}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
-                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE180-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
-              </module>
-          </module_updates>
-        EOF
-        )
-        echo "$STRING_13" > ppuc/13/updates.xml
-        echo "$STRING_14" > ppuc/14/updates.xml
-        echo "$STRING_15" > ppuc/15/updates.xml
-        echo "$STRING_16" > ppuc/16/updates.xml
-        echo "$STRING_17" > ppuc/17/updates.xml
-        echo "$STRING_18" > ppuc/18/updates.xml
-        git config --global user.name "albilu"
-        git config --global user.email "35330562+albilu@users.noreply.github.com"
-        git add ppuc/\*.*
-        git commit -m "Update PPUCs"
-        git push origin master
+      #TODO
+#    - name: Update PPUCs
+#      id: my_string
+#      run: |
+#        STRING_13=$(cat << 'EOF'
+#          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+#          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+#              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE130-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_13}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+#                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE130-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+#              </module>
+#          </module_updates>
+#        EOF
+#        )
+#        STRING_14=$(cat << 'EOF'
+#          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+#          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+#              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE140-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_14}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+#                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE140-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+#              </module>
+#          </module_updates>
+#        EOF
+#        )
+#        STRING_15=$(cat << 'EOF'
+#          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+#          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+#              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE150-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_15}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+#                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE150-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+#              </module>
+#          </module_updates>
+#        EOF
+#        )
+#        STRING_16=$(cat << 'EOF'
+#          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+#          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+#              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE160-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_16}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+#                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE160-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+#              </module>
+#          </module_updates>
+#        EOF
+#        )
+#        STRING_17=$(cat << 'EOF'
+#          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+#          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+#              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE170-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_17}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+#                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE170-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+#              </module>
+#          </module_updates>
+#        EOF
+#        )
+#        STRING_18=$(cat << 'EOF'
+#          <?xml version=\"1.0\" encoding=\"UTF-8\" ?><!DOCTYPE module_updates PUBLIC \"-//NetBeans//DTD Autoupdate Catalog 2.8//EN\" \"http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd\">
+#          <module_updates timestamp=\"00/00/00/${{env.RELEASE_DAY}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_YEAR}}\">
+#              <module codenamebase=\"io.github.albilu.python\" distribution=\"https://github.com/albilu/netbeansPython/releases/download/${{env.RELEASE_VERSION}}/python-RELEASE180-${{env.RELEASE_VERSION}}.nbm\" downloadsize=\"${{env.SIZE_18}}\" homepage=\"https://github.com/albilu/netbeansPython\" moduleauthor=\"albilu\" needsrestart=\"true\" releasedate=\"20${{env.RELEASE_YEAR}}/${{env.RELEASE_MONTH}}/${{env.RELEASE_DAY}}\">
+#                  <manifest OpenIDE-Module=\"io.github.albilu.python\" AutoUpdate-Show-In-Client=\"true\" OpenIDE-Module-Display-Category=\"Editing\" OpenIDE-Module-Implementation-Version=\"RELEASE180-${{env.RELEASE_VERSION}}\" OpenIDE-Module-Name=\"Python\" OpenIDE-Module-Requires=\"org.openide.windows.WindowManager\" OpenIDE-Module-Short-Description=\"Netbeans Support for Python\" OpenIDE-Module-Specification-Version=\"${{env.RELEASE_VERSION}}\"/>
+#              </module>
+#          </module_updates>
+#        EOF
+#        )
+#        echo "$STRING_13" > ppuc/13/updates.xml
+#        echo "$STRING_14" > ppuc/14/updates.xml
+#        echo "$STRING_15" > ppuc/15/updates.xml
+#        echo "$STRING_16" > ppuc/16/updates.xml
+#        echo "$STRING_17" > ppuc/17/updates.xml
+#        echo "$STRING_18" > ppuc/18/updates.xml
+#        git config --global user.name "albilu"
+#        git config --global user.email "35330562+albilu@users.noreply.github.com"
+#        git add ppuc/\*.*
+#        git commit -m "Update PPUCs"
+#        git push origin master
 
     #- name: Publish to GitHub Packages Apache Maven
     #  run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
