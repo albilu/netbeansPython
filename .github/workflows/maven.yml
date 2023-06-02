@@ -77,7 +77,7 @@ jobs:
     - name: Read CHANGELOG
       id: changelog
       run: |
-        echo "::set-output name=body::$(cat CHANGELOG.md)
+        echo "::set-output name=body::$(cat CHANGELOG.md)"
 
     - name: Create Release
       uses: actions/create-release@master
