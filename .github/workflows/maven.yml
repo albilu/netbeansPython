@@ -75,7 +75,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Create Release
-      uses: actions/create-release@v1
+      uses: actions/create-release@master
       id: create_release
       with:
         draft: false
