@@ -74,24 +74,15 @@ jobs:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Read CHANGELOG
-      id: changelog
-      run: |
-        CHANGELOG=$(cat CHANGELOG.md)
-        CHANGELOG="${CHANGELOG//'%'/'%25'}"
-        CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-        CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-        echo "::set-output name=body::$CHANGELOG"
-
     - name: Create Release
-      uses: actions/create-release@master
+      uses: actions/create-release@v1
       id: create_release
       with:
         draft: false
         prerelease: false
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
         tag_name: ${{ env.RELEASE_VERSION }}
-        body: ${{ steps.changelog.outputs.body }}
+        #body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
