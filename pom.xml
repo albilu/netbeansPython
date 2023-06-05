@@ -811,7 +811,7 @@
     </dependencies>
     <properties>
         <keystore>target/keystore</keystore>
-        <netbeans.release.version>RELEASE170</netbeans.release.version>
+        <netbeans.release.version>RELEASE180</netbeans.release.version>
         <next.version>1.2</next.version>
         <previous.version>1.1</previous.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
