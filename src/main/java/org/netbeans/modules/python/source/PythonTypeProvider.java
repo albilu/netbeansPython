@@ -61,7 +61,7 @@ public class PythonTypeProvider implements TypeProvider {
 
         Project[] openProjects = OpenProjects.getDefault().getOpenProjects();
         List<PythonTypeDescriptor> typeDescriptors = new ArrayList<>();
-        result.setHighlightText(text);
+        //result.setHighlightText(text);
 
         for (Project openProject : openProjects) {
             if (!(openProject instanceof PythonProject)) {
