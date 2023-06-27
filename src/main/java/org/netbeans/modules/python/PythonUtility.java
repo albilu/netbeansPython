@@ -462,6 +462,7 @@ public class PythonUtility {
                 .frontWindowOnError(select)
                 .controllable(controllable)
                 .showProgress(true)
+                .inputVisible(true)
                 .outConvertorFactory(convertorFactory)
                 .errConvertorFactory(convertorFactory)
                 .preExecution(preExeRunnable)
