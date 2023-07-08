@@ -261,7 +261,7 @@ jobs:
 #        git config --global user.email "35330562+albilu@users.noreply.github.com"
 #        git add ppuc/\*.*
 #        git commit -m "Update PPUCs"
-#        git push origin master
+#        git push --force origin master
 
     #- name: Publish to GitHub Packages Apache Maven
     #  run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml

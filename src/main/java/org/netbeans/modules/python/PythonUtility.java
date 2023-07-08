@@ -208,7 +208,7 @@ public class PythonUtility {
                             versions.add(Pair.of(vers, striped));
                         }
                     }
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     Exceptions.printStackTrace(ex);
                 }
             });

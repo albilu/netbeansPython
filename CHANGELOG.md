@@ -3,7 +3,375 @@ _Changelog of albilu netbeansPython._
 
 ## Unreleased
 
-[7a02ece2266bea4](https://github.com/albilu/netbeansPython/commits/7a02ece2266bea4) albilu *2023-05-20 09:09:47*
+[9379270204c0314](https://github.com/albilu/netbeansPython/commits/9379270204c0314) albilu *2023-07-08 13:43:25*
+
+ * Update PPUC
+ * Fix
+ * Task #56 - Statusbar disappears when Python plugin is active
+
+
+[7347fc00be2cb2e](https://github.com/albilu/netbeansPython/commits/7347fc00be2cb2e) dependabot[bot] *2023-07-01 19:05:45*
+
+ * Bump maven-dependency-plugin from 3.5.0 to 3.6.0
+ * Bumps [maven-dependency-plugin](https://github.com/apache/maven-dependency-plugin) from 3.5.0 to 3.6.0.
+ * - [Commits](https://github.com/apache/maven-dependency-plugin/compare/maven-dependency-plugin-3.5.0...maven-dependency-plugin-3.6.0)
+ * ---
+ * updated-dependencies:
+ * - dependency-name: org.apache.maven.plugins:maven-dependency-plugin
+ * dependency-type: direct:production
+ * update-type: version-update:semver-minor
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+[05d3cb6bc7df56c](https://github.com/albilu/netbeansPython/commits/05d3cb6bc7df56c) dependabot[bot] *2023-07-01 19:05:28*
+
+ * Bump spotbugs-maven-plugin from 4.7.3.4 to 4.7.3.5
+ * Bumps [spotbugs-maven-plugin](https://github.com/spotbugs/spotbugs-maven-plugin) from 4.7.3.4 to 4.7.3.5.
+ * - [Release notes](https://github.com/spotbugs/spotbugs-maven-plugin/releases)
+ * - [Commits](https://github.com/spotbugs/spotbugs-maven-plugin/compare/spotbugs-maven-plugin-4.7.3.4...spotbugs-maven-plugin-4.7.3.5)
+ * ---
+ * updated-dependencies:
+ * - dependency-name: com.github.spotbugs:spotbugs-maven-plugin
+ * dependency-type: direct:production
+ * update-type: version-update:semver-patch
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+[08a0f315d20c2e6](https://github.com/albilu/netbeansPython/commits/08a0f315d20c2e6) albilu *2023-06-27 21:20:03*
+
+ * Fix
+ * Task #51 - Terminal doesn&#x27;t accept input.
+
+
+[12027925b7b071c](https://github.com/albilu/netbeansPython/commits/12027925b7b071c) albilu *2023-06-24 13:21:27*
+
+ * Fix small UI alignment on new project creation panel
+
+
+[e0225d4e11fc7f2](https://github.com/albilu/netbeansPython/commits/e0225d4e11fc7f2) dependabot[bot] *2023-06-19 20:04:07*
+
+ * Bump maven-surefire-plugin from 3.1.0 to 3.1.2
+ * Bumps [maven-surefire-plugin](https://github.com/apache/maven-surefire) from 3.1.0 to 3.1.2.
+ * - [Release notes](https://github.com/apache/maven-surefire/releases)
+ * - [Commits](https://github.com/apache/maven-surefire/compare/surefire-3.1.0...surefire-3.1.2)
+ * ---
+ * updated-dependencies:
+ * - dependency-name: org.apache.maven.plugins:maven-surefire-plugin
+ * dependency-type: direct:production
+ * update-type: version-update:semver-patch
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+[2e6c21b6ea62068](https://github.com/albilu/netbeansPython/commits/2e6c21b6ea62068) dependabot[bot] *2023-06-19 20:03:49*
+
+ * Bump dependency-check-maven from 8.2.1 to 8.3.1
+ * Bumps [dependency-check-maven](https://github.com/jeremylong/DependencyCheck) from 8.2.1 to 8.3.1.
+ * - [Release notes](https://github.com/jeremylong/DependencyCheck/releases)
+ * - [Changelog](https://github.com/jeremylong/DependencyCheck/blob/main/CHANGELOG.md)
+ * - [Commits](https://github.com/jeremylong/DependencyCheck/compare/v8.2.1...v8.3.1)
+ * ---
+ * updated-dependencies:
+ * - dependency-name: org.owasp:dependency-check-maven
+ * dependency-type: direct:production
+ * update-type: version-update:semver-minor
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+[cf7dcfc09256d64](https://github.com/albilu/netbeansPython/commits/cf7dcfc09256d64) dependabot[bot] *2023-06-19 20:03:42*
+
+ * Bump guava from 31.1-jre to 32.0.1-jre
+ * Bumps [guava](https://github.com/google/guava) from 31.1-jre to 32.0.1-jre.
+ * - [Release notes](https://github.com/google/guava/releases)
+ * - [Commits](https://github.com/google/guava/commits)
+ * ---
+ * updated-dependencies:
+ * - dependency-name: com.google.guava:guava
+ * dependency-type: direct:production
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+[8a23d0304e4f840](https://github.com/albilu/netbeansPython/commits/8a23d0304e4f840) dependabot[bot] *2023-06-19 20:03:33*
+
+ * Bump maven-pmd-plugin from 3.20.0 to 3.21.0
+ * Bumps [maven-pmd-plugin](https://github.com/apache/maven-pmd-plugin) from 3.20.0 to 3.21.0.
+ * - [Release notes](https://github.com/apache/maven-pmd-plugin/releases)
+ * - [Commits](https://github.com/apache/maven-pmd-plugin/compare/maven-pmd-plugin-3.20.0...maven-pmd-plugin-3.21.0)
+ * ---
+ * updated-dependencies:
+ * - dependency-name: org.apache.maven.plugins:maven-pmd-plugin
+ * dependency-type: direct:production
+ * update-type: version-update:semver-minor
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+[b9c676e986772f7](https://github.com/albilu/netbeansPython/commits/b9c676e986772f7) albilu *2023-06-18 12:36:46*
+
+ * No need to call setHighlightText
+
+
+[63bad8095df7800](https://github.com/albilu/netbeansPython/commits/63bad8095df7800) albilu *2023-06-18 12:35:59*
+
+ * No need to call setHighlightText
+
+
+[88c7b6f4bd97c74](https://github.com/albilu/netbeansPython/commits/88c7b6f4bd97c74) albilu *2023-06-17 22:10:08*
+
+ * Disable dependabot.yml
+ * Signed-off-by: albilu &lt;35330562+albilu@users.noreply.github.com&gt;
+
+
+[8eb4317785a20bd](https://github.com/albilu/netbeansPython/commits/8eb4317785a20bd) dependabot[bot] *2023-06-05 20:02:49*
+
+ * Bump netbeans.release.version from RELEASE170 to RELEASE180
+ * Bumps &#x60;netbeans.release.version&#x60; from RELEASE170 to RELEASE180.
+ * Updates &#x60;org-netbeans-modules-lsp-client&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-api-annotations-common&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-modules&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-util-ui&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-mimelookup&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-api-templates&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-core-multiview&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-loaders&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-textmate-lexer&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-filesystems&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-windows&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-awt&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-util&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-util-lookup&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-indent&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-text&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-projectapi&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-extexecution&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-extexecution-base&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-csl-api&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-projectuiapi&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-nodes&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-actions&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-projectuiapi-base&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-options-api&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-dialogs&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-settings&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-lib&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-explorer&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-spi-editor-hints&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-parsing-api&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-spi-tasklist&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-lib2&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-parsing-indexing&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-api-progress&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-libs-jcodings&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-document&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-api-lsp&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-csl-types&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-filesystems-nb&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-errorstripe&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-lexer&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-api-java-classpath&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-masterfs&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-masterfs-ui&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-queries&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-parsing-ui&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-swing-outline&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-keyring&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-gsf-testrunner&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-openide-io&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-codetemplates&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-editor-completion&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-jumpto&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-gsf-codecoverage&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-gsf-testrunner-ui&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-gototest&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-api-debugger&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-spi-debugger-ui&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-spi-viewmodel&#x60; from RELEASE170 to RELEASE180
+ * Updates &#x60;org-netbeans-modules-autoupdate-services&#x60; from RELEASE170 to RELEASE180
+ * ---
+ * updated-dependencies:
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-lsp-client
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-api-annotations-common
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-modules
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-util-ui
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-mimelookup
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-api-templates
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-core-multiview
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-loaders
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-textmate-lexer
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-filesystems
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-windows
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-awt
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-util
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-util-lookup
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-indent
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-text
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-projectapi
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-extexecution
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-extexecution-base
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-csl-api
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-projectuiapi
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-nodes
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-actions
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-projectuiapi-base
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-options-api
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-dialogs
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-settings
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-lib
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-explorer
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-spi-editor-hints
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-parsing-api
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-spi-tasklist
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-lib2
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-parsing-indexing
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-api-progress
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-libs-jcodings
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-document
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-api-lsp
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-csl-types
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-filesystems-nb
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.modules:org-netbeans-modules-editor-errorstripe
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-lexer
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-api-java-classpath
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.modules:org-netbeans-modules-masterfs
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-masterfs-ui
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-queries
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.modules:org-netbeans-modules-parsing-ui
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-swing-outline
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-keyring
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-gsf-testrunner
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-openide-io
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-codetemplates
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-editor-completion
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-jumpto
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.modules:org-netbeans-modules-gsf-codecoverage
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.modules:org-netbeans-modules-gsf-testrunner-ui
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.modules:org-netbeans-modules-gototest
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-api-debugger
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-spi-debugger-ui
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-spi-viewmodel
+ * dependency-type: direct:production
+ * - dependency-name: org.netbeans.api:org-netbeans-modules-autoupdate-services
+ * dependency-type: direct:production
+ * ...
+ * Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+
+
+## 1.2
+>_2023-06-02 20:58:40_
+
+[88fa3082e46560c](https://github.com/albilu/netbeansPython/commits/88fa3082e46560c) albilu *2023-06-02 20:58:40*
+
+ * Manual Update of PPUC
+
+
+[2746a32c12903ed](https://github.com/albilu/netbeansPython/commits/2746a32c12903ed) albilu *2023-06-02 20:40:32*
+
+ * Fix Changelog generation for releases
+
+
+[c3414842d5a8bde](https://github.com/albilu/netbeansPython/commits/c3414842d5a8bde) albilu *2023-06-02 20:32:13*
+
+ * Fix Changelog generation for releases
+
+
+[48a7b3869670cc6](https://github.com/albilu/netbeansPython/commits/48a7b3869670cc6) albilu *2023-06-02 20:20:56*
+
+ * Fix Changelog generation for releases
+
+
+[7c3c42414174b52](https://github.com/albilu/netbeansPython/commits/7c3c42414174b52) albilu *2023-06-02 20:16:54*
+
+ * Fix Changelog generation for releases
+
+
+[06e6d00edc9d8aa](https://github.com/albilu/netbeansPython/commits/06e6d00edc9d8aa) albilu *2023-06-02 20:07:43*
+
+ * Fix Changelog generation for releases
+
+
+[fd2b035c2ff269f](https://github.com/albilu/netbeansPython/commits/fd2b035c2ff269f) albilu *2023-06-02 19:48:31*
+
+ * Fix Changelog generation for releases
+
+
+[b3cef5fae614de1](https://github.com/albilu/netbeansPython/commits/b3cef5fae614de1) albilu *2023-06-02 18:44:12*
+
+ * Fix for Realease 13 and 14
+
+
+[2d1e516d3c5551b](https://github.com/albilu/netbeansPython/commits/2d1e516d3c5551b) albilu *2023-06-02 18:16:33*
+
+ * Prepare Realease
+
+
+[5b78886b3a023db](https://github.com/albilu/netbeansPython/commits/5b78886b3a023db) albilu *2023-05-20 09:10:53*
 
  * Adding self signing even if irrelevant and insecure as much as Unsigned
  * Specification version already fixed in 26e7831fb954a707262e965cc8fd60637e05602a
