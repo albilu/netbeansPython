@@ -1,6 +1,6 @@
 # netbeansPython
 
-[![NBM CI with Maven](https://github.com/albilu/netbeansPython/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/albilu/netbeansPython/actions/workflows/maven.yml) [![Github All Releases](https://img.shields.io/github/downloads/albilu/netbeansPython/total.svg)]()
+[![Builds](https://github.com/albilu/netbeansPython/actions/workflows/builds.yml/badge.svg?branch=master)](https://github.com/albilu/netbeansPython/actions/workflows/builds.yml) [![CodeQL](https://github.com/albilu/netbeansPython/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/albilu/netbeansPython/actions/workflows/codeql.yml) [![Github All Releases](https://img.shields.io/github/downloads/albilu/netbeansPython/total.svg)]()
 
 ## User guide
 

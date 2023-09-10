@@ -193,6 +193,25 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
+    - name: Build with RELEASE190
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE190 -Dnext.version=RELEASE190-${{ env.RELEASE_VERSION }}
+        echo "SIZE_19=$(wc -c target/nbm/python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
+    - name: Attach RELEASE190 NBM
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/nbm/python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm
+        asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
       #TODO
 #    - name: Update PPUCs
 #      id: my_string
