@@ -10,7 +10,7 @@ import java.util.Properties;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.apache.commons.lang3.StringUtils;
-import org.javatuples.Triplet;
+import org.javatuples.Quartet;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.options.PythonPlatformManager;
 import org.netbeans.modules.python.project.PythonProject;
@@ -188,11 +188,12 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
                             .getVersion(python_path.toString()), python_path.toString()));
                 }
                 for (Pair pair : pyPlat) {
+                    //FIX #57 Need work here
                     pythonComboBox.addItem(pair);
                 }
-                for (Triplet<String, String, Boolean> pythonExe : PythonPlatformManager.getPythonExes()) {
-                    String exe = pythonExe.getValue0();
-                    Pair<String, String> of = Pair.of(pythonExe.getValue1(), exe);
+                for (Quartet<String, String, String, Boolean> pythonExe : PythonPlatformManager.getPythonExes()) {
+                    String exe = pythonExe.getValue1();
+                    Pair<String, String> of = Pair.of(pythonExe.getValue0(), exe);
                     if (exe.equals(python_path)) {
                         pythonComboBox.setSelectedItem(of);
                         continue;

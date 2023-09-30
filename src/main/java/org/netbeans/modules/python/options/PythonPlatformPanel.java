@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
-import org.javatuples.Triplet;
+import org.javatuples.Quartet;
 import org.json.JSONObject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.projectsample.PythonPoetryPanelVisual;
@@ -28,6 +30,22 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
     PythonPlatformPanel(PythonPlatformOptionsPanelController controller) {
         this.controller = controller;
         initComponents();
+        platformName.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                controller.changed();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                controller.changed();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                controller.changed();
+            }
+        });
         platformList.setCellRenderer(new PythonPlatformListRenderer());
         userEnvsTable.getModel().addTableModelListener((TableModelEvent tme) -> {
             controller.changed();
@@ -105,8 +123,12 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(platformNameLabel, org.openide.util.NbBundle.getMessage(PythonPlatformPanel.class, "PythonPlatformPanel.platformNameLabel.text")); // NOI18N
 
-        platformName.setEditable(false);
         platformName.setText(org.openide.util.NbBundle.getMessage(PythonPlatformPanel.class, "PythonPlatformPanel.platformName.text")); // NOI18N
+        platformName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                platformNameFocusLost(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(platformCommandLabel, org.openide.util.NbBundle.getMessage(PythonPlatformPanel.class, "PythonPlatformPanel.platformCommandLabel.text")); // NOI18N
 
@@ -353,10 +375,10 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
 
     private void platformListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_platformListValueChanged
         if (platformList.getSelectedIndex() != -1) {
-            Triplet<String, String, String> py = (Triplet) platformList.getSelectedValue();
-            platformName.setText(py.getValue1());
-            command.setText(py.getValue0());
-            setSysPaths(py.getValue0());
+            Quartet<String, String, String, Boolean> py = (Quartet) platformList.getSelectedValue();
+            platformName.setText(py.getValue0());
+            command.setText(py.getValue1());
+            setSysPaths(py.getValue1());
 
         }
     }//GEN-LAST:event_platformListValueChanged
@@ -376,10 +398,10 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
     private void removePlatformActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePlatformActionPerformed
         int selectedIndex = platformList.getSelectedIndex();
         if (selectedIndex != -1) {
-            Triplet<String, String, String> py = (Triplet) platformList.getSelectedValue();
+            Quartet<String, String, String, Boolean> py = (Quartet) platformList.getSelectedValue();
             DefaultListModel model = (DefaultListModel) platformList.getModel();
             model.remove(selectedIndex);
-            PythonPlatformManager.delete(py.getValue0());
+            PythonPlatformManager.delete(py.getValue1());
             reloadDetection();
             controller.changed();
         }
@@ -393,13 +415,17 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
     int defaultIndex = 0;
 
     private void reloadDetection() {
-        List<Triplet<String, String, Boolean>> pythonExes = PythonPlatformManager.getPythonExes();
+        List<Quartet<String, String, String, Boolean>> pythonExes = PythonPlatformManager.getPythonExes();
         if (!pythonExes.isEmpty()) {
-            DefaultListModel<Triplet<String, String, Boolean>> listModel = new DefaultListModel<>();
-            for (Triplet<String, String, Boolean> pythonExe : pythonExes) {
-                listModel.addElement(Triplet.with(pythonExe.getValue0(), pythonExe.getValue1(),
-                        pythonExe.getValue2()));
-                if (pythonExe.getValue2()) {
+            DefaultListModel<Quartet<String, String, String, Boolean>> listModel = new DefaultListModel<>();
+            for (Quartet<String, String, String, Boolean> pythonExe : pythonExes) {
+                listModel.addElement(Quartet.with(
+                        pythonExe.getValue0(),
+                        pythonExe.getValue1(),
+                        pythonExe.getValue2(),
+                        pythonExe.getValue3()
+                ));
+                if (pythonExe.getValue3()) {
                     defaultIndex = pythonExes.indexOf(pythonExe);
                 }
             }
@@ -410,8 +436,8 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
 
     private void makePlatformDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makePlatformDefaultActionPerformed
         if (platformList.getSelectedIndex() != -1) {
-            Triplet<String, String, String> py = (Triplet) platformList.getSelectedValue();
-            PythonPlatformManager.setSelected(py.getValue0(), "true");
+            Quartet<String, String, String, Boolean> py = (Quartet) platformList.getSelectedValue();
+            PythonPlatformManager.setSelected(py.getValue1(), "true");
             reloadDetection();
             controller.changed();
         }
@@ -432,6 +458,18 @@ final class PythonPlatformPanel extends javax.swing.JPanel {
     private void sysCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sysCheckBoxActionPerformed
         controller.changed();
     }//GEN-LAST:event_sysCheckBoxActionPerformed
+
+    private void platformNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_platformNameFocusLost
+        if (!controller.isChanged()) {
+            return;
+        }
+
+        if (platformList.getSelectedIndex() != -1) {
+            Quartet<String, String, String, Boolean> py = (Quartet) platformList.getSelectedValue();
+            PythonPlatformManager.setName(py.getValue1(), platformName.getText());
+            reloadDetection();
+        }
+    }//GEN-LAST:event_platformNameFocusLost
 
     void load() {
         RP.post(() -> {
