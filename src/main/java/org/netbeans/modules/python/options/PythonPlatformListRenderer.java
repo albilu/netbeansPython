@@ -23,7 +23,7 @@ public class PythonPlatformListRenderer extends DefaultListCellRenderer {
         JLabel label = (JLabel) super.getListCellRendererComponent(
                 list, value, index, isSelected, cellHasFocus);
         Quartet<String, String, String, Boolean> pyObject = (Quartet<String, String, String, Boolean>) value;
-        label.setText(pyObject.getValue0());//version
+        label.setText(pyObject.getValue0());//name
         label.setHorizontalTextPosition(JLabel.LEFT);
         if (pyObject.getValue3()) {//boolean
             label.setIcon(PythonPackagesListRenderer.ICON);
