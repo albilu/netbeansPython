@@ -6,7 +6,7 @@ import java.io.File;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import org.javatuples.Triplet;
+import org.javatuples.Quartet;
 
 /**
  *
@@ -22,13 +22,13 @@ public class PythonPlatformListRenderer extends DefaultListCellRenderer {
 
         JLabel label = (JLabel) super.getListCellRendererComponent(
                 list, value, index, isSelected, cellHasFocus);
-        Triplet<String, String, Boolean> pyObject = (Triplet<String, String, Boolean>) value;
-        label.setText(pyObject.getValue1());
+        Quartet<String, String, String, Boolean> pyObject = (Quartet<String, String, String, Boolean>) value;
+        label.setText(pyObject.getValue0());//version
         label.setHorizontalTextPosition(JLabel.LEFT);
-        if (pyObject.getValue2()) {
+        if (pyObject.getValue3()) {//boolean
             label.setIcon(PythonPackagesListRenderer.ICON);
         }
-        if (!new File(pyObject.getValue0()).exists()) {
+        if (!new File(pyObject.getValue1()).exists()) {//cmd
             label.setForeground(Color.GRAY);
         }
         return label;

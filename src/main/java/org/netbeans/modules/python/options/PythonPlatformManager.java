@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.text.StringEscapeUtils;
-import org.javatuples.Triplet;
+import org.javatuples.Quartet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.netbeans.modules.python.PythonUtility;
@@ -29,13 +29,13 @@ public class PythonPlatformManager {
         return PythonUtility.PLATFORMS;
     }
 
-    public static List<Triplet<String, String, Boolean>> getPythonExes() {
-        List<Triplet<String, String, Boolean>> exes = new ArrayList<>();
+    public static List<Quartet<String, String, String, Boolean>> getPythonExes() {
+        List<Quartet<String, String, String, Boolean>> exes = new ArrayList<>();
         try {
             JSONArray platformJsonArray = new JSONArray(Files.readString(getPlatformFile().toPath()));
             for (int i = 0; i < platformJsonArray.length(); i++) {
                 JSONObject jsonObject = platformJsonArray.getJSONObject(i);
-                exes.add(Triplet.with(jsonObject.getString("cmd"), jsonObject.getString("version"),
+                exes.add(Quartet.with(jsonObject.getString("name"), jsonObject.getString("cmd"), jsonObject.getString("version"),
                         jsonObject.getBoolean("state")));
 
             }
@@ -71,6 +71,7 @@ public class PythonPlatformManager {
                     Map<String, String> hashMap = new HashMap<>();
                     hashMap.put("cmd", pythonExe.second());
                     hashMap.put("version", pythonExe.first());
+                    hashMap.put("name", pythonExe.first());
                     hashMap.put("state", "false");
                     platformJsonArray.put(new JSONObject(hashMap));
                 }
@@ -132,6 +133,7 @@ public class PythonPlatformManager {
             if (!platformJsonArray.toString().contains(StringEscapeUtils.escapeJava(cmd))) {
                 Map<String, String> hashMap = new HashMap<>();
                 hashMap.put("cmd", cmd);
+                hashMap.put("name", PythonUtility.getVersion(cmd));
                 hashMap.put("version", PythonUtility.getVersion(cmd));
                 hashMap.put("state", "false");
                 platformJsonArray.put(new JSONObject(hashMap));
@@ -159,6 +161,23 @@ public class PythonPlatformManager {
 
         List<Pair<String, String>> pythonExes = PythonUtility.getPythonExes();
         return !pythonExes.isEmpty() ? pythonExes.get(0).second() : "";
+    }
+
+    public static void setName(String value1, String text) {
+        try {
+            JSONArray platformJsonArray = new JSONArray(Files.readString(getPlatformFile().toPath()));
+            for (int i = 0; i < platformJsonArray.length(); i++) {
+                JSONObject jsonObject = platformJsonArray.getJSONObject(i);
+
+                if (jsonObject.getString("cmd").equals(value1)) {
+                    jsonObject.put("name", text);
+                }
+            }
+
+            savePlaltformJson(platformJsonArray);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
 
 }
