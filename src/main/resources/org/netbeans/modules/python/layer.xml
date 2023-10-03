@@ -164,7 +164,7 @@
     </folder>
     <folder name="Editors">
         <folder name="AnnotationTypes">
-            <file name="runnable-test-annotation.xml" url="runnable-test-annotation.xml"/>
+            <file name="python-runnable-test-annotation.xml" url="python-runnable-test-annotation.xml"/>
             <file name="CurrentPCLinePart.xml" url="/org/netbeans/modules/python/debugger/CurrentPCLinePart.xml">
                 <attr name="weight" intvalue="100"/>
             </file>
