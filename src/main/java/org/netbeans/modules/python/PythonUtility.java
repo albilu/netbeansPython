@@ -202,7 +202,7 @@ public class PythonUtility {
                 ? "where" : "which", python}, null).lines().forEach(exe -> {
                 try {
                     String striped = exe.strip();
-                    if (Files.isExecutable(Paths.get(striped))) {
+                    if (!striped.startsWith("INFO") && Files.isExecutable(Paths.get(striped))) {
                         String vers = getVersion(striped);
                         if (!vers.isEmpty()) {
                             versions.add(Pair.of(vers, striped));
