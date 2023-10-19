@@ -202,7 +202,7 @@ public class PythonUtility {
                 ? "where" : "which", python}, null).lines().forEach(exe -> {
                 try {
                     String striped = exe.strip();
-                    if (!striped.startsWith("INFO") && Files.isExecutable(Paths.get(striped))) {
+                    if (isValidFilePath(striped)) {
                         String vers = getVersion(striped);
                         if (!vers.isEmpty()) {
                             versions.add(Pair.of(vers, striped));
@@ -216,6 +216,19 @@ public class PythonUtility {
         }
 
         return versions;
+    }
+
+    private static boolean isValidFilePath(String filePath) {
+        try {
+            // Attempt to create a Path object from the provided string
+            Path path = Paths.get(filePath);
+
+            // Check if the path is absolute and exists
+            return path.isAbsolute() && path.toFile().exists() && Files.isExecutable(path);
+        } catch (Exception e) {
+            // An exception was thrown when parsing the path
+            return false;
+        }
     }
 
     public static String[] getOsShell() {
