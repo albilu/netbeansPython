@@ -119,7 +119,7 @@ public class PythonUtility {
         "ptpython",
         "ipython",
         "pytest",
-        "pynguin",
+        //"pynguin",
         "build",
         "pdoc",
         "poetry"
