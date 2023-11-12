@@ -4,11 +4,15 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ToNumberPolicy;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
@@ -100,6 +104,11 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
         lspServerLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(lspServerLabel, org.openide.util.NbBundle.getMessage(PythonLspServerConfigsPanel.class, "PythonLspServerConfigsPanel.lspServerLabel.text")); // NOI18N
 
+        lspList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lspListMouseClicked(evt);
+            }
+        });
         lspScrollPane.setViewportView(lspList);
 
         lspPythonVersionLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -179,6 +188,26 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
     private void lspServerCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_lspServerCheckBoxStateChanged
         controller.changed();
     }//GEN-LAST:event_lspServerCheckBoxStateChanged
+
+    private void lspListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lspListMouseClicked
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Pair<String, Boolean> selected = (Pair<String, Boolean>) lspList.getSelectedValue();
+            if (!selected.second()) {
+                JPopupMenu menu = new JPopupMenu();
+                JMenuItem pm = new JMenuItem("Install");
+                pm.addActionListener((ActionEvent e) -> {
+                    String[] cmd = {
+                        PythonUtility.getLspPythonExe(), "-m", "pip", "install",
+                        "--upgrade", selected.first()
+                    };
+                    PythonUtility.processExecutor(cmd, String.format("%s %s", "Installing", selected.first()));
+                });
+                menu.add(pm);
+                menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+
+        }
+    }//GEN-LAST:event_lspListMouseClicked
 
     void load() {
         try {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE module_updates PUBLIC "-//NetBeans//DTD Autoupdate Catalog 2.8//EN" "http://www.netbeans.org/dtds/autoupdate-catalog-2_8.dtd">
-<module_updates timestamp="00/00/00/10/09/2023">
-    <module codenamebase="io.github.albilu.python" distribution="https://github.com/albilu/netbeansPython/releases/download/1.4/python-RELEASE180-1.4.nbm" downloadsize="133405377" homepage="https://github.com/albilu/netbeansPython" moduleauthor="albilu" needsrestart="true" releasedate="2023/09/10">
-        <manifest OpenIDE-Module="io.github.albilu.python" AutoUpdate-Show-In-Client="true" OpenIDE-Module-Display-Category="Editing" OpenIDE-Module-Implementation-Version="RELEASE180-1.4" OpenIDE-Module-Name="Python" OpenIDE-Module-Requires="org.openide.windows.WindowManager" OpenIDE-Module-Short-Description="Netbeans Support for Python" OpenIDE-Module-Specification-Version="1.4"/>
+<module_updates timestamp="00/00/00/12/11/2023">
+    <module codenamebase="io.github.albilu.python" distribution="https://github.com/albilu/netbeansPython/releases/download/1.5/python-RELEASE180-1.5.nbm" downloadsize="133405377" homepage="https://github.com/albilu/netbeansPython" moduleauthor="albilu" needsrestart="true" releasedate="2023/11/12">
+        <manifest OpenIDE-Module="io.github.albilu.python" AutoUpdate-Show-In-Client="true" OpenIDE-Module-Display-Category="Editing" OpenIDE-Module-Implementation-Version="RELEASE180-1.5" OpenIDE-Module-Name="Python" OpenIDE-Module-Requires="org.openide.windows.WindowManager" OpenIDE-Module-Short-Description="Netbeans Support for Python" OpenIDE-Module-Specification-Version="1.5"/>
     </module>
 </module_updates>

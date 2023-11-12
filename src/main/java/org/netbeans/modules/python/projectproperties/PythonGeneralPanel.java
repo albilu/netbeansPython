@@ -188,7 +188,7 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
                             .getVersion(python_path.toString()), python_path.toString()));
                 }
                 for (Pair pair : pyPlat) {
-                    //FIX #57 Need work here
+                    //FIXME #57 Need work here
                     pythonComboBox.addItem(pair);
                 }
                 for (Quartet<String, String, String, Boolean> pythonExe : PythonPlatformManager.getPythonExes()) {

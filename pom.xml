@@ -812,8 +812,8 @@
     <properties>
         <keystore>target/keystore</keystore>
         <netbeans.release.version>RELEASE190</netbeans.release.version>
-        <next.version>1.4</next.version>
-        <previous.version>1.3</previous.version>
+        <next.version>1.5</next.version>
+        <previous.version>1.4</previous.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
         <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

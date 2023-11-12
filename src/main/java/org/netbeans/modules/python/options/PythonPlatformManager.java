@@ -35,7 +35,8 @@ public class PythonPlatformManager {
             JSONArray platformJsonArray = new JSONArray(Files.readString(getPlatformFile().toPath()));
             for (int i = 0; i < platformJsonArray.length(); i++) {
                 JSONObject jsonObject = platformJsonArray.getJSONObject(i);
-                exes.add(Quartet.with(jsonObject.getString("name"), jsonObject.getString("cmd"), jsonObject.getString("version"),
+                exes.add(Quartet.with(jsonObject.has("name")
+                        ? jsonObject.getString("name") : jsonObject.getString("version"), jsonObject.getString("cmd"), jsonObject.getString("version"),
                         jsonObject.getBoolean("state")));
 
             }
@@ -67,6 +68,7 @@ public class PythonPlatformManager {
             List<Pair<String, String>> pythonExes = PythonUtility.getPythonExes();
             JSONArray platformJsonArray = new JSONArray(Files.readString(getPlatformFile().toPath()));
             for (Pair<String, String> pythonExe : pythonExes) {
+                //FIXME fore platformJsonArray.cmd not equals second
                 if (!platformJsonArray.toString().contains(StringEscapeUtils.escapeJava(pythonExe.second()))) {
                     Map<String, String> hashMap = new HashMap<>();
                     hashMap.put("cmd", pythonExe.second());

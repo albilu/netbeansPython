@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
@@ -148,7 +149,13 @@ public class PythonUtility {
     }
 
     public static String getServerVersion() throws IOException {
-        return getCommandOutput(new String[]{getLspPythonExe(), "-m", "pylsp", "--version"}, null);
+        String commandOutput = getCommandOutput(new String[]{getLspPythonExe(), "-m", "pylsp", "--version"}, null);
+        if (!commandOutput.startsWith("__main__.py")) {
+            LOG.log(Level.SEVERE, commandOutput);
+            return "UNKNOW";
+        }
+        return commandOutput;
+
     }
 
     public static String getCommandOutput(String[] cmd, FileObject projectDir) throws IOException {
@@ -291,7 +298,12 @@ public class PythonUtility {
     }
 
     public static String getVersion(String projectPythonExe) throws IOException {
-        return getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
+        String commandOutput = getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
+        if (!commandOutput.startsWith("Py")) {
+            LOG.log(Level.SEVERE, commandOutput);
+            return "";
+        }
+        return commandOutput;
     }
 
     public static ImageIcon getErrorIcon() {
