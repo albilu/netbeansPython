@@ -53,8 +53,8 @@ public class PythonCustomIndexer extends CustomIndexer {
         Project owner = root != null ? FileOwnerQuery.getOwner(root) : null;
         boolean pyProject = owner != null && owner.getClass()
                 .getName().equals("org.netbeans.modules.python.project.PythonProject");
-        boolean pyLibPath = root != null && root.getParent() != null
-                && root.getParent().getName().equals("lib");
+        boolean pyLibPath = root != null && (root.getName().endsWith("Lib") || (root.getParent() != null
+                && root.getParent().getName().equals("lib")));
         if (pyProject || pyLibPath) {
             try {
                 IndexingSupport is = IndexingSupport.getInstance(context);
@@ -87,7 +87,8 @@ public class PythonCustomIndexer extends CustomIndexer {
         }
         long endTime = System.currentTimeMillis();
         if (LOG.isLoggable(Level.INFO)) {
-            LOG.log(Level.INFO, "Processed {0} files in {1}ms.", new Object[]{cnt, endTime - startTime});
+            LOG.log(Level.INFO, "Processed {0} files for {1} in {2}ms.", new Object[]{
+                cnt, cnt > 0 ? root.getPath() : "null", endTime - startTime});
         }
     }
 

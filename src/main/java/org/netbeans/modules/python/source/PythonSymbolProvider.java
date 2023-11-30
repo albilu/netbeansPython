@@ -16,10 +16,10 @@ import org.netbeans.api.project.ProjectUtils;
 import org.netbeans.api.project.ui.OpenProjects;
 import org.netbeans.modules.csl.spi.GsfUtilities;
 import org.netbeans.modules.parsing.spi.indexing.support.IndexResult;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.indexing.PythonCustomIndexer;
 import org.netbeans.modules.python.indexing.PythonIndexQuery;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.spi.jumpto.symbol.SymbolDescriptor;
 import org.netbeans.spi.jumpto.symbol.SymbolProvider;
 import org.netbeans.spi.jumpto.type.SearchType;
@@ -93,14 +93,18 @@ public class PythonSymbolProvider implements SymbolProvider {
 //        }
     }
 
-    private void computeSymbols(URL toURL, Project openProject, SearchType kind, String text, List<PythonSymbolDescriptor> typeDescriptors) {
+    private void computeSymbols(URL toURL, Project openProject, SearchType kind, String text, List<PythonSymbolDescriptor> symbolDescriptors) {
         Collection<? extends IndexResult> types = PythonIndexQuery
                 .searchIndex(toURL, PythonCustomIndexer.SYMBOLS_FIELD, kind,
                         text);
         for (IndexResult type : types) {
+            FileObject fo = type.getFile();
+            if (fo == null) {
+                continue;
+            }
             for (Object value : type.getValues(PythonCustomIndexer.SYMBOLS_FIELD)) {
                 String[] split = value.toString().split("#");
-                typeDescriptors.add(new PythonSymbolDescriptor(split[0], openProject,
+                symbolDescriptors.add(new PythonSymbolDescriptor(split[0], openProject,
                         type.getFile(), NumberUtils.createInteger(split[1]), split[2]));
 
             }

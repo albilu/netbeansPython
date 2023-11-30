@@ -16,10 +16,10 @@ import org.netbeans.api.project.ProjectUtils;
 import org.netbeans.api.project.ui.OpenProjects;
 import org.netbeans.modules.csl.spi.GsfUtilities;
 import org.netbeans.modules.parsing.spi.indexing.support.IndexResult;
-import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.indexing.PythonCustomIndexer;
 import org.netbeans.modules.python.indexing.PythonIndexQuery;
+import org.netbeans.modules.python.project.PythonProject;
 import org.netbeans.spi.jumpto.type.SearchType;
 import org.netbeans.spi.jumpto.type.TypeDescriptor;
 import org.netbeans.spi.jumpto.type.TypeProvider;
@@ -104,6 +104,10 @@ public class PythonTypeProvider implements TypeProvider {
                 .searchIndex(toURL, PythonCustomIndexer.TYPE_FIELD, kind,
                         text);
         for (IndexResult type : types) {
+            FileObject fo = type.getFile();
+            if (fo == null) {
+                continue;
+            }
             for (Object value : type.getValues(PythonCustomIndexer.TYPE_FIELD)) {
                 String[] split = value.toString().split("#");
                 typeDescriptors.add(new PythonTypeDescriptor(split[0], openProject,

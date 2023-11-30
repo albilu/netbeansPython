@@ -154,22 +154,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>se.bjurr.gitchangelog</groupId>
-                <artifactId>git-changelog-maven-plugin</artifactId>
-                <version>1.100.6</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>git-changelog</goal>
-                        </goals>
-                        <configuration>
-                            <templateFile>src/main/resources/org/netbeans/modules/python/changelog.mustache</templateFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>8.3.1</version>
@@ -813,7 +797,6 @@
         <keystore>target/keystore</keystore>
         <netbeans.release.version>RELEASE190</netbeans.release.version>
         <next.version>1.5</next.version>
-        <previous.version>1.4</previous.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
         <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

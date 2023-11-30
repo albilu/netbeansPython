@@ -57,17 +57,13 @@ jobs:
         echo "RELEASE_MONTH=$(date +%m)" >> $GITHUB_ENV
         echo "RELEASE_YEAR=$(date +%y)" >> $GITHUB_ENV
 
-    - name: Get Previous Version
-      run: |
-        echo "PREVIOUS_VERSION=$(mvn help:evaluate -Dproject.version=next.version -Dexpression=previous.version -q -DforceStdout)" >> $GITHUB_ENV
-
     - name: Set Spec Version
       run: |
         sed -i "s/OpenIDE-Module-Specification-Version:.*/OpenIDE-Module-Specification-Version: ${{ env.RELEASE_VERSION }}/" src/main/nbm/manifest.mf
 
     - name: Build with RELEASE130
       run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130-${{ env.RELEASE_VERSION }} -DuntaggedName=${{ env.RELEASE_VERSION }} -DfromRef=${{ env.PREVIOUS_VERSION }} -DgitHubToken=${{ env.GITHUB_TOKEN }}
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130-${{ env.RELEASE_VERSION }}
         echo "SIZE_13=$(wc -c target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -83,8 +79,6 @@ jobs:
         prerelease: false
         release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
         tag_name: ${{ env.RELEASE_VERSION }}
-        #TODO
-        #body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
