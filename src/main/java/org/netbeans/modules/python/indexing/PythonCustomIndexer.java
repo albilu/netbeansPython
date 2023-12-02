@@ -88,7 +88,7 @@ public class PythonCustomIndexer extends CustomIndexer {
         long endTime = System.currentTimeMillis();
         if (LOG.isLoggable(Level.INFO)) {
             LOG.log(Level.INFO, "Processed {0} files for {1} in {2}ms.", new Object[]{
-                cnt, cnt > 0 ? root.getPath() : "null", endTime - startTime});
+                cnt, root != null ? root.getPath() : "null", endTime - startTime});
         }
     }
 
