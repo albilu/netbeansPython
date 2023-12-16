@@ -120,17 +120,17 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
             lspPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lspPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(lspPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lspServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addComponent(lspPythonVersionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(lspPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lspPythonVersionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                    .addComponent(lspServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(lspPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(lspPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(lspPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lspServerCheckBox)
-                        .addComponent(lspScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lspScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
         lspPanelLayout.setVerticalGroup(
             lspPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,8 +144,8 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
                 .addGroup(lspPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(lspServerCheckBox)
-                    .addGap(59, 59, 59)
-                    .addComponent(lspScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                    .addGap(56, 56, 56)
+                    .addComponent(lspScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -172,11 +172,11 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
         );
         lspSettingsPanelLayout.setVerticalGroup(
             lspSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 421, Short.MAX_VALUE)
+            .addGap(0, 424, Short.MAX_VALUE)
             .addGroup(lspSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(lspSettingsPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(lspSettingsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(lspSettingsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
