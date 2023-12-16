@@ -19,6 +19,8 @@ public class PythonPackagesListRenderer extends DefaultListCellRenderer {
             .loadImage("org/netbeans/modules/python/passed.png", false));
     static final Icon ICON_ERROR = ImageUtilities.image2Icon(ImageUtilities
             .loadImage("org/netbeans/modules/python/test-error_16.png", false));
+    static final Icon ICON_WARN = ImageUtilities.image2Icon(ImageUtilities
+            .loadImage("org/netbeans/modules/python/warning.svg", false));
 
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index,
@@ -32,6 +34,9 @@ public class PythonPackagesListRenderer extends DefaultListCellRenderer {
         if (pyPackage.second()) {
             label.setToolTipText("Installed");
             label.setIcon(ICON);
+        } else if (pyPackage.first().equals("pynguin")) {
+            label.setToolTipText("Not Installed");
+            label.setIcon(ICON_WARN);
         } else {
             label.setToolTipText("Not Installed");
             label.setIcon(ICON_ERROR);
