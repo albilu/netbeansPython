@@ -255,20 +255,20 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
 
     }
 
+    static final File settingsSchema = PythonUtility.SETTINGS_SCHEMA;
+    static final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+
     void store() {
         if (controller.isChanged()) {
             errroLabel.setText("");
             try {
                 String jsonSettings = lspEditorPane.getText();
 
-                File settingsSchema = PythonUtility.SETTINGS_SCHEMA;
                 if (settingsSchema.exists()) {
-                    JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
                     JsonSchema jsonSchema = factory.getSchema(Files.readString(settingsSchema.toPath()));
                     JsonNode jsonNode = new ObjectMapper().readTree(jsonSettings);
                     Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
                     if (!errors.isEmpty()) {
-                        errors.iterator().next().getMessage();
                         errroLabel.setText(errors.iterator().next().getMessage());
                         return;
                     }
