@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
@@ -18,8 +19,12 @@ import org.netbeans.api.project.Project;
 import org.netbeans.modules.masterfs.providers.AnnotationProvider;
 import org.netbeans.modules.masterfs.providers.InterceptionListener;
 import org.netbeans.modules.parsing.impl.indexing.errors.Utilities;
+import org.netbeans.modules.parsing.impl.indexing.implspi.FileAnnotationsRefresh;
 import org.netbeans.modules.parsing.spi.indexing.ErrorsCache;
 import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileStateInvalidException;
+import org.openide.filesystems.FileStatusEvent;
+import org.openide.filesystems.URLMapper;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import static org.openide.util.ImageUtilities.assignToolTipToImage;
@@ -28,15 +33,19 @@ import static org.openide.util.ImageUtilities.mergeImages;
 import org.openide.util.Lookup;
 import static org.openide.util.NbBundle.getMessage;
 import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 
 /**
  *
  * @author albilu
  */
 //FIXME-BUG: Notice weird slowness on large directories (but not on debug mode) => contribution-welcome
-@ServiceProvider(service = org.netbeans.modules.masterfs.providers.AnnotationProvider.class,
-        supersedes = "org.netbeans.modules.parsing.ui.indexing.errors$AnnotationProvider", position = 100)
-public class PythonErrorAnnotator extends AnnotationProvider {
+@ServiceProviders({
+    @ServiceProvider(service = org.netbeans.modules.parsing.impl.indexing.implspi.FileAnnotationsRefresh.class, position = 100),
+    @ServiceProvider(service = org.netbeans.modules.masterfs.providers.AnnotationProvider.class,
+            supersedes = "org.netbeans.modules.parsing.ui.indexing.errors$AnnotationProvider", position = 100)
+})
+public class PythonErrorAnnotator extends AnnotationProvider implements FileAnnotationsRefresh {
 
     private static final Logger LOG = Logger.getLogger(PythonErrorAnnotator.class.getName());
 
@@ -170,5 +179,22 @@ public class PythonErrorAnnotator extends AnnotationProvider {
         }
 
         return result;
+    }
+
+    @Override
+    public void refresh(Set<URL> set) {
+        try {
+
+            Set<FileObject> toRefresh = new HashSet<>();
+
+            set.forEach((t) -> {
+                toRefresh.add(URLMapper.findFileObject(t));
+            });
+
+            fireFileStatusChanged(new FileStatusEvent(toRefresh.iterator().next()
+                    .getFileSystem(), toRefresh, true, false));
+        } catch (FileStateInvalidException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
 }

@@ -50,6 +50,7 @@
                 <version>1.7</version>
                 <executions>
                     <execution>
+                        <id>generateKeyPair</id>
                         <goals>
                             <goal>generateKeyPair</goal>
                         </goals>
@@ -813,6 +814,17 @@
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>keytool-maven-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>generateKeyPair</id>
                                 <phase>none</phase>
                             </execution>
                         </executions>
