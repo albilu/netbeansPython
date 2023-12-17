@@ -15,7 +15,7 @@
             "filename": "",
             "hangClosing": false,
             "ignore": [],
-            "maxLineLength": "80",
+            "maxLineLength": 80,
             "indentSize": 4,
             "perFileIgnores": [],
             "select": [
@@ -81,7 +81,7 @@
             ],
             "ignore": [],
             "hangClosing": false,
-            "maxLineLength": "",
+            "maxLineLength": 80,
             "indentSize": 4
         },
         "pydocstyle": {

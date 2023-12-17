@@ -127,6 +127,7 @@ public class PythonUtility {
     };
 
     public static final File SETTINGS = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("settings.json").toFile();
+    public static final File SETTINGS_SCHEMA = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("schema.json").toFile();
     public static final File REPOS = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("repos.json").toFile();
     public static final File PLATFORMS = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("platforms.json").toFile();
     public static final File ENVS = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("envs.json").toFile();
@@ -383,6 +384,10 @@ public class PythonUtility {
                 PythonUtility.PYLSP_VENV_DIR.mkdir();
                 Files.writeString(SETTINGS.toPath(),
                         IOUtils.resourceToString("org/netbeans/modules/python/settings.json",
+                                StandardCharsets.UTF_8, cl)
+                );
+                Files.writeString(SETTINGS_SCHEMA.toPath(),
+                        IOUtils.resourceToString("org/netbeans/modules/python/schema.json",
                                 StandardCharsets.UTF_8, cl)
                 );
                 Files.writeString(REPOS.toPath(),

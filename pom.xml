@@ -266,6 +266,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>1.0.87</version>
+        </dependency>
         <dependency> 
             <groupId>io.vavr</groupId> 
             <artifactId>vavr</artifactId> 

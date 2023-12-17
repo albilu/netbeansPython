@@ -1,14 +1,22 @@
 package org.netbeans.modules.python.options;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ToNumberPolicy;
+import com.networknt.schema.JsonSchema;
+import com.networknt.schema.JsonSchemaFactory;
+import com.networknt.schema.SpecVersion;
+import com.networknt.schema.ValidationMessage;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -88,6 +96,7 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
         lspSettingsPanel = new javax.swing.JPanel();
         lspSettingsScrollPane = new javax.swing.JScrollPane();
         lspEditorPane = new javax.swing.JEditorPane();
+        errroLabel = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -145,8 +154,8 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
                     .addContainerGap()
                     .addComponent(lspServerCheckBox)
                     .addGap(56, 56, 56)
-                    .addComponent(lspScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(lspScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addGap(30, 30, 30)))
         );
 
         lspSplitPane.setLeftComponent(lspPanel);
@@ -159,11 +168,17 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
         lspEditorPane.setContentType("text/x-json"); // NOI18N
         lspSettingsScrollPane.setViewportView(lspEditorPane);
 
+        errroLabel.setForeground(new java.awt.Color(255, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(errroLabel, org.openide.util.NbBundle.getMessage(PythonLspServerConfigsPanel.class, "PythonLspServerConfigsPanel.errroLabel.text")); // NOI18N
+
         javax.swing.GroupLayout lspSettingsPanelLayout = new javax.swing.GroupLayout(lspSettingsPanel);
         lspSettingsPanel.setLayout(lspSettingsPanelLayout);
         lspSettingsPanelLayout.setHorizontalGroup(
             lspSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(lspSettingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(errroLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(lspSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(lspSettingsPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -172,12 +187,15 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
         );
         lspSettingsPanelLayout.setVerticalGroup(
             lspSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lspSettingsPanelLayout.createSequentialGroup()
+                .addContainerGap(418, Short.MAX_VALUE)
+                .addComponent(errroLabel)
+                .addContainerGap())
             .addGroup(lspSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(lspSettingsPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(lspSettingsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(lspSettingsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                    .addGap(28, 28, 28)))
         );
 
         lspSplitPane.setRightComponent(lspSettingsPanel);
@@ -239,8 +257,23 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
 
     void store() {
         if (controller.isChanged()) {
+            errroLabel.setText("");
             try {
                 String jsonSettings = lspEditorPane.getText();
+
+                File settingsSchema = PythonUtility.SETTINGS_SCHEMA;
+                if (settingsSchema.exists()) {
+                    JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+                    JsonSchema jsonSchema = factory.getSchema(Files.readString(settingsSchema.toPath()));
+                    JsonNode jsonNode = new ObjectMapper().readTree(jsonSettings);
+                    Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
+                    if (!errors.isEmpty()) {
+                        errors.iterator().next().getMessage();
+                        errroLabel.setText(errors.iterator().next().getMessage());
+                        return;
+                    }
+                }
+
                 NbPreferences.root().putBoolean("autoUpdate", lspServerCheckBox.isSelected());
                 Files.writeString(PythonUtility.SETTINGS.toPath(),
                         jsonSettings);
@@ -271,6 +304,7 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel errroLabel;
     private javax.swing.JEditorPane lspEditorPane;
     private javax.swing.JList lspList;
     private javax.swing.JPanel lspPanel;

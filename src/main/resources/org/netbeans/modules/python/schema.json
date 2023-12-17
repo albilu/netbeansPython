@@ -1,0 +1,645 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": true,
+    "type": "object",
+    "properties": {
+        "auto_pop_completion": {
+            "default": false,
+            "examples": [false],
+            "type": "boolean"
+        },
+        "plugins": {
+            "additionalProperties": true,
+            "type": "object",
+            "properties": {
+                "autopep8": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {"enabled": {
+                        "default": false,
+                        "examples": [false],
+                        "type": "boolean"
+                    }},
+                    "required": ["enabled"]
+                },
+                "pyflakes": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {"enabled": {
+                        "default": true,
+                        "examples": [true],
+                        "type": "boolean"
+                    }},
+                    "required": ["enabled"]
+                },
+                "yapf": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {"enabled": {
+                        "default": false,
+                        "examples": [false],
+                        "type": "boolean"
+                    }},
+                    "required": ["enabled"]
+                },
+                "pylsp_mypy": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "live_mode": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "strict": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "dmypy": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "live_mode",
+                        "dmypy",
+                        "strict"
+                    ]
+                },
+                "rope": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "ropeFolder": {
+                            "type": "array",
+                            "items": {
+                                "default": "",
+                                "examples": [""],
+                                "type": "string"
+                            }
+                        },
+                        "extensionModules": {
+                            "default": "",
+                            "examples": [""],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "extensionModules",
+                        "ropeFolder"
+                    ]
+                },
+                "black": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "preview": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "line_length": {
+                            "default": 80,
+                            "examples": [80],
+                            "type": "integer"
+                        },
+                        "cache_config": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "cache_config",
+                        "line_length",
+                        "preview"
+                    ]
+                },
+                "pycodestyle": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "filename": {"type": "array"},
+                        "select": {
+                            "type": "array",
+                            "items": {
+                                "default": "",
+                                "examples": [""],
+                                "type": "string"
+                            }
+                        },
+                        "maxLineLength": {
+                            "default": 80,
+                            "examples": [80],
+                            "type": "integer"
+                        },
+                        "ignore": {"type": "array"},
+                        "exclude": {"type": "array"},
+                        "indentSize": {
+                            "default": 4,
+                            "examples": [4],
+                            "type": "integer"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "hangClosing": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "exclude",
+                        "filename",
+                        "select",
+                        "ignore",
+                        "hangClosing",
+                        "maxLineLength",
+                        "indentSize"
+                    ]
+                },
+                "jedi_hover": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {"enabled": {
+                        "default": true,
+                        "examples": [true],
+                        "type": "boolean"
+                    }},
+                    "required": ["enabled"]
+                },
+                "rope_completion": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "eager": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "eager"
+                    ]
+                },
+                "preload": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "modules": {"type": "array"}
+                    },
+                    "required": [
+                        "enabled",
+                        "modules"
+                    ]
+                },
+                "flake8": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "filename": {
+                            "default": "",
+                            "examples": [""],
+                            "type": "string"
+                        },
+                        "select": {
+                            "type": "array",
+                            "items": {
+                                "default": "",
+                                "examples": [""],
+                                "type": "string"
+                            }
+                        },
+                        "perFileIgnores": {"type": "array"},
+                        "maxLineLength": {
+                            "default": 80,
+                            "examples": [80],
+                            "type": "integer"
+                        },
+                        "ignore": {"type": "array"},
+                        "exclude": {"type": "array"},
+                        "indentSize": {
+                            "default": 4,
+                            "examples": [4],
+                            "type": "integer"
+                        },
+                        "config": {
+                            "default": "",
+                            "examples": [""],
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "executable": {
+                            "default": "flake8",
+                            "examples": ["flake8"],
+                            "type": "string"
+                        },
+                        "hangClosing": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "config",
+                        "enabled",
+                        "exclude",
+                        "executable",
+                        "filename",
+                        "hangClosing",
+                        "ignore",
+                        "maxLineLength",
+                        "indentSize",
+                        "perFileIgnores",
+                        "select"
+                    ]
+                },
+                "jedi": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "auto_import_modules": {
+                            "type": "array",
+                            "items": {
+                                "default": "numpy",
+                                "examples": ["numpy"],
+                                "type": "string"
+                            }
+                        },
+                        "extra_paths": {"type": "array"},
+                        "env_vars": {
+                            "additionalProperties": true,
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "auto_import_modules",
+                        "extra_paths",
+                        "env_vars"
+                    ]
+                },
+                "jedi_symbols": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "include_import_symbols": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "all_scopes": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "all_scopes",
+                        "include_import_symbols"
+                    ]
+                },
+                "mccabe": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "threshold": {
+                            "default": 15,
+                            "examples": [15],
+                            "type": "integer"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "threshold"
+                    ]
+                },
+                "pylint": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "args": {"type": "array"},
+                        "enabled": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "executable": {
+                            "default": "",
+                            "examples": [""],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "args",
+                        "executable"
+                    ]
+                },
+                "jedi_references": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {"enabled": {
+                        "default": true,
+                        "examples": [true],
+                        "type": "boolean"
+                    }},
+                    "required": ["enabled"]
+                },
+                "pyls-memestra": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "decorator_module": {
+                            "default": "deprecated",
+                            "examples": ["deprecated"],
+                            "type": "string"
+                        },
+                        "decorator_function": {
+                            "default": "deprecated",
+                            "examples": ["deprecated"],
+                            "type": "string"
+                        },
+                        "reason_keyword": {
+                            "default": "reason",
+                            "examples": ["reason"],
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "recursive": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "additional_search_paths": {"type": "array"}
+                    },
+                    "required": [
+                        "enabled",
+                        "recursive",
+                        "decorator_module",
+                        "decorator_function",
+                        "reason_keyword",
+                        "additional_search_paths"
+                    ]
+                },
+                "jedi_completion": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "include_class_objects": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "eager": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "resolve_at_most": {
+                            "default": 25,
+                            "examples": [25],
+                            "type": "integer"
+                        },
+                        "include_function_objects": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "cache_for": {
+                            "type": "array",
+                            "items": {
+                                "default": "pandas",
+                                "examples": [
+                                    "pandas",
+                                    "numpy",
+                                    "tensorflow",
+                                    "matplotlib"
+                                ],
+                                "type": "string"
+                            }
+                        },
+                        "include_params": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "fuzzy": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "include_params",
+                        "include_class_objects",
+                        "include_function_objects",
+                        "fuzzy",
+                        "eager",
+                        "resolve_at_most",
+                        "cache_for"
+                    ]
+                },
+                "jedi_signature_help": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {"enabled": {
+                        "default": true,
+                        "examples": [true],
+                        "type": "boolean"
+                    }},
+                    "required": ["enabled"]
+                },
+                "pydocstyle": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "convention": {
+                            "default": "None",
+                            "examples": ["None"],
+                            "type": "string"
+                        },
+                        "addIgnore": {"type": "array"},
+                        "select": {
+                            "type": "array",
+                            "items": {
+                                "default": "",
+                                "examples": [""],
+                                "type": "string"
+                            }
+                        },
+                        "match": {
+                            "default": "(?!test_).*\\.py",
+                            "examples": ["(?!test_).*\\.py"],
+                            "type": "string"
+                        },
+                        "ignore": {"type": "array"},
+                        "matchDir": {
+                            "default": "[^\\.].*",
+                            "examples": ["[^\\.].*"],
+                            "type": "string"
+                        },
+                        "addSelect": {"type": "array"},
+                        "enabled": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "convention",
+                        "addIgnore",
+                        "addSelect",
+                        "ignore",
+                        "select",
+                        "match",
+                        "matchDir"
+                    ]
+                },
+                "rope_autoimport": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "memory": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": false,
+                            "examples": [false],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "memory"
+                    ]
+                },
+                "jedi_definition": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "properties": {
+                        "follow_builtin_definitions": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "follow_imports": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        },
+                        "follow_builtin_imports": {
+                            "default": true,
+                            "examples": [true],
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "follow_imports",
+                        "follow_builtin_imports",
+                        "follow_builtin_definitions"
+                    ]
+                }
+            },
+            "required": [
+                "autopep8",
+                "flake8",
+                "jedi",
+                "jedi_completion",
+                "jedi_definition",
+                "jedi_hover",
+                "jedi_references",
+                "jedi_signature_help",
+                "jedi_symbols",
+                "mccabe",
+                "preload",
+                "pycodestyle",
+                "pydocstyle",
+                "pyflakes",
+                "pylint",
+                "rope_autoimport",
+                "rope_completion",
+                "yapf",
+                "rope",
+                "pylsp_mypy",
+                "black",
+                "pyls-memestra"
+            ]
+        },
+        "configurationSources": {
+            "type": "array",
+            "items": {
+                "default": "pycodestyle",
+                "examples": ["pycodestyle"],
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "auto_pop_completion",
+        "configurationSources",
+        "plugins"
+    ]
+}
