@@ -23,10 +23,10 @@ import org.openide.util.NbBundle.Messages;
 @Messages("CTL_PythonLspLog=Python Lsp Log")
 public final class PythonLspLog implements ActionListener {
 
+    static final File f = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("lsp_log_file").toFile();
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        File f = PythonUtility.PYLSP_VENV_DIR.toPath().resolve("lsp_log_file").toFile();
 
         if (!f.exists()) {
             return;
