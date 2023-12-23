@@ -191,8 +191,16 @@ public class PythonErrorAnnotator extends AnnotationProvider implements FileAnno
                 toRefresh.add(URLMapper.findFileObject(t));
             });
 
-            fireFileStatusChanged(new FileStatusEvent(toRefresh.iterator().next()
-                    .getFileSystem(), toRefresh, true, false));
+            if (toRefresh.iterator().hasNext()) {
+                FileObject next = toRefresh.iterator().next();
+                if (next == null) {
+                    return;
+                }
+
+                fireFileStatusChanged(new FileStatusEvent(next
+                        .getFileSystem(), toRefresh, true, false));
+            }
+
         } catch (FileStateInvalidException ex) {
             Exceptions.printStackTrace(ex);
         }
