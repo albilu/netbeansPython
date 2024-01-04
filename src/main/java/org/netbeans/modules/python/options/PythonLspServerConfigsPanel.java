@@ -13,6 +13,7 @@ import com.networknt.schema.ValidationMessage;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.apache.commons.io.IOUtils;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.netbeans.modules.lsp.client.LSPBindings;
 import org.netbeans.modules.python.PythonUtility;
@@ -228,6 +230,9 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_lspListMouseClicked
 
     void load() {
+        if (errors != null && !errors.isEmpty()) {
+            return;
+        }
         try {
             lspServerCheckBox.setSelected(NbPreferences.root().getBoolean("autoUpdate", false));
             lspServerLabel.setText(String.format("%s%s", "Current Version: ", PythonUtility.getServerVersion()));
@@ -257,6 +262,7 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
 
     static final File settingsSchema = PythonUtility.SETTINGS_SCHEMA;
     static final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+    static Set<ValidationMessage> errors;
 
     void store() {
         if (controller.isChanged()) {
@@ -264,14 +270,18 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
             try {
                 String jsonSettings = lspEditorPane.getText();
 
-                if (settingsSchema.exists()) {
-                    JsonSchema jsonSchema = factory.getSchema(Files.readString(settingsSchema.toPath()));
-                    JsonNode jsonNode = new ObjectMapper().readTree(jsonSettings);
-                    Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
-                    if (!errors.isEmpty()) {
-                        errroLabel.setText(errors.iterator().next().getMessage());
-                        return;
-                    }
+                if (!settingsSchema.exists()) {
+                    Files.writeString(settingsSchema.toPath(),
+                            IOUtils.resourceToString("org/netbeans/modules/python/schema.json",
+                                    StandardCharsets.UTF_8)
+                    );
+                }
+                JsonSchema jsonSchema = factory.getSchema(Files.readString(settingsSchema.toPath()));
+                JsonNode jsonNode = new ObjectMapper().readTree(jsonSettings);
+                errors = jsonSchema.validate(jsonNode);
+                if (!errors.isEmpty()) {
+                    errroLabel.setText(errors.iterator().next().getMessage());
+                    return;
                 }
 
                 NbPreferences.root().putBoolean("autoUpdate", lspServerCheckBox.isSelected());
