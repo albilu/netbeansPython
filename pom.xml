@@ -802,7 +802,7 @@
     <properties>
         <keystore>target/keystore</keystore>
         <netbeans.release.version>RELEASE200</netbeans.release.version>
-        <next.version>1.6</next.version>
+        <next.version>1.7</next.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
         <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

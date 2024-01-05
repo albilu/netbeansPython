@@ -27,6 +27,7 @@ import javax.swing.event.DocumentListener;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.netbeans.modules.lsp.client.LSPBindings;
+import org.netbeans.modules.python.Installer;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.util.Exceptions;
 import org.openide.util.NbPreferences;
@@ -273,7 +274,7 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
                 if (!settingsSchema.exists()) {
                     Files.writeString(settingsSchema.toPath(),
                             IOUtils.resourceToString("org/netbeans/modules/python/schema.json",
-                                    StandardCharsets.UTF_8)
+                                    StandardCharsets.UTF_8, Installer.class.getClassLoader())
                     );
                 }
                 JsonSchema jsonSchema = factory.getSchema(Files.readString(settingsSchema.toPath()));
