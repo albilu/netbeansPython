@@ -27,6 +27,7 @@ import org.openide.loaders.DataObjectNotFoundException;
 import org.openide.text.Annotatable;
 import org.openide.text.Line;
 import org.openide.util.Exceptions;
+import org.openide.util.RequestProcessor;
 import org.openide.windows.IOColorLines;
 import org.openide.windows.InputOutput;
 
@@ -45,12 +46,17 @@ public class PdbClient {
     InputOutput io;
     private final BufferedWriter writer;
     private final BufferedReader reader;
+    private final BufferedReader ioReader;
 
     public PdbClient(Process process, InputOutput io) {
         this.process = process;
         this.io = io;
         writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        ioReader = new BufferedReader(this.io.getIn());
+        RequestProcessor.getDefault().post(() -> {
+            handleIoInput();
+        });
     }
 
     public Process getProcess() {
@@ -213,6 +219,20 @@ public class PdbClient {
 
     public boolean isSuspended() {
         return isStopped;
+    }
+
+    private void handleIoInput() {
+        try {
+            try (ioReader) {
+                String line;
+                while ((line = ioReader.readLine()) != null) {
+                    // Process each line of input as needed
+                    writeToStream(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

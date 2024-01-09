@@ -118,6 +118,7 @@ public class PythonDebugger {
 
             io = IOProvider.getDefault().getIO(String.format("%s (%s)",
                     Bundle.CTL_SessionName(), sessionName), false);
+            io.setInputVisible(true);
             io.select();
 
             pdbClient = new PdbClient(process, /*loggingPtyProcessTtyConnector,*/ io);

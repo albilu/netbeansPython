@@ -61,7 +61,7 @@ public class PythonCustomIndexer extends CustomIndexer {
                 for (Indexable file : files) {
                     File toFile = Paths.get(file.getURL().toURI()).toFile();
                     FileObject fo = FileUtil.toFileObject(toFile);
-                    if (fo.getExt().equals("py")) {
+                    if (fo != null && fo.getExt().equals("py")) {
                         boolean notSkipped = !StringUtils.containsAny(toFile.toPath().toString(),
                                 PythonUtility.EXCLUDED_DIRS);
                         if (pyProject && notSkipped) {
