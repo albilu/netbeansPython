@@ -270,6 +270,7 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
             errroLabel.setText("");
             try {
                 String jsonSettings = lspEditorPane.getText();
+                NbPreferences.root().putBoolean("autoUpdate", lspServerCheckBox.isSelected());
 
                 if (!settingsSchema.exists()) {
                     Files.writeString(settingsSchema.toPath(),
@@ -285,7 +286,6 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
                     return;
                 }
 
-                NbPreferences.root().putBoolean("autoUpdate", lspServerCheckBox.isSelected());
                 Files.writeString(PythonUtility.SETTINGS.toPath(),
                         jsonSettings);
                 Gson create = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL).create();
