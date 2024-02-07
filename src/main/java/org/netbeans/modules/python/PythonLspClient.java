@@ -20,6 +20,7 @@ public class PythonLspClient implements LanguageServerProvider {
                     PythonUtility.getLspPythonExe(),
                     "-m",
                     "pylsp",
+                    "--verbose",
                     "--log-file",
                     PythonUtility.PYLSP_VENV_DIR.toPath().resolve("lsp_log_file").toString()
             //,

@@ -66,13 +66,7 @@
                             "examples": [false],
                             "type": "boolean"
                         }
-                    },
-                    "required": [
-                        "enabled",
-                        "live_mode",
-                        "dmypy",
-                        "strict"
-                    ]
+                    }
                 },
                 "rope": {
                     "additionalProperties": true,
@@ -91,11 +85,7 @@
                             "examples": [""],
                             "type": "string"
                         }
-                    },
-                    "required": [
-                        "extensionModules",
-                        "ropeFolder"
-                    ]
+                    }
                 },
                 "black": {
                     "additionalProperties": true,
@@ -123,10 +113,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "cache_config",
-                        "line_length",
-                        "preview"
+                        "enabled"
                     ]
                 },
                 "pycodestyle": {
@@ -166,14 +153,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "exclude",
-                        "filename",
-                        "select",
-                        "ignore",
-                        "hangClosing",
-                        "maxLineLength",
-                        "indentSize"
+                        "enabled"
                     ]
                 },
                 "jedi_hover": {
@@ -202,8 +182,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "eager"
+                        "enabled"
                     ]
                 },
                 "preload": {
@@ -218,8 +197,7 @@
                         "modules": {"type": "array"}
                     },
                     "required": [
-                        "enabled",
-                        "modules"
+                        "enabled"
                     ]
                 },
                 "flake8": {
@@ -274,17 +252,7 @@
                         }
                     },
                     "required": [
-                        "config",
-                        "enabled",
-                        "exclude",
-                        "executable",
-                        "filename",
-                        "hangClosing",
-                        "ignore",
-                        "maxLineLength",
-                        "indentSize",
-                        "perFileIgnores",
-                        "select"
+                        "enabled"
                     ]
                 },
                 "jedi": {
@@ -304,12 +272,7 @@
                             "additionalProperties": true,
                             "type": "object"
                         }
-                    },
-                    "required": [
-                        "auto_import_modules",
-                        "extra_paths",
-                        "env_vars"
-                    ]
+                    }
                 },
                 "jedi_symbols": {
                     "additionalProperties": true,
@@ -332,9 +295,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "all_scopes",
-                        "include_import_symbols"
+                        "enabled"
                     ]
                 },
                 "mccabe": {
@@ -353,8 +314,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "threshold"
+                        "enabled"
                     ]
                 },
                 "pylint": {
@@ -374,9 +334,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "args",
-                        "executable"
+                        "enabled"
                     ]
                 },
                 "jedi_references": {
@@ -421,12 +379,7 @@
                         "additional_search_paths": {"type": "array"}
                     },
                     "required": [
-                        "enabled",
-                        "recursive",
-                        "decorator_module",
-                        "decorator_function",
-                        "reason_keyword",
-                        "additional_search_paths"
+                        "enabled"
                     ]
                 },
                 "jedi_completion": {
@@ -483,14 +436,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "include_params",
-                        "include_class_objects",
-                        "include_function_objects",
-                        "fuzzy",
-                        "eager",
-                        "resolve_at_most",
-                        "cache_for"
+                        "enabled"
                     ]
                 },
                 "jedi_signature_help": {
@@ -540,14 +486,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "convention",
-                        "addIgnore",
-                        "addSelect",
-                        "ignore",
-                        "select",
-                        "match",
-                        "matchDir"
+                        "enabled"
                     ]
                 },
                 "rope_autoimport": {
@@ -566,8 +505,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "memory"
+                        "enabled"
                     ]
                 },
                 "jedi_definition": {
@@ -596,10 +534,7 @@
                         }
                     },
                     "required": [
-                        "enabled",
-                        "follow_imports",
-                        "follow_builtin_imports",
-                        "follow_builtin_definitions"
+                        "enabled"
                     ]
                 }
             },
