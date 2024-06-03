@@ -71,3 +71,15 @@ jobs:
         mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE200 -Dnext.version=RELEASE200
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE210
+      run: |
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE210 -Dnext.version=RELEASE210
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE220
+      run: |
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE220 -Dnext.version=RELEASE220
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
