@@ -57,11 +57,11 @@
                       <Component id="testGeneratorParamsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="testGeneratorDirLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="testGeneratorParamsTextField" pref="400" max="32767" attributes="0"/>
+                      <Component id="testGeneratorParamsTextField" pref="401" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="testGeneratorDirTextField" pref="322" max="32767" attributes="0"/>
+                          <Component id="testGeneratorDirTextField" pref="323" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="testGeneratorDirButton" min="-2" max="-2" attributes="0"/>
                       </Group>
