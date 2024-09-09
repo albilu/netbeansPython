@@ -32,10 +32,13 @@ import org.netbeans.modules.python.PythonUtility;
 import org.openide.util.Exceptions;
 import org.openide.util.NbPreferences;
 import org.openide.util.Pair;
+import org.openide.util.RequestProcessor;
 
 final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
+
+    RequestProcessor RP = new RequestProcessor(this.getClass().getName(), 1);
 
     public static String[] PACKAGES = {
         "pylsp",
@@ -231,33 +234,36 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_lspListMouseClicked
 
     void load() {
-        if (errors != null && !errors.isEmpty()) {
-            return;
-        }
-        try {
-            lspServerCheckBox.setSelected(NbPreferences.root().getBoolean("autoUpdate", false));
-            lspServerLabel.setText(String.format("%s%s", "Current Version: ", PythonUtility.getServerVersion()));
-            lspPythonVersionLabel.setText(String.format("%s%s", "Python Version: ", PythonUtility.getVersion(PythonUtility.getLspPythonExe())));
-            String pipListOutput = PythonUtility.getPipList(PythonUtility.getLspPythonExe());
+        RP.post(() -> {
+            if (errors != null && !errors.isEmpty()) {
+                return;
+            }
+            try {
+                lspServerCheckBox.setSelected(NbPreferences.root().getBoolean("autoUpdate", false));
+                lspServerLabel.setText(String.format("%s%s", "Current Version: ", PythonUtility.getServerVersion()));
+                lspPythonVersionLabel.setText(String.format("%s%s", "Python Version: ", PythonUtility.getVersion(PythonUtility.getLspPythonExe())));
+                String pipListOutput = PythonUtility.getPipList(PythonUtility.getLspPythonExe());
 
-            DefaultListModel<Pair<String, Boolean>> model = new DefaultListModel<>();
+                DefaultListModel<Pair<String, Boolean>> model = new DefaultListModel<>();
 
-            for (String pipPackage : PACKAGES) {
-                if (pipListOutput.contains(pipPackage)) {
-                    model.addElement(Pair.of(pipPackage, true));
+                for (String pipPackage : PACKAGES) {
+                    if (pipListOutput.contains(pipPackage)) {
+                        model.addElement(Pair.of(pipPackage, true));
 
-                } else {
-                    model.addElement(Pair.of(pipPackage, false));
+                    } else {
+                        model.addElement(Pair.of(pipPackage, false));
+
+                    }
 
                 }
+                lspList.setModel(model);
 
+                lspEditorPane.setText(Files.readString(PythonUtility.SETTINGS.toPath()));
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
-            lspList.setModel(model);
 
-            lspEditorPane.setText(Files.readString(PythonUtility.SETTINGS.toPath()));
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        });
 
     }
 

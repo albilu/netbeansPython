@@ -37,9 +37,9 @@ The project is driven by the need to bring to Netbeans similar support for Pytho
 
 Support this project growth and maintenance by:
 
--   Starring it [![](https://img.shields.io/github/stars/albilu/netbeansPython)]()
--   Submiting [PR](https://github.com/albilu/netbeansPython/pulls) for issues in the backlog
 -   [Sponsoring it](https://github.com/sponsors/albilu)
+-   Submiting [PR](https://github.com/albilu/netbeansPython/pulls) for issues in the backlog
+-   Starring it [![](https://img.shields.io/github/stars/albilu/netbeansPython)]()
 
 ### Related Projects
 
