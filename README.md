@@ -33,7 +33,7 @@ It leverage the `Spyder IDE` community supported [Language Server Protocol](http
 
 The project is driven by the need to bring to Netbeans similar support for Python as what other main IDEs/Editors (namely [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/)/[Spyder IDE](https://www.spyder-ide.org/)/[VScode](https://code.visualstudio.com/docs/languages/python)) offers.
 
-### Support/Contribute/Sponsor
+### Sponsor/Contribute/Support
 
 Support this project growth and maintenance by:
 
