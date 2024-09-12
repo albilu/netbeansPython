@@ -4,6 +4,9 @@
         "pycodestyle"
     ],
     "plugins": {
+        "isort": {
+            "enabled": true
+        },
         "autopep8": {
             "enabled": false
         },

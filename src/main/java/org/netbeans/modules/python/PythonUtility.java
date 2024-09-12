@@ -110,7 +110,7 @@ public class PythonUtility {
 
     public static String[] LSP_DEPS = new String[]{
         "python-lsp-server[all]",
-        "pyls-isort",
+        "python-lsp-isort",
         "pylsp-mypy",
         "pylsp-rope",
         "black",
