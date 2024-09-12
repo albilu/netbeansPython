@@ -29,15 +29,15 @@ OpenIDE-Module-Long-Description: <html><h1 id="netbeanspython">netbeansPython</h
       >/<a href="https://code.visualstudio.com/docs/languages/python">VScode</a>)
       offers.
     </p>
-    <h3 id="support-contribute-sponsor">Support/Contribute/Sponsor</h3>
+    <h3 id="support-contribute-sponsor">Sponsor/Contribute/Support</h3>
     <p>Support this project growth and maintenance by:</p>
     <ul>
+      <li><a href="https://github.com/sponsors/albilu">Sponsoring it</a></li>
       <li>
         Submiting
         <a href="https://github.com/albilu/netbeansPython/pulls">PR</a> for issues
         in the backlog
       </li>
-      <li><a href="https://github.com/sponsors/albilu">Sponsoring it</a></li>
     </ul>
     <h3 id="related-projects">Related Projects</h3>
     <p>
