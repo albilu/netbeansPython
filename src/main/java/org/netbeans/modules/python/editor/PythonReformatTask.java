@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.StyledDocument;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.FormattingOptions;
@@ -25,6 +26,7 @@ import org.netbeans.modules.editor.indent.spi.Context;
 import org.netbeans.modules.editor.indent.spi.ExtraLock;
 import org.netbeans.modules.lsp.client.LSPBindings;
 import org.netbeans.modules.lsp.client.Utils;
+import org.netbeans.modules.python.PythonUtility;
 import org.openide.filesystems.FileObject;
 import org.openide.text.NbDocument;
 import org.openide.util.Exceptions;
@@ -43,7 +45,8 @@ public class PythonReformatTask
         Document document = context.document();
         boolean rangeOrDoc = context.startOffset() != 0;
         FileObject fileObject = NbEditorUtilities.getFileObject(document);
-        if (fileObject != null) {
+        if (fileObject != null && !StringUtils.containsAny(fileObject.getPath(),
+                PythonUtility.EXCLUDED_DIRS)) {
             LSPBindings bindings = LSPBindings.getBindings(fileObject);
             if (bindings != null) {
                 boolean documentFormatting = Utils.isEnabled(bindings
