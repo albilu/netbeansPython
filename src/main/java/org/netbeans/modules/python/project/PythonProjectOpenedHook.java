@@ -10,14 +10,11 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
-import org.netbeans.api.java.classpath.ClassPath;
-import org.netbeans.api.java.classpath.GlobalPathRegistry;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.ProjectProblems;
 import org.netbeans.modules.lsp.client.LSPBindings;
 import org.netbeans.modules.parsing.api.indexing.IndexingManager;
 import org.netbeans.modules.python.PythonUtility;
-import org.netbeans.spi.java.classpath.support.ClassPathSupport;
 import org.netbeans.spi.project.ui.ProjectOpenedHook;
 import org.openide.filesystems.FileObject;
 import org.openide.util.Exceptions;
@@ -32,12 +29,11 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
     private final Project project;
     private final FileObject projectDir;
 
-    private final ClassPath source;
-
+//    private final ClassPath source;
     public PythonProjectOpenedHook(Project project) {
         this.project = project;
         this.projectDir = project.getProjectDirectory();
-        this.source = ClassPathSupport.createClassPath(project.getProjectDirectory());
+//        this.source = ClassPathSupport.createClassPath(project.getProjectDirectory());
     }
 
     @Override
@@ -76,7 +72,7 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
-        GlobalPathRegistry.getDefault().register(ClassPath.SOURCE, new ClassPath[]{source});
+//        GlobalPathRegistry.getDefault().register(ClassPath.SOURCE, new ClassPath[]{source});
         if (ProjectProblems.isBroken(project)) {
             ProjectProblems.showAlert(project);
         }
@@ -85,6 +81,6 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
 
     @Override
     protected void projectClosed() {
-        GlobalPathRegistry.getDefault().unregister(ClassPath.SOURCE, new ClassPath[]{source});
+//        GlobalPathRegistry.getDefault().unregister(ClassPath.SOURCE, new ClassPath[]{source});
     }
 }

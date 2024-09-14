@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 import org.netbeans.api.java.classpath.ClassPath;
 import org.netbeans.modules.parsing.spi.indexing.PathRecognizer;
-import org.openide.util.lookup.ServiceProvider;
+//import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author albilu
  */
-@ServiceProvider(service = PathRecognizer.class)
+//@ServiceProvider(service = PathRecognizer.class)
 public class PythonPathRecognizer extends PathRecognizer {
 
     @Override
