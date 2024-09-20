@@ -17,7 +17,7 @@ Follow the [Wiki Session](https://github.com/albilu/netbeansPython/wiki) (WIP) f
 
     -   If Plugin not available, register the repository
         `Tools -> Plugins -> Settings -> Add`
-        https://raw.githubusercontent.com/albilu/netbeansPython/master/ppuc/{Netbeans version}/updates.xml
+        https://raw.githubusercontent.com/albilu/netbeansPython/master/ppuc/{Netbeans%20version}/updates.xml
 
 -   Or Download the latest [release](https://github.com/albilu/netbeansPython/releases) and install in Netbeans: \
      `Tools -> Plugins -> Downloaded -> Add Plugins -> Install`

@@ -61,16 +61,6 @@ jobs:
       run: |
         sed -i "s/OpenIDE-Module-Specification-Version:.*/OpenIDE-Module-Specification-Version: ${{ env.RELEASE_VERSION }}/" src/main/nbm/manifest.mf
 
-    - name: Build with RELEASE130
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130-${{ env.RELEASE_VERSION }}
-        echo "SIZE_13=$(wc -c target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-        GITHUB_TOKEN: ${{ github.token }}
-
     - name: Create Release
       uses: actions/create-release@v1
       id: create_release
@@ -82,148 +72,158 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Attach RELEASE130 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE140
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE140 -Dnext.version=RELEASE140-${{ env.RELEASE_VERSION }}
-        echo "SIZE_14=$(wc -c target/nbm/python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE140 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE150
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
-        echo "SIZE_15=$(wc -c target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE150 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE160
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }}
-        echo "SIZE_16=$(wc -c target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE160 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE170
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }}
-        echo "SIZE_17=$(wc -c target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE170 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE180
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE180 -Dnext.version=RELEASE180-${{ env.RELEASE_VERSION }}
-        echo "SIZE_18=$(wc -c target/nbm/python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE180 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE190
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE190 -Dnext.version=RELEASE190-${{ env.RELEASE_VERSION }}
-        echo "SIZE_19=$(wc -c target/nbm/python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE190 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE200
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE200 -Dnext.version=RELEASE200-${{ env.RELEASE_VERSION }}
-        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE200-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-    - name: Attach RELEASE200 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE200-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE200-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Build with RELEASE130
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_13=$(wc -c target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Attach RELEASE130 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE130-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE140
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE140 -Dnext.version=RELEASE140-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_14=$(wc -c target/nbm/python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE140 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE140-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE150
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_15=$(wc -c target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE150 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE150-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE160
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_16=$(wc -c target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE160 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE160-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE170
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_17=$(wc -c target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE170 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE170-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE180
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE180 -Dnext.version=RELEASE180-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_18=$(wc -c target/nbm/python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE180 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE180-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE190
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE190 -Dnext.version=RELEASE190-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_19=$(wc -c target/nbm/python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE190 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE190-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE200
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE200 -Dnext.version=RELEASE200-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE200-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#
+#    - name: Attach RELEASE200 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE200-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE200-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with RELEASE210
       run: |
@@ -259,6 +259,25 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: target/nbm/python-RELEASE220-${{ env.RELEASE_VERSION }}.nbm
         asset_name: python-RELEASE220-${{ env.RELEASE_VERSION }}.nbm
+        asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE230
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE230 -Dnext.version=RELEASE230-${{ env.RELEASE_VERSION }}
+        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE230-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
+    - name: Attach RELEASE230 NBM
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/nbm/python-RELEASE230-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-RELEASE230-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
         GITHUB_TOKEN: ${{ github.token }}

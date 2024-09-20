@@ -24,53 +24,53 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build with RELEASE130
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE140
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE140 -Dnext.version=RELEASE140
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE150
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE160
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE170
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE180
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE180 -Dnext.version=RELEASE180
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE190
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE190 -Dnext.version=RELEASE190
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE200
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE200 -Dnext.version=RELEASE200
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Build with RELEASE130
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE130 -Dnext.version=RELEASE130
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE140
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE140 -Dnext.version=RELEASE140
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE150
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE150 -Dnext.version=RELEASE150
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE160
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE160 -Dnext.version=RELEASE160
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE170
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE170 -Dnext.version=RELEASE170
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE180
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE180 -Dnext.version=RELEASE180
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE190
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE190 -Dnext.version=RELEASE190
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE200
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE200 -Dnext.version=RELEASE200
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with RELEASE210
       run: |
@@ -81,5 +81,11 @@ jobs:
     - name: Build with RELEASE220
       run: |
         mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE220 -Dnext.version=RELEASE220
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE230
+      run: |
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE230 -Dnext.version=RELEASE230
       env:
         GITHUB_TOKEN: ${{ github.token }}
