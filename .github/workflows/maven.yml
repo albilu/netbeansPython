@@ -233,6 +233,7 @@ jobs:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE210 NBM
       uses: actions/upload-release-asset@v1
@@ -252,6 +253,7 @@ jobs:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE220 NBM
       uses: actions/upload-release-asset@v1
@@ -271,6 +273,7 @@ jobs:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE230 NBM
       uses: actions/upload-release-asset@v1
