@@ -299,7 +299,12 @@ public class PythonUtility {
     }
 
     public static String getVersion(String projectPythonExe) throws IOException {
-        String commandOutput = getCommandOutput(new String[]{projectPythonExe, "--version"}, null);
+        String stripedPath = projectPythonExe.strip();
+        if (!isValidFilePath(stripedPath)) {
+            LOG.log(Level.SEVERE, stripedPath);
+            return "";
+        }
+        String commandOutput = getCommandOutput(new String[]{stripedPath, "--version"}, null);
         if (!commandOutput.startsWith("Py")) {
             LOG.log(Level.SEVERE, commandOutput);
             return "";
