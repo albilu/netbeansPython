@@ -104,7 +104,7 @@ public class PythonUtility {
 
     public static String[] VENV_DEPS = new String[]{
         "pytest",
-        "pynguin",
+        //"pynguin",
         "build"
     };
 
