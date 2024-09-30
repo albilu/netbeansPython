@@ -434,7 +434,7 @@
         <dependency>
             <groupId>org.jetbrains.pty4j</groupId>
             <artifactId>pty4j</artifactId>
-            <version>0.12.10</version>
+            <version>0.12.35</version>
             <type>jar</type>
         </dependency>
         <dependency>
