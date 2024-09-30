@@ -42,7 +42,7 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
 
     public static String[] PACKAGES = {
         "pylsp",
-        "pyls-isort",
+        "python-lsp-isort",
         "pylsp-mypy",
         "pylsp-rope",
         "black",

@@ -19,6 +19,8 @@ import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
 import org.openide.util.Utilities;
+import org.openide.windows.Mode;
+import org.openide.windows.WindowManager;
 
 /**
  *
@@ -92,6 +94,12 @@ public final class PythonVEnvConsoleAction extends AbstractAction
         PythonProject get = lkpInfo.allInstances().stream().findFirst().get();
         PythonVEnvConsoleActionTopComponent pythonVEnvConsoleActionTopComponent
                 = new PythonVEnvConsoleActionTopComponent(get, "venv");
+        for (Mode mode : WindowManager.getDefault().getModes()) {
+            if (mode.getName().equals("output") && mode.canDock(pythonVEnvConsoleActionTopComponent)) {
+                mode.dockInto(pythonVEnvConsoleActionTopComponent);
+                break;
+            }
+        }
         pythonVEnvConsoleActionTopComponent.open();
         pythonVEnvConsoleActionTopComponent.requestActive();
     }

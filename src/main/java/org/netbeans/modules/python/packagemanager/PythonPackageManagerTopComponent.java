@@ -243,9 +243,21 @@ public final class PythonPackageManagerTopComponent extends TopComponent {
             switch (text) {
                 case "Install":
                     RP.post(() -> {
-                        PythonUtility.processExecutor(new String[]{pyPath, "-m", "pip",
-                            "install", name + "==" + versionsComboBox.getSelectedItem()
-                            .toString()}, "Installing Package " + name);
+                        PythonUtility.processExecutor(
+                                new String[]{
+                                    pyPath,
+                                    "-m",
+                                    "pip",
+                                    "install",
+                                    String.format(
+                                            "%s%s",
+                                            name,
+                                            versionsComboBox.getSelectedItem() != null
+                                            ? "==" + versionsComboBox.getSelectedItem().toString()
+                                            : "")
+                                },
+                                "Installing Package " + name
+                        );
                         PythonPackagesModel.loadInstalled(pyPath);
                     });
                     break;

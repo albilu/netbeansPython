@@ -17,10 +17,7 @@ import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.netbeans.api.editor.EditorRegistry;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
-import org.netbeans.api.settings.ConvertAsProperties;
 import org.netbeans.modules.editor.NbEditorUtilities;
-import org.openide.awt.ActionID;
-import org.openide.awt.ActionReference;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
@@ -31,16 +28,16 @@ import org.openide.windows.TopComponent;
 /**
  * Top component which displays something.
  */
-@ConvertAsProperties(dtd = "-//org.netbeans.modules.python.testrunner//PythonTestResults//EN", autostore = false)
-@TopComponent.Description(preferredID = "PythonTestResultsTopComponent", iconBase = "org/netbeans/modules/python/pytest.png", persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "output", openAtStartup = false)
-@ActionID(category = "Window", id = "org.netbeans.modules.python.testrunner.PythonTestResultsTopComponent")
-@ActionReference(path = "Menu/Window/Tools", position = 255)
-@TopComponent.OpenActionRegistration(displayName = "#CTL_PythonTestResultsAction", preferredID = "PythonTestResultsTopComponent")
+//@ConvertAsProperties(dtd = "-//org.netbeans.modules.python.testrunner//PythonTestResults//EN", autostore = false)
+//@TopComponent.Description(preferredID = "PythonTestResultsTopComponent", iconBase = "org/netbeans/modules/python/pytest.png", persistenceType = TopComponent.PERSISTENCE_ALWAYS)
+//@TopComponent.Registration(mode = "output", openAtStartup = false)
+//@ActionID(category = "Window", id = "org.netbeans.modules.python.testrunner.PythonTestResultsTopComponent")
+//@ActionReference(path = "Menu/Window/Tools", position = 255)
+//@TopComponent.OpenActionRegistration(displayName = "#CTL_PythonTestResultsAction", preferredID = "PythonTestResultsTopComponent")
 @Messages({
-        "CTL_PythonTestResultsAction=PyTest Results",
-        "CTL_PythonTestResultsTopComponent=PyTest Results Window",
-        "HINT_PythonTestResultsTopComponent=This is a PyTest Results window"
+    "CTL_PythonTestResultsAction=PyTest Results",
+    "CTL_PythonTestResultsTopComponent=PyTest Results Window",
+    "HINT_PythonTestResultsTopComponent=This is a PyTest Results window"
 })
 public final class PythonTestResultsTopComponent extends TopComponent {
 
@@ -91,7 +88,7 @@ public final class PythonTestResultsTopComponent extends TopComponent {
                                     .getProjectDirectory()).toPath())
                                     .map(Path::toFile)
                                     .filter(file -> file.getName()
-                                            .equals("report.html"))
+                                    .equals("report.html"))
                                     .collect(Collectors.toList());
                             collect.sort(LastModifiedFileComparator.LASTMODIFIED_REVERSE);
                             if (!collect.isEmpty()) {
