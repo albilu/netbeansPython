@@ -31,7 +31,8 @@ public class PythonTestManager {
         try {
             Properties prop = PythonUtility.getProperties(project, false);
             return new Object[]{prop.getProperty("nbproject.test.runner", "unittest"),
-                prop.getProperty("nbproject.test.params", "*Test.py").split(" ")};
+                PythonUtility.getParamsTokenizer().reset(
+                prop.getProperty("nbproject.test.params", "*Test.py")).getTokenArray()};
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }

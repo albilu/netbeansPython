@@ -25,6 +25,8 @@ import javax.swing.ImageIcon;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.text.StringTokenizer;
+import org.apache.commons.text.matcher.StringMatcherFactory;
 import org.json.JSONObject;
 import org.netbeans.api.annotations.common.NonNull;
 import org.netbeans.api.extexecution.ExecutionDescriptor;
@@ -56,6 +58,13 @@ public class PythonUtility {
 
     public static final Logger LOG = Logger.getLogger(PythonUtility.class.getName());
 
+    public static final StringTokenizer STRING_TOKENIZER = new StringTokenizer();
+
+    static {
+        STRING_TOKENIZER.setDelimiterMatcher(StringMatcherFactory.INSTANCE.spaceMatcher());
+        STRING_TOKENIZER.setQuoteMatcher(StringMatcherFactory.INSTANCE.quoteMatcher());
+    }
+
     public static final RequestProcessor RP = new RequestProcessor("Retry RP", 2);
     public static final String PYTHON_MIME_TYPE = "text/x-python";
     public static final File PYLSP_VENV_DIR = Paths.get(System.getProperty("netbeans.user")).resolve(".pythonlsp").toFile();
@@ -73,6 +82,10 @@ public class PythonUtility {
                 .strip()));
         return toFileObject != null ? toFileObject : null;
     };
+
+    public static StringTokenizer getParamsTokenizer() {
+        return STRING_TOKENIZER;
+    }
 
     public static LineConvertor FILE_CONVERTOR = LineConvertors.filePattern(FILE_LOCATOR,
             PYTHON_STACKTRACE_PATTERN,
