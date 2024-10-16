@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
+import org.apache.commons.text.StringTokenizer;
+import org.apache.commons.text.matcher.StringMatcherFactory;
 import org.netbeans.api.extexecution.ExecutionService;
 import org.netbeans.api.project.Project;
 import org.netbeans.modules.python.PythonOutputLine;
@@ -57,8 +59,7 @@ public class PythonRun {
             if (owner != null) {
                 Properties prop = PythonUtility.getProperties(owner, false);
                 if (!prop.getProperty("nbproject.run.params", "").isEmpty()) {
-                    params = prop.getProperty("nbproject.run.params", "")
-                            .split(" ");
+                    params = new StringTokenizer(prop.getProperty("nbproject.run.params", ""), StringMatcherFactory.INSTANCE.spaceMatcher(), StringMatcherFactory.INSTANCE.quoteMatcher()).getTokenArray();
                 }
             }
             if (owner != null && PythonUtility.isPoetry((PythonProject) owner) && !isDebug) {
