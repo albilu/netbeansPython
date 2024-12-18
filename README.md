@@ -43,11 +43,11 @@ Support this project growth and maintenance by:
 
 ### Roadmap (Call for contributors)
 
-[ ] Add full LDAP based [Debugger](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372748) \
-[ ] Add Support to [PyTest Framework](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372837) \
-[ ] Add Support to [Django/Flask Web Frameworks](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372901) \
-[ ] Add support to [Python Profiler](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372872). \
-[ ] Add support to [Jupyter Notebook/Data science/Conda](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372936)
+-   [ ] Add full LDAP based [Debugger](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372748)
+-   [ ] Add Support to [PyTest Framework](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372837)
+-   [ ] Add Support to [Django/Flask Web Frameworks](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372901)
+-   [ ] Add support to [Python Profiler](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372872).
+-   [ ] Add support to [Jupyter Notebook/Data science/Conda](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372936)
 
 ### Related Projects
 
