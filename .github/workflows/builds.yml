@@ -17,10 +17,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
         cache: maven
 
@@ -72,20 +72,26 @@ jobs:
 #      env:
 #        GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Build with RELEASE210
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE210 -Dnext.version=RELEASE210
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Build with RELEASE210
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE210 -Dnext.version=RELEASE210
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Build with RELEASE220
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE220 -Dnext.version=RELEASE220
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Build with RELEASE220
-      run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE220 -Dnext.version=RELEASE220
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Build with RELEASE230
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE230 -Dnext.version=RELEASE230
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Build with RELEASE230
+    - name: Build with RELEASE240
       run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE230 -Dnext.version=RELEASE230
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE240 -Dnext.version=RELEASE240
       env:
         GITHUB_TOKEN: ${{ github.token }}
