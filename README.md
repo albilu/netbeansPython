@@ -41,14 +41,6 @@ Support this project growth and maintenance by:
 -   Submiting [PR](https://github.com/albilu/netbeansPython/pulls) for issues in the backlog
 -   Starring it [![](https://img.shields.io/github/stars/albilu/netbeansPython)]()
 
-### Roadmap (Call for contributors)
-
--   [ ] Add full LDAP based [Debugger](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372748)
--   [ ] Add Support to [PyTest Framework](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372837)
--   [ ] Add Support to [Django/Flask Web Frameworks](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372901)
--   [ ] Add support to [Python Profiler](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372872).
--   [ ] Add support to [Jupyter Notebook/Data science/Conda](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372936)
-
 ### Related Projects
 
 This is a non exhaustive list of some outstanding projects this module rely on:
@@ -103,3 +95,11 @@ This is a non exhaustive list of some outstanding projects this module rely on:
 
 -   Lite Python Debugger relying on the Python internal debugger [PDB](https://docs.python.org/3/library/pdb.html) (breakpoints/callstack/variable inspection) supported
     ![74a5dd8877b9608931b49604ab59555d.png](_resources/74a5dd8877b9608931b49604ab59555d.png)
+
+### Roadmap (Call for contributors)
+
+-   [ ] Add full LDAP based [Debugger](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372748)
+-   [ ] Add Support to [PyTest Framework](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372837)
+-   [ ] Add Support to [Django/Flask Web Frameworks](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372901)
+-   [ ] Add support to [Python Profiler](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372872).
+-   [ ] Add support to [Jupyter Notebook/Data science/Conda](https://github.com/users/albilu/projects/3?pane=issue&itemId=26372936)
