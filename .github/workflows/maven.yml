@@ -274,10 +274,41 @@ jobs:
 #      env:
 #        GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Build with RELEASE240
+#    - name: Build with RELEASE240
+#      run: |
+#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE240 -Dnext.version=RELEASE240-${{ env.RELEASE_VERSION }}
+#        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE240-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Create Release
+#      uses: actions/create-release@v1
+#      id: create_release
+#      with:
+#        draft: false
+#        prerelease: false
+#        release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
+#        tag_name: ${{ env.RELEASE_VERSION }}
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+#    - name: Attach RELEASE240 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE240-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE240-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE250
       run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE240 -Dnext.version=RELEASE240-${{ env.RELEASE_VERSION }}
-        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE240-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE250 -Dnext.version=RELEASE250-${{ env.RELEASE_VERSION }}
+        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE250-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -295,12 +326,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Attach RELEASE240 NBM
+    - name: Attach RELEASE250 NBM
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE240-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE240-${{ env.RELEASE_VERSION }}.nbm
+        asset_path: target/nbm/python-RELEASE250-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-RELEASE250-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
         GITHUB_TOKEN: ${{ github.token }}

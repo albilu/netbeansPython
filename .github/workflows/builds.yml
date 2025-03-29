@@ -90,8 +90,14 @@ jobs:
 #      env:
 #        GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Build with RELEASE240
+#    - name: Build with RELEASE240
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE240 -Dnext.version=RELEASE240
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Build with RELEASE250
       run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE240 -Dnext.version=RELEASE240
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE250 -Dnext.version=RELEASE250
       env:
         GITHUB_TOKEN: ${{ github.token }}
