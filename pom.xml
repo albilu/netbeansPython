@@ -801,8 +801,8 @@
     </dependencies>
     <properties>
         <keystore>target/keystore</keystore>
-        <netbeans.release.version>RELEASE250</netbeans.release.version>
-        <next.version>1.9.5</next.version>
+        <netbeans.release.version>RELEASE260</netbeans.release.version>
+        <next.version>1.9.6</next.version>
         <git.url>https://github.com/albilu/netbeansPython</git.url>
         <git.link>https://github.com/albilu/netbeansPython.git</git.link>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
