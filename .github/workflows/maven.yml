@@ -369,8 +369,8 @@ jobs:
 
     - name: Build with RELEASE270
       run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE270 -Dnext.version=RELEASE270-${{ env.RELEASE_VERSION }}
-        echo "SIZE_20=$(wc -c target/nbm/python-RELEASE270-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE270 -Dnext.version=${{ env.RELEASE_VERSION }}
+        echo "SIZE_20=$(wc -c target/nbm/python-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -392,8 +392,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE270-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE270-${{ env.RELEASE_VERSION }}.nbm
+        asset_path: target/nbm/python-${{ env.RELEASE_VERSION }}.nbm
+        asset_name: python-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
         GITHUB_TOKEN: ${{ github.token }}
