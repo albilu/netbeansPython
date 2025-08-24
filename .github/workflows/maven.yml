@@ -383,7 +383,7 @@ jobs:
       with:
         draft: false
         prerelease: false
-        release_name: ${{ github.event.repository.name }} ${{ env.RELEASE_VERSION }}
+        release_name: ${{ github.event.repository.name }} RELEASE270 ${{ env.RELEASE_VERSION }}
         tag_name: ${{ env.RELEASE_VERSION }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
