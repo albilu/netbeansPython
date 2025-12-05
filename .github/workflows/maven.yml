@@ -397,16 +397,17 @@ jobs:
 #        asset_content_type: application/gzip
 #      env:
 #        GITHUB_TOKEN: ${{ github.token }}
-#
-#    - name: Build with RELEASE270
-#      run: |
-#        mvn -B clean deploy -Dnetbeans.release.version=RELEASE270 -Dnext.version=${{ env.RELEASE_VERSION }}
-#        echo "SIZE_20=$(wc -c target/nbm/python-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-#      env:
-#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-#        GITHUB_TOKEN: ${{ github.token }}
+
+
+    - name: Build with RELEASE280
+      run: |
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE280 -Dnext.version=${{ env.RELEASE_VERSION }}
+        echo "SIZE_20=$(wc -c target/nbm/python-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Create Release
       uses: actions/create-release@v1
@@ -427,16 +428,6 @@ jobs:
         asset_name: python-${{ env.RELEASE_VERSION }}.nbm
         asset_content_type: application/gzip
       env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE280
-      run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE280 -Dnext.version=${{ env.RELEASE_VERSION }}
-        echo "SIZE_20=$(wc -c target/nbm/python-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
         GITHUB_TOKEN: ${{ github.token }}
 
       #TODO
