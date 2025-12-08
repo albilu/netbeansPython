@@ -107,9 +107,15 @@ jobs:
 #        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE260 -Dnext.version=RELEASE260
 #      env:
 #        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Build with RELEASE270
+#
+#    - name: Build with RELEASE270
+#      run: |
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE270 -Dnext.version=RELEASE270
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
+#
+    - name: Build with RELEASE280
       run: |
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE270 -Dnext.version=RELEASE270
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE280 -Dnext.version=RELEASE280
       env:
         GITHUB_TOKEN: ${{ github.token }}
