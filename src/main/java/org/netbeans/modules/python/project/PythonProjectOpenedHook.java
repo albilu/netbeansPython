@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.netbeans.api.project.Project;
@@ -65,9 +66,12 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
                 settings.remove("auto_pop_completion");
                 paramsObject.put("pylsp", settings);
                 DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
-                LSPBindings.getBindingsImpl(project, projectDir,
-                        PythonUtility.PYTHON_MIME_TYPE).getWorkspaceService()
-                        .didChangeConfiguration(params);
+                List<LSPBindings> bindingsImpl = LSPBindings.getBindingsImpl(project, projectDir,
+                        PythonUtility.PYTHON_MIME_TYPE);
+                for (LSPBindings lSPBindings : bindingsImpl) {
+                    lSPBindings.getWorkspaceService()
+                            .didChangeConfiguration(params);
+                }
             }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

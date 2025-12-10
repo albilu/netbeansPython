@@ -47,18 +47,18 @@ public class PythonReformatTask
         FileObject fileObject = NbEditorUtilities.getFileObject(document);
         if (fileObject != null && !StringUtils.containsAny(fileObject.getPath(),
                 PythonUtility.EXCLUDED_DIRS)) {
-            LSPBindings bindings = LSPBindings.getBindings(fileObject);
-            if (bindings != null) {
-                boolean documentFormatting = Utils.isEnabled(bindings
+            List<LSPBindings> bindings = LSPBindings.getBindings(fileObject);
+            for (LSPBindings binding : bindings) {
+                boolean documentFormatting = Utils.isEnabled(binding
                         .getInitResult().getCapabilities()
                         .getDocumentFormattingProvider());
-                boolean rangeFormatting = Utils.isEnabled(bindings
+                boolean rangeFormatting = Utils.isEnabled(binding
                         .getInitResult().getCapabilities()
                         .getDocumentRangeFormattingProvider());
                 if (rangeFormatting && rangeOrDoc) {
-                    rangeFormat(NbEditorUtilities.getFileObject(document), bindings);
+                    rangeFormat(NbEditorUtilities.getFileObject(document), binding);
                 } else if (documentFormatting && !rangeOrDoc) {
-                    documentFormat(NbEditorUtilities.getFileObject(document), bindings);
+                    documentFormat(NbEditorUtilities.getFileObject(document), binding);
                 }
             }
         }
