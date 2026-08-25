@@ -399,20 +399,20 @@ jobs:
 #        GITHUB_TOKEN: ${{ github.token }}
 
 
-    - name: Build with RELEASE280
-      run: |
-        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-280<\/next.version>/" pom.xml
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE280
-        cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.nbm target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
-        cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.jar target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
-        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
-        echo "SIZE_280=$(wc -c target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Build with RELEASE280
+#      run: |
+#        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-280<\/next.version>/" pom.xml
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE280
+#        cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.nbm target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
+#        cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.jar target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
+#        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
+#        echo "SIZE_280=$(wc -c target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with RELEASE290
       run: |
@@ -429,21 +429,21 @@ jobs:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Build with RELEASE300
-      run: |
-        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-300<\/next.version>/" pom.xml
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE300
-        cp target/nbm/python-${{ env.RELEASE_VERSION }}-300.nbm target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
-        cp target/nbm/python-${{ env.RELEASE_VERSION }}-300.jar target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
-        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
-        cp /tmp/nbms/*.nbm target/nbm/ || true
-        echo "SIZE_300=$(wc -c target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
-        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Build with RELEASE300
+#      run: |
+#        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-300<\/next.version>/" pom.xml
+#        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE300
+#        cp target/nbm/python-${{ env.RELEASE_VERSION }}-300.nbm target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
+#        cp target/nbm/python-${{ env.RELEASE_VERSION }}-300.jar target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
+#        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
+#        cp /tmp/nbms/*.nbm target/nbm/ || true
+#        echo "SIZE_300=$(wc -c target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+#        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
+#      env:
+#        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+#        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with RELEASE310
       run: |
@@ -472,15 +472,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Attach RELEASE280 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Attach RELEASE280 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE290 NBM
       uses: actions/upload-release-asset@v1
@@ -492,15 +492,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Attach RELEASE300 NBM
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
-        asset_name: python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
-        asset_content_type: application/gzip
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Attach RELEASE300 NBM
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
+#        asset_name: python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
+#        asset_content_type: application/gzip
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Attach RELEASE310 NBM
       uses: actions/upload-release-asset@v1
