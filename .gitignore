@@ -23,3 +23,6 @@ hs_err_pid*
 /pom.xml.versionsBackup
 /nb-configuration.xml
 /nbactions.xml
+target/
+nbproject/
+.gitignore
