@@ -401,7 +401,9 @@ jobs:
 
     - name: Build with RELEASE280
       run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE280 -Dnext.version=RELEASE280-${{ env.RELEASE_VERSION }}
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE280 -Dnext.version=${{ env.RELEASE_VERSION }}-280
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.nbm target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.jar target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         echo "SIZE_280=$(wc -c target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -411,7 +413,9 @@ jobs:
 
     - name: Build with RELEASE290
       run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE290 -Dnext.version=RELEASE290-${{ env.RELEASE_VERSION }}
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE290 -Dnext.version=${{ env.RELEASE_VERSION }}-290
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.nbm target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.jar target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         echo "SIZE_290=$(wc -c target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -421,7 +425,9 @@ jobs:
 
     - name: Build with RELEASE300
       run: |
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE300 -Dnext.version=RELEASE300-${{ env.RELEASE_VERSION }}
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE300 -Dnext.version=${{ env.RELEASE_VERSION }}
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}.nbm target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}.jar target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         echo "SIZE_300=$(wc -c target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
