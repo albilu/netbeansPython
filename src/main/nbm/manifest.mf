@@ -191,4 +191,4 @@ OpenIDE-Module-Long-Description: <html><h1 id="netbeanspython">netbeansPython</h
       </li>
     </ul>
     </html>
-OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Specification-Version: 1.9.91
