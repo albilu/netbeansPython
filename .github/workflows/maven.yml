@@ -431,12 +431,14 @@ jobs:
 
     - name: Build with RELEASE300
       run: |
+        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-300<\/next.version>/" pom.xml
         mvn -B clean deploy -Dnetbeans.release.version=RELEASE300
-        cp target/nbm/python-${{ env.RELEASE_VERSION }}.nbm target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
-        cp target/nbm/python-${{ env.RELEASE_VERSION }}.jar target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}-300.nbm target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
+        cp target/nbm/python-${{ env.RELEASE_VERSION }}-300.jar target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
         cp /tmp/nbms/*.nbm target/nbm/ || true
         echo "SIZE_300=$(wc -c target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
+        sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
