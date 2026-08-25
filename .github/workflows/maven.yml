@@ -402,7 +402,7 @@ jobs:
     - name: Build with RELEASE280
       run: |
         sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-280<\/next.version>/" pom.xml
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE280
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE280
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.nbm target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.jar target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         echo "SIZE_280=$(wc -c target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
@@ -416,7 +416,7 @@ jobs:
     - name: Build with RELEASE290
       run: |
         sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-290<\/next.version>/" pom.xml
-        mvn -B clean deploy -Dnetbeans.release.version=RELEASE290
+        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE290
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.nbm target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.jar target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         echo "SIZE_290=$(wc -c target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
