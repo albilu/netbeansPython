@@ -417,7 +417,7 @@ jobs:
     - name: Build with RELEASE290
       run: |
         sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}-290<\/next.version>/" pom.xml
-        mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE290
+        mvn -B clean deploy -Dnetbeans.release.version=RELEASE290
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.nbm target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.jar target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
         mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
