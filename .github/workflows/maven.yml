@@ -405,6 +405,7 @@ jobs:
         mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE280
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.nbm target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-280.jar target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
+        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
         echo "SIZE_280=$(wc -c target/nbm/python-RELEASE280-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
         sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
       env:
@@ -419,6 +420,7 @@ jobs:
         mvn -B clean install -P dev -Dnetbeans.release.version=RELEASE290
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.nbm target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm
         cp target/nbm/python-${{ env.RELEASE_VERSION }}-290.jar target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
+        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
         echo "SIZE_290=$(wc -c target/nbm/python-RELEASE290-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
         sed -i "s/<next.version>.*<\/next.version>/<next.version>${{ env.RELEASE_VERSION }}<\/next.version>/" pom.xml
       env:
@@ -432,6 +434,8 @@ jobs:
         mvn -B clean deploy -Dnetbeans.release.version=RELEASE300
         cp target/nbm/python-${{ env.RELEASE_VERSION }}.nbm target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm
         cp target/nbm/python-${{ env.RELEASE_VERSION }}.jar target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.jar 2>/dev/null || true
+        mkdir -p /tmp/nbms && cp target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm /tmp/nbms/
+        cp /tmp/nbms/*.nbm target/nbm/ || true
         echo "SIZE_300=$(wc -c target/nbm/python-RELEASE300-${{ env.RELEASE_VERSION }}.nbm | awk '{print $1}')" >> $GITHUB_ENV
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
