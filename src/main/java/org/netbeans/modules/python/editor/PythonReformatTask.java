@@ -5,16 +5,18 @@ package org.netbeans.modules.python.editor;
  * @author albilu
  */
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Caret;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.Position;
 import javax.swing.text.StyledDocument;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.lsp4j.DocumentFormattingParams;
@@ -25,6 +27,8 @@ import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextEdit;
 import org.netbeans.modules.editor.NbEditorUtilities;
 import org.netbeans.api.editor.EditorRegistry;
+import org.netbeans.api.editor.caret.CaretInfo;
+import org.netbeans.api.editor.caret.EditorCaret;
 import org.netbeans.modules.editor.indent.api.IndentUtils;
 import org.netbeans.modules.editor.indent.spi.Context;
 import org.netbeans.modules.editor.indent.spi.ExtraLock;
@@ -146,135 +150,84 @@ public class PythonReformatTask
     }
 
     public static void applyEditsNoLock(Document doc, List<? extends TextEdit> edits, Integer startLimit, Integer endLimit) {
+        List<JTextComponent> editors = new ArrayList<>();
+        for (JTextComponent editor : EditorRegistry.componentList()) {
+            if (editor.getDocument() == doc) {
+                editors.add(editor);
+            }
+        }
+        applyEdits(doc, edits, startLimit, endLimit, editors);
+    }
+
+    /** Applies the edits within the limits, keeping the carets of the editors at their code. */
+    static void applyEdits(Document doc, List<? extends TextEdit> edits, Integer startLimit, Integer endLimit,
+            List<JTextComponent> editors) {
         if (edits == null || edits.isEmpty()) {
             return;
         }
-        List<CaretLocation> carets = new ArrayList<>();
-        for (JTextComponent editor : EditorRegistry.componentList()) {
-            if (editor.getDocument() == doc) {
-                carets.add(new CaretLocation(editor));
-            }
-        }
-        edits
-                .stream()
-                .sorted(rangeReverseSort)
-                .forEach(te -> {
-                    try {
-                        int start = editOffset(doc, te.getRange().getStart());
-                        int end = editOffset(doc, te.getRange().getEnd());
-                        if (start < 0 || end < start || end > doc.getLength()) {
-                            return;
-                        }
-                        // Formatters replace whole lines or the whole document. Apply
-                        // only the changed text: limits then apply to real changes, and
-                        // unchanged code keeps its positions and annotations.
-                        String original = doc.getText(start, end - start);
-                        String replacement = te.getNewText() == null ? "" : te.getNewText();
-                        int prefix = commonPrefix(original, replacement);
-                        int suffix = commonSuffix(original, replacement, prefix);
-                        int changeStart = start + prefix;
-                        int changeEnd = end - suffix;
-                        String text = replacement.substring(prefix, replacement.length() - suffix);
-                        if ((changeStart == changeEnd && text.isEmpty())
-                                || (startLimit != null && changeStart < startLimit)
-                                || (endLimit != null && changeEnd > endLimit)) {
-                            return;
-                        }
-                        carets.forEach(caret -> caret.replacing(changeStart, changeEnd));
-                        doc.remove(changeStart, changeEnd - changeStart);
-                        doc.insertString(changeStart, text, null);
-                    } catch (BadLocationException ex) {
-                        Exceptions.printStackTrace(ex);
-                    }
-                });
-        carets.forEach(CaretLocation::restore);
-    }
-
-    static int commonPrefix(String original, String replacement) {
-        int max = Math.min(original.length(), replacement.length());
-        int length = 0;
-        while (length < max && original.charAt(length) == replacement.charAt(length)) {
-            length++;
-        }
-        // Never split a surrogate pair between unchanged and replaced text.
-        return length > 0 && Character.isHighSurrogate(original.charAt(length - 1)) ? length - 1 : length;
-    }
-
-    static int commonSuffix(String original, String replacement, int prefix) {
-        int max = Math.min(original.length(), replacement.length()) - prefix;
-        int length = 0;
-        while (length < max && original.charAt(original.length() - 1 - length)
-                == replacement.charAt(replacement.length() - 1 - length)) {
-            length++;
-        }
-        return length > 0 && Character.isLowSurrogate(original.charAt(original.length() - length)) ? length - 1 : length;
-    }
-
-    private static int editOffset(Document document, org.eclipse.lsp4j.Position position) {
-        if (position.getLine() < 0 || position.getCharacter() < 0) {
-            return -1;
-        }
-        Element root = document.getDefaultRootElement();
-        // Python formatters use the following line as EOF even when the last
-        // line has no newline. LSP positions beyond a line/document are clamped.
-        if (position.getLine() >= root.getElementCount()) {
-            return document.getLength();
-        }
-        Element line = root.getElement(position.getLine());
-        int end = Math.min(document.getLength(), line.getEndOffset() - 1);
-        return line.getStartOffset() + Math.min(position.getCharacter(), end - line.getStartOffset());
-    }
-
-    /** Keep the cursor and selection on their original lines when a server
-     * replaces the whole document. Swing otherwise moves them to its end. */
-    private static final class CaretLocation {
-        private final JTextComponent editor;
-        private final Document document;
-        private final int dotLine;
-        private final int dotColumn;
-        private final int markLine;
-        private final int markColumn;
-        private boolean dotReplaced;
-        private boolean markReplaced;
-
-        CaretLocation(JTextComponent editor) {
-            this.editor = editor;
-            document = editor.getDocument();
-            Element root = document.getDefaultRootElement();
-            int dot = editor.getCaret().getDot();
-            int mark = editor.getCaret().getMark();
-            dotLine = root.getElementIndex(dot);
-            dotColumn = dot - root.getElement(dotLine).getStartOffset();
-            markLine = root.getElementIndex(mark);
-            markColumn = mark - root.getElement(markLine).getStartOffset();
-        }
-
-        void replacing(int start, int end) {
-            int dot = editor.getCaret().getDot();
-            int mark = editor.getCaret().getMark();
-            dotReplaced |= start <= dot && dot < end;
-            markReplaced |= start <= mark && mark < end;
-        }
-
-        private int offset(int line, int column) {
-            Element root = document.getDefaultRootElement();
-            Element element = root.getElement(Math.min(line, root.getElementCount() - 1));
-            return Math.min(element.getStartOffset() + column,
-                    Math.min(document.getLength(), element.getEndOffset() - 1));
-        }
-
-        void restore() {
-            if (!dotReplaced && !markReplaced) {
+        try {
+            String text = doc.getText(0, doc.getLength());
+            String formatted = FormatterEdits.apply(text, edits);
+            if (formatted == null) {
+                Logger.getLogger(PythonReformatTask.class.getName()).log(Level.INFO,
+                        "Ignoring invalid or overlapping formatting edits: {0}", edits);
                 return;
             }
-            int dotAfterEdit = editor.getCaret().getDot();
-            int markAfterEdit = editor.getCaret().getMark();
+            List<FormatterEdits.Change> changes = FormatterEdits.changes(text, formatted, startLimit, endLimit);
+            if (changes.isEmpty()) {
+                return;
+            }
+            List<Carets> carets = new ArrayList<>();
+            for (JTextComponent editor : editors) {
+                carets.add(new Carets(editor));
+            }
+            // Only the changed text is replaced: unchanged code keeps its
+            // positions and annotations.
+            for (int k = changes.size() - 1; k >= 0; k--) {
+                FormatterEdits.Change change = changes.get(k);
+                if (change.end() > change.start()) {
+                    doc.remove(change.start(), change.end() - change.start());
+                }
+                if (!change.text().isEmpty()) {
+                    doc.insertString(change.start(), change.text(), null);
+                }
+            }
+            for (Carets caret : carets) {
+                caret.restore(text, changes);
+            }
+        } catch (BadLocationException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
+
+    /**
+     * The carets of an editor, kept at their code when formatting replaces
+     * the text around them. Swing would otherwise move them to the end of
+     * the replaced text, e.g. the end of the document.
+     */
+    private static final class Carets {
+        private final JTextComponent editor;
+        private final int[] original;
+
+        Carets(JTextComponent editor) {
+            this.editor = editor;
+            this.original = positions(editor);
+        }
+
+        void restore(String text, List<FormatterEdits.Change> changes) {
+            int[] target = new int[original.length];
+            for (int k = 0; k < original.length; k++) {
+                target[k] = FormatterEdits.map(text, changes, original[k]);
+            }
+            int[] afterEdit = positions(editor);
+            if (Arrays.equals(target, afterEdit)) {
+                return;
+            }
+            Document document = editor.getDocument();
             Runnable update = () -> {
-                if (editor.getDocument() == document
-                        && editor.getCaret().getDot() == dotAfterEdit
-                        && editor.getCaret().getMark() == markAfterEdit) {
-                    editor.getCaret().setDot(markReplaced ? offset(markLine, markColumn) : markAfterEdit);
-                    editor.getCaret().moveDot(dotReplaced ? offset(dotLine, dotColumn) : dotAfterEdit);
+                // Unless the carets were moved meanwhile.
+                if (editor.getDocument() == document && Arrays.equals(positions(editor), afterEdit)) {
+                    setPositions(editor, target);
                 }
             };
             if (SwingUtilities.isEventDispatchThread()) {
@@ -283,19 +236,44 @@ public class PythonReformatTask
                 SwingUtilities.invokeLater(update);
             }
         }
-    }
 
-    private static final Comparator<TextEdit> rangeReverseSort = (s1, s2) -> {
-        int l1 = s1.getRange().getEnd().getLine();
-        int l2 = s2.getRange().getEnd().getLine();
-        int c1 = s1.getRange().getEnd().getCharacter();
-        int c2 = s2.getRange().getEnd().getCharacter();
-        if (l1 != l2) {
-            return l2 - l1;
-        } else {
-            return c2 - c1;
+        /** Dot and mark of each caret, in the order of the editor's carets. */
+        private static int[] positions(JTextComponent editor) {
+            Caret caret = editor.getCaret();
+            if (caret instanceof EditorCaret) {
+                List<CaretInfo> carets = ((EditorCaret) caret).getCarets();
+                int[] positions = new int[2 * carets.size()];
+                for (int k = 0; k < carets.size(); k++) {
+                    positions[2 * k] = carets.get(k).getDot();
+                    positions[2 * k + 1] = carets.get(k).getMark();
+                }
+                return positions;
+            }
+            return caret == null ? new int[0] : new int[]{caret.getDot(), caret.getMark()};
         }
-    };
+
+        private static void setPositions(JTextComponent editor, int[] positions) {
+            Caret caret = editor.getCaret();
+            if (caret instanceof EditorCaret) {
+                // EditorCaret.setDot() would remove all carets but the last one,
+                // and carets that met in replaced text are already merged.
+                Document document = editor.getDocument();
+                List<Position> dotsAndMarks = new ArrayList<>();
+                try {
+                    for (int position : positions) {
+                        dotsAndMarks.add(document.createPosition(position));
+                    }
+                } catch (BadLocationException ex) {
+                    Exceptions.printStackTrace(ex);
+                    return;
+                }
+                ((EditorCaret) caret).replaceCarets(dotsAndMarks, null);
+            } else if (caret != null) {
+                caret.setDot(positions[1]);
+                caret.moveDot(positions[0]);
+            }
+        }
+    }
 
     @Override
     public ExtraLock reformatLock() {
