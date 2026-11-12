@@ -1,6 +1,7 @@
 package org.netbeans.modules.python.editor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import org.eclipse.lsp4j.Position;
@@ -18,6 +19,9 @@ import org.eclipse.lsp4j.TextEdit;
  * applied without its insertion.
  */
 final class FormatterEdits {
+
+    /** At most this many token insertions and deletions are aligned in a change. */
+    private static final int MAX_TOKEN_CHANGES = 2000;
 
     /** Replaces {@code [start, end)} of the original text with {@code text}. */
     record Change(int start, int end, String text) {
@@ -121,9 +125,11 @@ final class FormatterEdits {
     }
 
     /**
-     * Where {@code offset} of the original text is after the changes: before
-     * the same non-whitespace character, or, if it was followed by
-     * whitespace, after the same preceding one.
+     * Where {@code offset} of the original text is after the changes. Inside
+     * a change, the code of both versions is split into tokens, and the
+     * offset stays before the same token, or, if it was followed by
+     * whitespace or by a token the formatter removed (such as optional
+     * parentheses), after the last preceding token it kept.
      */
     static int map(String original, List<Change> changes, int offset) {
         boolean beforeCode = offset < original.length() && !Character.isWhitespace(original.charAt(offset));
@@ -137,19 +143,156 @@ final class FormatterEdits {
                 shift += change.text().length() - (change.end() - change.start());
                 continue;
             }
-            // Inside the replaced text: find the same code in the new text.
-            String text = change.text();
-            int code = code(original.substring(change.start(), offset)).length();
-            int index = 0;
-            while (index < text.length() && (code > 0 || (beforeCode && Character.isWhitespace(text.charAt(index))))) {
-                if (!Character.isWhitespace(text.charAt(index))) {
-                    code--;
-                }
-                index++;
-            }
-            return change.start() + shift + index;
+            return change.start() + shift
+                    + mapInside(original.substring(change.start(), change.end()), change.text(),
+                            offset - change.start(), beforeCode);
         }
         return offset + shift;
+    }
+
+    /** Where {@code offset} of {@code oldText} is in {@code newText}. */
+    private static int mapInside(String oldText, String newText, int offset, boolean beforeCode) {
+        List<int[]> oldTokens = tokens(oldText);
+        List<int[]> newTokens = tokens(newText);
+        int[] match = matchTokens(oldText, oldTokens, newText, newTokens);
+        if (beforeCode) {
+            // Before or inside the same token, if the formatter kept it.
+            for (int k = 0; k < oldTokens.size(); k++) {
+                int[] token = oldTokens.get(k);
+                if (token[1] > offset) {
+                    if (match[k] >= 0) {
+                        return newTokens.get(match[k])[0] + Math.max(0, offset - token[0]);
+                    }
+                    break;
+                }
+            }
+        }
+        // After the last kept token before the offset.
+        for (int k = oldTokens.size() - 1; k >= 0; k--) {
+            int[] token = oldTokens.get(k);
+            if (token[1] <= offset && match[k] >= 0) {
+                return newTokens.get(match[k])[1];
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Code tokens {start, end}: runs of letters, digits and underscores, and
+     * single other characters that are not whitespace.
+     */
+    private static List<int[]> tokens(String text) {
+        List<int[]> tokens = new ArrayList<>();
+        int k = 0;
+        while (k < text.length()) {
+            int c = text.codePointAt(k);
+            int end = k + Character.charCount(c);
+            if (Character.isWhitespace(c)) {
+                k = end;
+                continue;
+            }
+            if (word(c)) {
+                while (end < text.length() && word(text.codePointAt(end))) {
+                    end += Character.charCount(text.codePointAt(end));
+                }
+            }
+            tokens.add(new int[]{k, end});
+            k = end;
+        }
+        return tokens;
+    }
+
+    private static boolean word(int c) {
+        return c == '_' || Character.isLetterOrDigit(c);
+    }
+
+    /**
+     * For each old token, the index of the same new token in a longest
+     * common subsequence of the tokens, or -1 if the formatter removed it.
+     * Uses Myers' O(ND) algorithm; formatters change few tokens. Tokens
+     * that are the same at the start and end are matched first, and if more
+     * than {@link #MAX_TOKEN_CHANGES} tokens differ, only those are matched.
+     */
+    private static int[] matchTokens(String oldText, List<int[]> oldTokens, String newText, List<int[]> newTokens) {
+        int n = oldTokens.size();
+        int m = newTokens.size();
+        String[] a = new String[n];
+        for (int k = 0; k < n; k++) {
+            a[k] = oldText.substring(oldTokens.get(k)[0], oldTokens.get(k)[1]);
+        }
+        String[] b = new String[m];
+        for (int k = 0; k < m; k++) {
+            b[k] = newText.substring(newTokens.get(k)[0], newTokens.get(k)[1]);
+        }
+        int[] match = new int[n];
+        Arrays.fill(match, -1);
+        int prefix = 0;
+        while (prefix < n && prefix < m && a[prefix].equals(b[prefix])) {
+            match[prefix] = prefix;
+            prefix++;
+        }
+        while (n > prefix && m > prefix && a[n - 1].equals(b[m - 1])) {
+            match[n - 1] = m - 1;
+            n--;
+            m--;
+        }
+        a = Arrays.copyOfRange(a, prefix, n);
+        b = Arrays.copyOfRange(b, prefix, m);
+        n -= prefix;
+        m -= prefix;
+        int max = n + m;
+        int[] v = new int[2 * max + 2];
+        List<int[]> trace = new ArrayList<>();
+        int found = -1;
+        for (int d = 0; d <= Math.min(max, MAX_TOKEN_CHANGES) && found < 0; d++) {
+            for (int k = -d; k <= d; k += 2) {
+                int x = k == -d || (k != d && v[max + k - 1] < v[max + k + 1])
+                        ? v[max + k + 1] : v[max + k - 1] + 1;
+                int y = x - k;
+                while (x < n && y < m && a[x].equals(b[y])) {
+                    x++;
+                    y++;
+                }
+                v[max + k] = x;
+                if (x >= n && y >= m) {
+                    found = d;
+                    break;
+                }
+            }
+            // Keep the diagonals -d..d of this step for the backtrack.
+            trace.add(Arrays.copyOfRange(v, max - d, max + d + 1));
+        }
+        if (found < 0) {
+            return match;
+        }
+        int x = n;
+        int y = m;
+        for (int d = found; d >= 0; d--) {
+            int k = x - y;
+            int previousK;
+            int previousX;
+            if (d == 0) {
+                previousK = 0;
+                previousX = 0;
+            } else {
+                int[] previous = trace.get(d - 1);
+                boolean down = k == -d || (k != d && previous[k - 1 + d - 1] < previous[k + 1 + d - 1]);
+                previousK = down ? k + 1 : k - 1;
+                previousX = previous[previousK + d - 1];
+            }
+            int previousY = previousX - previousK;
+            // The snake of this step: matching tokens up to (x, y).
+            int startX = d == 0 ? 0 : (previousK == k + 1 ? previousX : previousX + 1);
+            int startY = startX - k;
+            while (x > startX && y > startY) {
+                x--;
+                y--;
+                match[prefix + x] = prefix + y;
+            }
+            x = previousX;
+            y = previousY;
+        }
+        return match;
     }
 
     /**

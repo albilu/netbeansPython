@@ -189,8 +189,55 @@ public class PythonReformatTaskTest {
         });
     }
 
+    private static final String PARENTHESES_SOURCE = "x=(((1)))\ny=(((2)))\n# anchor\nz=(((3)))\n";
+    private static final String PARENTHESES_FORMATTED = "x = 1\ny = 2\n# anchor\nz = 3\n";
+    /** Black (python-lsp-black 2.0.0) removes the redundant parentheses. */
+    private static final List<TextEdit> PARENTHESES_BLACK = List.of(edit(0, 0, 4, 0, PARENTHESES_FORMATTED));
+
+    /** The cursor before "# anchor" stays there although code before it was removed. */
+    @Test
+    public void formatKeepsTheCursorWhenCodeIsRemoved() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            JEditorPane editor = editorWithCarets(PARENTHESES_SOURCE, 20, 20);
+            formatDocument(editor, PARENTHESES_BLACK);
+            assertEquals(PARENTHESES_FORMATTED, editor.getText());
+            assertCarets(editor, 12, 12);
+        });
+    }
+
+    @Test
+    public void formatKeepsTheCursorWhenCodeIsRemovedFromABackgroundThread() throws Exception {
+        List<JEditorPane> editor = new ArrayList<>();
+        SwingUtilities.invokeAndWait(() -> editor.add(editorWithCarets(PARENTHESES_SOURCE, 20, 20)));
+        formatDocument(editor.get(0), PARENTHESES_BLACK);
+        SwingUtilities.invokeAndWait(() -> {
+            assertEquals(PARENTHESES_FORMATTED, editor.get(0).getText());
+            assertCarets(editor.get(0), 12, 12);
+        });
+    }
+
+    /**
+     * Carets in removed code move after the kept code before it: before
+     * "(((2" to after "y =", after "3)))" to after "3"; inside "anchor"
+     * stays inside it.
+     */
+    @Test
+    public void formatMovesCaretsInRemovedCodeToKeptCode() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            JEditorPane editor = editorWithCarets(PARENTHESES_SOURCE, 12, 12, 24, 24, 38, 38);
+            formatDocument(editor, PARENTHESES_BLACK);
+            assertEquals(PARENTHESES_FORMATTED, editor.getText());
+            assertCarets(editor, 9, 9, 16, 16, 26, 26);
+        });
+    }
+
     /** An editor whose carets have the given dot and mark pairs, the last one added last. */
     private static JEditorPane editorWithCarets(int... dotsAndMarks) {
+        return editorWithCarets(CARETS_SOURCE, dotsAndMarks);
+    }
+
+    /** An editor with {@code source} whose carets have the given dot and mark pairs. */
+    private static JEditorPane editorWithCarets(String source, int... dotsAndMarks) {
         JEditorPane editor = new JEditorPane() {
             @Override
             public Toolkit getToolkit() {
@@ -199,7 +246,7 @@ public class PythonReformatTaskTest {
                 throw new SecurityException("No system selection in tests");
             }
         };
-        editor.setDocument(document(CARETS_SOURCE));
+        editor.setDocument(document(source));
         EditorCaret caret = new EditorCaret();
         editor.setCaret(caret);
         Document document = editor.getDocument();
