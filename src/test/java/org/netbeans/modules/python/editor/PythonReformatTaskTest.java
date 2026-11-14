@@ -231,6 +231,64 @@ public class PythonReformatTaskTest {
         });
     }
 
+    /** Black normalizes 1,200 quotes: more than 2,000 token insertions/deletions. */
+    private static final String LARGE_QUOTES_SOURCE = largeQuotedList();
+    private static final String LARGE_QUOTES_FORMATTED = LARGE_QUOTES_SOURCE.replace('\'', '"');
+    private static final List<TextEdit> LARGE_QUOTES_BLACK = List.of(edit(0, 0, 603, 0, LARGE_QUOTES_FORMATTED));
+    private static final int LARGE_QUOTES_ANCHOR = LARGE_QUOTES_SOURCE.indexOf("# anchor");
+    private static final int LARGE_QUOTES_SECOND_CARET = LARGE_QUOTES_SOURCE.indexOf("item_450");
+
+    @Test
+    public void formatKeepsCaretsWhenTokenAlignmentLimitIsReached() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            JEditorPane editor = editorWithCarets(LARGE_QUOTES_SOURCE,
+                    LARGE_QUOTES_ANCHOR + 8, LARGE_QUOTES_ANCHOR,
+                    LARGE_QUOTES_SECOND_CARET, LARGE_QUOTES_SECOND_CARET);
+            formatDocument(editor, LARGE_QUOTES_BLACK);
+            assertEquals(LARGE_QUOTES_FORMATTED, editor.getText());
+            assertCarets(editor, LARGE_QUOTES_ANCHOR + 8, LARGE_QUOTES_ANCHOR,
+                    LARGE_QUOTES_SECOND_CARET, LARGE_QUOTES_SECOND_CARET);
+        });
+    }
+
+    @Test
+    public void formatKeepsCaretsWhenTokenAlignmentLimitIsReachedFromABackgroundThread() throws Exception {
+        List<JEditorPane> editor = new ArrayList<>();
+        SwingUtilities.invokeAndWait(() -> editor.add(editorWithCarets(LARGE_QUOTES_SOURCE,
+                LARGE_QUOTES_ANCHOR + 8, LARGE_QUOTES_ANCHOR,
+                LARGE_QUOTES_SECOND_CARET, LARGE_QUOTES_SECOND_CARET)));
+        formatDocument(editor.get(0), LARGE_QUOTES_BLACK);
+        SwingUtilities.invokeAndWait(() -> {
+            assertEquals(LARGE_QUOTES_FORMATTED, editor.get(0).getText());
+            assertCarets(editor.get(0), LARGE_QUOTES_ANCHOR + 8, LARGE_QUOTES_ANCHOR,
+                    LARGE_QUOTES_SECOND_CARET, LARGE_QUOTES_SECOND_CARET);
+        });
+    }
+
+    @Test
+    public void formatClampsTheColumnWhenTokenAlignmentLimitIsReached() throws Exception {
+        String source = LARGE_QUOTES_SOURCE.replace(",\n", ",      \n");
+        int caret = source.indexOf("'item_450'") + "'item_450',".length() + 3;
+        int expected = LARGE_QUOTES_FORMATTED.indexOf("\"item_450\"") + "\"item_450\",".length();
+        SwingUtilities.invokeAndWait(() -> {
+            JEditorPane editor = editorWithCarets(source, caret, caret);
+            formatDocument(editor, LARGE_QUOTES_BLACK);
+            assertEquals(LARGE_QUOTES_FORMATTED, editor.getText());
+            assertCarets(editor, expected, expected);
+        });
+    }
+
+    private static String largeQuotedList() {
+        StringBuilder source = new StringBuilder("values = [\n");
+        for (int k = 0; k < 600; k++) {
+            if (k == 300) {
+                source.append("    # anchor\n");
+            }
+            source.append("    'item_").append(k).append("',\n");
+        }
+        return source.append("]\n").toString();
+    }
+
     /** An editor whose carets have the given dot and mark pairs, the last one added last. */
     private static JEditorPane editorWithCarets(int... dotsAndMarks) {
         return editorWithCarets(CARETS_SOURCE, dotsAndMarks);

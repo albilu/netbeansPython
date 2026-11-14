@@ -155,6 +155,11 @@ final class FormatterEdits {
         List<int[]> oldTokens = tokens(oldText);
         List<int[]> newTokens = tokens(newText);
         int[] match = matchTokens(oldText, oldTokens, newText, newTokens);
+        if (match == null) {
+            // Unexamined tokens are not necessarily deleted. Keep the original
+            // line and column when the bounded alignment cannot finish.
+            return mapLineAndColumn(oldText, newText, offset);
+        }
         if (beforeCode) {
             // Before or inside the same token, if the formatter kept it.
             for (int k = 0; k < oldTokens.size(); k++) {
@@ -175,6 +180,34 @@ final class FormatterEdits {
             }
         }
         return 0;
+    }
+
+    /** Preserve the line and column within a replacement, clamped to the new text. */
+    private static int mapLineAndColumn(String oldText, String newText, int offset) {
+        int oldLineStart = 0;
+        int newLineStart = 0;
+        for (int k = 0; k < offset; k++) {
+            if (oldText.charAt(k) == '\n') {
+                oldLineStart = k + 1;
+                int newline = newText.indexOf('\n', newLineStart);
+                if (newline < 0) {
+                    return newText.length();
+                }
+                newLineStart = newline + 1;
+            }
+        }
+        int newLineEnd = newText.indexOf('\n', newLineStart);
+        if (newLineEnd < 0) {
+            newLineEnd = newText.length();
+        }
+        int mapped = newLineStart + Math.min(offset - oldLineStart, newLineEnd - newLineStart);
+        // A changed column must not place the caret inside a surrogate pair.
+        if (mapped > 0 && mapped < newText.length()
+                && Character.isHighSurrogate(newText.charAt(mapped - 1))
+                && Character.isLowSurrogate(newText.charAt(mapped))) {
+            mapped--;
+        }
+        return mapped;
     }
 
     /**
@@ -210,8 +243,9 @@ final class FormatterEdits {
      * For each old token, the index of the same new token in a longest
      * common subsequence of the tokens, or -1 if the formatter removed it.
      * Uses Myers' O(ND) algorithm; formatters change few tokens. Tokens
-     * that are the same at the start and end are matched first, and if more
-     * than {@link #MAX_TOKEN_CHANGES} tokens differ, only those are matched.
+     * that are the same at the start and end are matched first. Returns
+     * {@code null} if more than {@link #MAX_TOKEN_CHANGES} tokens differ,
+     * distinguishing an incomplete alignment from tokens that were deleted.
      */
     private static int[] matchTokens(String oldText, List<int[]> oldTokens, String newText, List<int[]> newTokens) {
         int n = oldTokens.size();
@@ -263,7 +297,7 @@ final class FormatterEdits {
             trace.add(Arrays.copyOfRange(v, max - d, max + d + 1));
         }
         if (found < 0) {
-            return match;
+            return null;
         }
         int x = n;
         int y = m;
