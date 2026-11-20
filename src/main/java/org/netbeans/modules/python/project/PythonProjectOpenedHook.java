@@ -1,20 +1,12 @@
 package org.netbeans.modules.python.project;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.ToNumberPolicy;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.ProjectProblems;
 import org.netbeans.modules.lsp.client.LSPBindings;
 import org.netbeans.modules.parsing.api.indexing.IndexingManager;
+import org.netbeans.modules.python.PythonLspConfiguration;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.spi.project.ui.ProjectOpenedHook;
 import org.openide.filesystems.FileObject;
@@ -52,30 +44,10 @@ public class PythonProjectOpenedHook extends ProjectOpenedHook {
             Exceptions.printStackTrace(ex);
         }
 
-        try {
-            LSPBindings.ensureServerRunning(project, PythonUtility.PYTHON_MIME_TYPE);
-            Gson create = new GsonBuilder()
-                    .setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL).create();
-            Map<String, Object> settings = create
-                    .fromJson(Files.readString(
-                            PythonUtility.SETTINGS.toPath()),
-                            new TypeToken<HashMap<String, Object>>() {
-                            }.getType());
-            if (settings != null) {
-                Map<String, Object> paramsObject = new HashMap<>();
-                settings.remove("auto_pop_completion");
-                paramsObject.put("pylsp", settings);
-                DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
-                List<LSPBindings> bindingsImpl = LSPBindings.getBindingsImpl(project, projectDir,
-                        PythonUtility.PYTHON_MIME_TYPE);
-                for (LSPBindings lSPBindings : bindingsImpl) {
-                    lSPBindings.getWorkspaceService()
-                            .didChangeConfiguration(params);
-                }
-            }
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        // A new server receives its settings and the project's interpreter once
+        // started; one that kept running gets them again here (#144).
+        LSPBindings.ensureServerRunning(project, PythonUtility.PYTHON_MIME_TYPE);
+        PythonLspConfiguration.configureProject(project);
 //        GlobalPathRegistry.getDefault().register(ClassPath.SOURCE, new ClassPath[]{source});
         if (ProjectProblems.isBroken(project)) {
             ProjectProblems.showAlert(project);

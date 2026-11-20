@@ -314,6 +314,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <java.awt.headless>true</java.awt.headless>
+                        <netbeans.user>${project.build.directory}/test-userdir</netbeans.user>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
