@@ -5,6 +5,7 @@ package org.netbeans.modules.python;
  */
 import java.io.IOException;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
+import org.netbeans.api.project.Project;
 import org.netbeans.modules.lsp.client.spi.LanguageServerProvider;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
@@ -28,9 +29,16 @@ public class PythonLspClient implements LanguageServerProvider {
             )
                     .redirectError(ProcessBuilder.Redirect.INHERIT)
                     .start();
-            return LanguageServerDescription.create(p.getInputStream(),
+            LanguageServerDescription description = LanguageServerDescription.create(p.getInputStream(),
                     p.getOutputStream(), p
             );
+            try {
+                PythonLspConfiguration.serverStarted(lkp.lookup(Project.class), description);
+            } catch (RuntimeException | LinkageError ex) {
+                // The server still works, only without the project's interpreter.
+                Exceptions.printStackTrace(ex);
+            }
+            return description;
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
             return null;

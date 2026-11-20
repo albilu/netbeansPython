@@ -11,6 +11,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.apache.commons.lang3.StringUtils;
 import org.javatuples.Quartet;
+import org.netbeans.modules.python.PythonLspConfiguration;
 import org.netbeans.modules.python.PythonUtility;
 import org.netbeans.modules.python.options.PythonPlatformManager;
 import org.netbeans.modules.python.project.PythonProject;
@@ -245,6 +246,7 @@ public class PythonGeneralPanel extends javax.swing.JPanel implements DocumentLi
                     ? ((Pair) selectedItem).second().toString() : "");
             prop.store(new FileWriter(FileUtil.toFile(project.getProjectDirectory()
                     .getFileObject("nbproject/project.properties"))), null);
+            PythonLspConfiguration.configureProject(project);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }

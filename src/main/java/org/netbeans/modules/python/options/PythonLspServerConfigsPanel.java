@@ -25,9 +25,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.apache.commons.io.IOUtils;
-import org.eclipse.lsp4j.DidChangeConfigurationParams;
-import org.netbeans.modules.lsp.client.LSPBindings;
 import org.netbeans.modules.python.Installer;
+import org.netbeans.modules.python.PythonLspConfiguration;
 import org.netbeans.modules.python.PythonUtility;
 import org.openide.util.Exceptions;
 import org.openide.util.NbPreferences;
@@ -300,15 +299,10 @@ final class PythonLspServerConfigsPanel extends javax.swing.JPanel {
                                 new TypeToken<HashMap<String, Object>>() {
                                 }.getType());
                 if (settings != null) {
-                    Map<String, Object> paramsObject = new HashMap<>();
                     NbPreferences.root().putBoolean("auto_pop_completion",
                             (boolean) settings.getOrDefault("auto_pop_completion", true));
-                    settings.remove("auto_pop_completion");
-                    paramsObject.put("pylsp", settings);
-                    DidChangeConfigurationParams params = new DidChangeConfigurationParams(paramsObject);
-                    LSPBindings.getAllBindings().forEach(server -> {
-                        server.getWorkspaceService().didChangeConfiguration(params);
-                    });
+                    // Each server keeps its project's interpreter (#144).
+                    PythonLspConfiguration.configureRunningServers(settings);
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
